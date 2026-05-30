@@ -28,6 +28,15 @@
   .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:580px;padding:80px 0;}
   .hero h1{font-size:clamp(2.7rem,5.8vw,5rem);line-height:.96;text-shadow:0 6px 30px rgba(0,0,0,.4);}
   .hero h1 .o{color:var(--orange);}
+  .hero-rotator{position:relative;display:inline-grid;min-width:min(100%,520px);vertical-align:bottom;overflow:hidden;padding-right:.04em;}
+  .hero-rotator span{grid-area:1/1;opacity:0;transform:translateY(80%);animation:heroWords 9s infinite;}
+  .hero-rotator span:nth-child(2){animation-delay:3s;}
+  .hero-rotator span:nth-child(3){animation-delay:6s;}
+  @keyframes heroWords{
+    0%{opacity:0;transform:translateY(80%);}
+    8%,28%{opacity:1;transform:translateY(0);}
+    36%,100%{opacity:0;transform:translateY(-80%);}
+  }
   .hero .lead{max-width:500px;margin-top:18px;font-size:1.2rem;text-shadow:0 2px 14px rgba(0,0,0,.3);}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
   .hero .mini{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);}
@@ -77,6 +86,7 @@
   .moto{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:.2s var(--ease);}
   .moto:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
   .moto image-slot{width:100%;height:170px;display:block;}
+  .moto-photo{width:100%;height:170px;display:block;object-fit:contain;background:linear-gradient(160deg,#fff,var(--cloud));padding:16px;}
   .moto .mb{padding:18px;}
   .moto .tag{margin-bottom:10px;}
   .moto h3{font-size:1.15rem;color:var(--navy-700);}
@@ -185,7 +195,7 @@
   <div class="wrap hero-in">
     <div>
       <span class="kicker on-dark"></span>
-      <h1 style="margin-top:16px;">Sua liberdade <span class="o">merece mais</span></h1>
+      <h1 style="margin-top:16px;">Sua liberdade <span class="o hero-rotator" aria-label="merece mais"><span>merece mais</span><span>sem burocracia</span><span>em movimento</span></span></h1>
       <p class="lead on-dark">Alugue uma moto Honda com planos semanais sem burocracia, manutenção inclusa e a opção de chamar a moto de sua. A estrada é sua.</p>
       <div class="cta-row">
         <a class="btn btn-lg btn-wa" href="#planos">
@@ -287,19 +297,19 @@
     </div>
     <div class="moto-grid">
       <div class="moto">
-        <image-slot id="moto1" placeholder="Foto" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 2024 preta">
         <div class="mb"><span class="tag">Trimestral</span><h3>Start 160 · 2024</h3><div class="specs"><span>160cc</span><span>Confiável</span><span>Econômica</span></div></div>
       </div>
       <div class="moto">
-        <image-slot id="moto2" placeholder="Foto" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 2025 preta">
         <div class="mb"><span class="tag">Trimestral</span><h3>Start 160 · 2025</h3><div class="specs"><span>Freio a disco</span><span>Roda liga leve</span></div></div>
       </div>
       <div class="moto">
-        <image-slot id="moto3" placeholder="Foto" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Fan 160 2026 prata">
         <div class="mb"><span class="tag navy">0 km</span><h3>Fan 2026</h3><div class="specs"><span>Zero km</span><span>Freio a disco</span><span>Roda liga</span></div></div>
       </div>
       <div class="moto">
-        <image-slot id="moto4" placeholder="Foto" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 seminova preta">
         <div class="mb"><span class="tag">Seminova</span><h3>Start 160 Semi Nova</h3><div class="specs"><span>Revisada</span><span>Menor valor</span></div></div>
       </div>
     </div>
@@ -415,7 +425,7 @@
     <span class="kicker on-dark" style="justify-content:center;display:inline-flex;">Fale com a LokMais</span>
     <h2 style="margin-top:14px;font-size:clamp(2.2rem,4.5vw,3.4rem);">Bora <span style="color:var(--orange-bright);">colocar você na estrada?</span></h2>
     <p class="lead on-dark" style="max-width:560px;margin:14px auto 0;">Chama no WhatsApp e garanta sua moto hoje mesmo. Rápido, sem burocracia e com atendimento de verdade.</p>
-    <a class="btn btn-lg btn-wa" href="#" style="margin-top:28px;">
+    <a class="btn btn-lg btn-wa" href="https://wa.me/5531972285918" style="margin-top:28px;">
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
       Falar no WhatsApp
     </a>
@@ -432,13 +442,13 @@
       </div>
       <div class="foot-col"><h4>Alugar</h4><a href="planos.html">Planos</a><a href="como-funciona.html">Como funciona</a><a href="motos.html">Motos</a><a href="faq.html">Dúvidas</a></div>
       <div class="foot-col"><h4>Empresa</h4><a href="sobre.html">Sobre</a><a href="unidades.html">Unidades</a><a href="lp-seja-franqueado.html">Seja franqueado</a></div>
-      <div class="foot-col"><h4>Contato</h4><a href="contato.html">Fale com a gente</a><a href="#">WhatsApp</a></div>
+      <div class="foot-col"><h4>Contato</h4><a href="contato.html">Fale com a gente</a><a href="https://wa.me/5531972285918">WhatsApp</a></div>
     </div>
     <p style="margin-top:46px;font-size:.78rem;color:var(--on-dark-muted);">© 2026 LokMais · Locação de motos. Sua liberdade merece mais.</p>
   </div>
 </footer>
 
-<a class="wa-float" href="#" aria-label="WhatsApp">
+<a class="wa-float" href="https://wa.me/5531972285918" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
 </a>
 

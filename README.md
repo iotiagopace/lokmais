@@ -40,15 +40,15 @@ Estes pontos têm valores genéricos no código. **Trocar antes de subir para pr
 
 | O quê | Onde | Valor atual |
 |---|---|---|
-| WhatsApp oficial | `simulador.html`, `contato.html`, `lp-seja-franqueado.html` | `const WA = '5500000000000'` |
-| Floats e botões WhatsApp | todas as páginas | `href="#"` |
+| WhatsApp oficial | páginas principais | `5531972285918` aplicado como padrão |
+| Floats e botões WhatsApp | páginas principais | `https://wa.me/5531972285918` |
 | ID do vídeo YouTube (hero) | `index.html` | `const YT_ID = "5qap5aO4i9A"` |
 | Endereços/telefones das unidades | `unidades.html` | `0000-0000`, ruas com `0000` |
 | Posição dos pinos no mapa | `unidades.html` | aproximação NE — refinar lat/lng |
 | Nota e avaliações do Google | `index.html` | "4,9 placeholder" |
 | Depoimentos em vídeo | `index.html` | image-slots vazios |
 | E-mails | `contato.html`, footers | `contato@lokmais.com`, `expansao@lokmais.com` |
-| Fotos reais (motos, equipe, depoimentos) | todas | `<image-slot>` drag-and-drop |
+| Fotos reais de equipe/depoimentos | páginas secundárias | `<image-slot>` drag-and-drop |
 
 ---
 

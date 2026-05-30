@@ -528,8 +528,8 @@ function enviarLead(e){
   e.preventDefault();
   const f=e.target;
   const msg=`Olá! Quero ser franqueado LokMais.%0A%0ANome: ${encodeURIComponent(f.nome.value)}%0AWhatsApp: ${encodeURIComponent(f.fone.value)}%0ACidade: ${encodeURIComponent(f.cidade.value)}%0ACapital: ${encodeURIComponent(f.capital.value)}`;
-  // Substituir 5500000000000 pelo número oficial da LokMais
-  window.open(`https://wa.me/5500000000000?text=${msg}`,'_blank');
+  // WhatsApp padrão da LokMais
+  window.open(`https://wa.me/5531972285918?text=${msg}`,'_blank');
   return false;
 }
 // reveal on scroll

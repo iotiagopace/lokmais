@@ -41,6 +41,7 @@
   .mcard.on::after{content:"✓";position:absolute;top:10px;right:12px;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:700;}
   .mcard{position:relative;}
   .mcard image-slot{width:100%;height:130px;display:block;background:var(--cloud);}
+  .mcard .moto-photo{width:100%;height:130px;display:block;object-fit:contain;background:linear-gradient(160deg,#fff,var(--cloud));padding:12px;}
   .mcard .mb{padding:16px;flex:1;display:flex;flex-direction:column;}
   .mcard .mtag{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.66rem;letter-spacing:.05em;color:var(--orange-deep);background:var(--orange-soft);padding:4px 9px;border-radius:var(--r-pill);align-self:flex-start;}
   .mcard h3{font-size:1.05rem;color:var(--navy-700);margin-top:10px;}
@@ -200,11 +201,22 @@ const PLANOS = {
   ]},
 };
 const CAUCAO = 800;
-const WA = '5500000000000'; // <- substituir pelo WhatsApp oficial da LokMais
+const WA = '5531972285918';
 
 const brl = n => n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const brl0 = n => Math.round(n).toLocaleString('pt-BR');
 const $ = s => document.querySelector(s);
+const MOTO_IMG = {
+  'tri-start24': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'tri-fan25': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'tri-start25': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm30-semi': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm30-fan': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm30-start': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm36-semi': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm36-fan': 'assets/motos/honda-cg-lokmais-cover.jpg',
+  'm36-start': 'assets/motos/honda-cg-lokmais-cover.jpg',
+};
 
 let planoKey = 'trimestral';
 let motoIdx = 0;
@@ -231,7 +243,7 @@ function renderMotos(){
   const motos = PLANOS[planoKey].motos;
   $('#motos').innerHTML = motos.map((m,i)=>`
     <button class="mcard ${i===motoIdx?'on':''}" data-i="${i}">
-      <image-slot id="sim-${m.id}" placeholder="Foto" shape="rect"></image-slot>
+      <img class="moto-photo" src="${MOTO_IMG[m.id]}" alt="${m.nome} ${m.tag}">
       <div class="mb">
         <span class="mtag">${m.tag}</span>
         <h3>${m.nome}</h3>

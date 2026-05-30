@@ -18,6 +18,7 @@
   .mcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);display:flex;flex-direction:column;transition:.2s var(--ease);}
   .mcard:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
   .mcard image-slot{width:100%;height:220px;display:block;background:var(--cloud);}
+  .mcard .moto-photo{width:100%;height:220px;display:block;object-fit:contain;background:linear-gradient(160deg,#fff,var(--cloud));padding:20px;}
   .mcard .mb{padding:22px;display:flex;flex-direction:column;flex:1;}
   .mcard .tagrow{display:flex;gap:6px;flex-wrap:wrap;}
   .mcard h3{font-size:1.25rem;color:var(--navy-700);margin-top:12px;}
@@ -83,7 +84,7 @@
     <div class="cat-grid" id="grid">
       <!-- 1 -->
       <div class="mcard" data-cat="start semi">
-        <image-slot id="cat-1" placeholder="Foto: Start 160 Semi Nova" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 seminova preta">
         <div class="mb">
           <div class="tagrow"><span class="tag">Seminova</span><span class="tag navy">Trimestral · 30m · 36m</span></div>
           <h3>Honda Start 160 Semi Nova</h3>
@@ -101,7 +102,7 @@
 
       <!-- 2 -->
       <div class="mcard" data-cat="start">
-        <image-slot id="cat-2" placeholder="Foto: Start 160 2024" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 2024 preta">
         <div class="mb">
           <div class="tagrow"><span class="tag">2024</span><span class="tag navy">Trimestral</span></div>
           <h3>Honda Start 160 · 2024</h3>
@@ -119,7 +120,7 @@
 
       <!-- 3 -->
       <div class="mcard" data-cat="start">
-        <image-slot id="cat-3" placeholder="Foto: Start 160 2025" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 2025 preta">
         <div class="mb">
           <div class="tagrow"><span class="tag">2025</span><span class="tag navy">Trimestral</span></div>
           <h3>Honda Start 160 · 2025</h3>
@@ -137,7 +138,7 @@
 
       <!-- 4 -->
       <div class="mcard" data-cat="start 0km">
-        <image-slot id="cat-4" placeholder="Foto: Start 160 0 km" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Start 160 0 km preta">
         <div class="mb">
           <div class="tagrow"><span class="tag">0 km</span><span class="tag navy">30m · 36m</span></div>
           <h3>Honda Start 160 · 0 km</h3>
@@ -155,7 +156,7 @@
 
       <!-- 5 -->
       <div class="mcard" data-cat="fan">
-        <image-slot id="cat-5" placeholder="Foto: Fan 160 2025" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Fan 160 2025 preta">
         <div class="mb">
           <div class="tagrow"><span class="tag">2025</span><span class="tag navy">Trimestral</span></div>
           <h3>Honda Fan 160 · 2025</h3>
@@ -173,7 +174,7 @@
 
       <!-- 6 -->
       <div class="mcard" data-cat="fan 0km">
-        <image-slot id="cat-6" placeholder="Foto: Fan 2026 0 km" shape="rect"></image-slot>
+        <img class="moto-photo" src="assets/motos/honda-cg-lokmais-cover.jpg" alt="Honda Fan 2026 0 km prata">
         <div class="mb">
           <div class="tagrow"><span class="tag">2026</span><span class="tag navy">30m · 36m</span></div>
           <h3>Honda Fan · 2026 · 0 km</h3>
@@ -211,7 +212,7 @@
     <span class="kicker on-dark" style="justify-content:center;display:inline-flex;">Pronto para rodar?</span>
     <h2 style="margin-top:14px;font-size:clamp(2.2rem,4.5vw,3.4rem);color:#fff;">Sua moto está <span style="color:var(--orange-bright);">a um clique</span></h2>
     <p class="lead on-dark" style="max-width:520px;margin:14px auto 0;">Fale com a gente no WhatsApp e garanta sua Honda hoje mesmo.</p>
-    <a class="btn btn-lg btn-wa" href="#" style="margin-top:26px;">
+    <a class="btn btn-lg btn-wa" href="https://wa.me/5531972285918" style="margin-top:26px;">
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
       Falar no WhatsApp
     </a>
@@ -226,11 +227,11 @@
     </div>
     <div><h4 style="color:#fff;margin-bottom:14px;">Alugar</h4><a href="planos.html" style="display:block;margin-bottom:10px;">Planos</a><a href="como-funciona.html" style="display:block;margin-bottom:10px;">Como funciona</a><a href="motos.html" style="display:block;margin-bottom:10px;">Motos</a><a href="faq.html" style="display:block;margin-bottom:10px;">Dúvidas</a></div>
     <div><h4 style="color:#fff;margin-bottom:14px;">Empresa</h4><a href="sobre.html" style="display:block;margin-bottom:10px;">Sobre</a><a href="unidades.html" style="display:block;margin-bottom:10px;">Unidades</a><a href="lp-seja-franqueado.html" style="display:block;margin-bottom:10px;">Seja franqueado</a></div>
-    <div><h4 style="color:#fff;margin-bottom:14px;">Contato</h4><a href="contato.html" style="display:block;margin-bottom:10px;">Fale com a gente</a><a href="#" style="display:block;margin-bottom:10px;">WhatsApp</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Contato</h4><a href="contato.html" style="display:block;margin-bottom:10px;">Fale com a gente</a><a href="https://wa.me/5531972285918" style="display:block;margin-bottom:10px;">WhatsApp</a></div>
   </div>
 </footer>
 
-<a class="wa-float" href="#" aria-label="WhatsApp">
+<a class="wa-float" href="https://wa.me/5531972285918" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
 </a>
 
