@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Locação de Motos · Sua liberdade merece mais</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:#fff;}
+  .nav .brand b{font-style:normal;}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:32px;height:3px;background:var(--orange);border-radius:2px;}
+  .sec-head{max-width:680px;}
+  .sec-head h2 .o{color:var(--orange);}
+  .sec-head .lead{margin-top:14px;}
+  .center{margin-left:auto;margin-right:auto;text-align:center;}
+  .center .eyebrow{justify-content:center;}
+
+  /* HERO */
+  /* HERO with YouTube background */
+  .hero{position:relative;overflow:hidden;color:var(--on-dark);min-height:640px;display:flex;align-items:center;background:var(--navy-900);}
+  .hero-video{position:absolute;inset:0;overflow:hidden;z-index:0;}
+  .hero-video iframe{position:absolute;top:50%;left:50%;width:max(100vw,177vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%);pointer-events:none;border:0;opacity:.55;}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:
+     linear-gradient(110deg,rgba(11,11,46,.92) 0%,rgba(11,11,46,.78) 38%,rgba(17,17,70,.55) 65%,rgba(11,11,46,.4) 100%),
+     radial-gradient(120% 120% at 90% 10%,rgba(244,122,24,.32),transparent 55%);}
+  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:580px;padding:80px 0;}
+  .hero h1{font-size:clamp(2.7rem,5.8vw,5rem);line-height:.96;text-shadow:0 6px 30px rgba(0,0,0,.4);}
+  .hero h1 .o{color:var(--orange);}
+  .hero .lead{max-width:500px;margin-top:18px;font-size:1.2rem;text-shadow:0 2px 14px rgba(0,0,0,.3);}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
+  .hero .mini{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);}
+  .hero .mini div{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--on-dark);}
+  .hero .mini svg{width:20px;height:20px;color:var(--orange-bright);flex:0 0 auto;}
+  .hero-side{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
+  .play-card{position:relative;background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:var(--r-lg);padding:18px 22px;display:flex;align-items:center;gap:14px;color:#fff;width:max-content;max-width:100%;}
+  .play-card .pi{width:46px;height:46px;border-radius:50%;background:var(--orange);display:grid;place-items:center;flex:0 0 auto;box-shadow:var(--sh-orange);}
+  .play-card .pi svg{width:18px;height:18px;color:#fff;margin-left:2px;}
+  .play-card b{font-family:var(--font-head);font-weight:700;display:block;font-size:.95rem;}
+  .play-card span{font-size:.78rem;color:var(--on-dark-muted);}
+  .hero-badge{position:relative;background:var(--orange);color:#fff;border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh-orange);align-self:flex-end;}
+  .hero-badge b{font-family:var(--font-display);font-weight:800;font-size:1.7rem;display:block;line-height:1;}
+  .hero-badge span{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-family:var(--font-head);font-weight:600;}
+
+  /* STEPS */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;}
+  .step{background:var(--cloud);border-radius:var(--r-lg);padding:28px 24px;}
+  .step .num{font-family:var(--font-display);font-weight:800;font-size:3rem;color:var(--orange);line-height:.8;}
+  .step h3{font-size:1.02rem;color:var(--navy-700);margin-top:12px;}
+  .step p{color:var(--muted);font-size:.92rem;margin-top:8px;}
+
+  /* PLANOS */
+  .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
+  .plan{position:relative;background:#fff;border:2px solid var(--line);border-radius:var(--r-xl);padding:32px 28px;transition:.2s var(--ease);}
+  .plan:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:transparent;}
+  .plan.feat-plan{background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-color:transparent;box-shadow:var(--sh-lg);}
+  .plan .ribbon{position:absolute;top:-13px;left:28px;white-space:nowrap;background:var(--orange);color:#fff;font-family:var(--font-head);font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-pill);box-shadow:var(--sh-orange);}
+  .plan .pname{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.5rem;color:var(--navy-700);}
+  .plan.feat-plan .pname{color:#fff;}
+  .plan .pdesc{color:var(--muted);font-size:.92rem;margin-top:4px;min-height:42px;}
+  .plan.feat-plan .pdesc{color:var(--on-dark-muted);}
+  .plan .price{font-family:var(--font-display);font-weight:800;font-size:3rem;color:var(--ink);line-height:1;margin-top:14px;}
+  .plan.feat-plan .price{color:var(--orange-bright);}
+  .plan .price small{font-size:.92rem;font-weight:600;color:var(--muted);}
+  .plan.feat-plan .price small{color:var(--on-dark-muted);}
+  .plan .apartir{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--orange-deep);font-family:var(--font-head);font-weight:700;}
+  .plan.feat-plan .apartir{color:var(--orange-bright);}
+  .plan ul{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:11px;}
+  .plan li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink);}
+  .plan.feat-plan li{color:var(--on-dark);}
+  .plan li svg{flex:0 0 auto;width:18px;height:18px;color:var(--orange);margin-top:2px;}
+  .plan .btn{width:100%;justify-content:center;margin-top:24px;}
+
+  /* CATALOGO */
+  .moto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;}
+  .moto{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:.2s var(--ease);}
+  .moto:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
+  .moto image-slot{width:100%;height:170px;display:block;}
+  .moto .mb{padding:18px;}
+  .moto .tag{margin-bottom:10px;}
+  .moto h3{font-size:1.15rem;color:var(--navy-700);}
+  .moto .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .moto .specs span{font-size:.74rem;background:var(--cloud);color:var(--muted);padding:5px 10px;border-radius:var(--r-pill);font-family:var(--font-head);font-weight:600;}
+
+  /* DIFERENCIAIS */
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;}
+  .feat{padding:26px;border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm);transition:.2s var(--ease);}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
+  .feat .fi{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(160deg,var(--orange),var(--orange-deep));color:#fff;transform:skewX(-8deg);margin-bottom:16px;box-shadow:var(--sh-orange);}
+  .feat .fi svg{width:25px;height:25px;transform:skewX(8deg);}
+  .feat h3{font-size:1.02rem;color:var(--navy-700);}
+  .feat p{color:var(--muted);font-size:.92rem;margin-top:8px;}
+
+  /* FRANCHISE BAND */
+  .fran{background:linear-gradient(120deg,var(--orange),var(--orange-deep));color:#fff;border-radius:var(--r-xl);padding:clamp(34px,5vw,58px);position:relative;overflow:hidden;display:grid;grid-template-columns:1.4fr .6fr;gap:30px;align-items:center;}
+  .fran::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.18) 2px,transparent 2.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(100deg,transparent,#000);mask-image:linear-gradient(100deg,transparent,#000);}
+  .fran>*{position:relative;}
+  .fran h2{font-size:clamp(1.8rem,3.4vw,2.8rem);}
+  .fran p{margin-top:10px;max-width:560px;opacity:.96;}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:46px auto 0;}
+  .qa{border-bottom:1px solid var(--line);}
+  .qa button{width:100%;background:none;border:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 4px;text-align:left;font-family:var(--font-head);font-weight:700;font-size:1.05rem;color:var(--navy-700);}
+  .qa .ans{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);color:var(--muted);}
+  .qa .ans p{padding:0 4px 22px;margin:0;}
+  .qa.open .ans{max-height:240px;}
+  .qa .pl{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--orange-soft);color:var(--orange-deep);display:grid;place-items:center;font-size:1.3rem;line-height:1;transition:.2s;}
+  .qa.open .pl{background:var(--orange);color:#fff;transform:rotate(45deg);}
+
+  /* FOOTER */
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;}
+  .foot-grid .brand{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .foot-grid .brand img{height:36px;}
+  .foot-grid .brand b{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:#fff;text-transform:uppercase;}
+  .foot-col h4{font-size:.95rem;color:#fff;margin-bottom:14px;letter-spacing:.04em;}
+  .foot-col a{display:block;margin-bottom:10px;font-size:.95rem;}
+
+  /* DEPOIMENTOS / GOOGLE */
+  .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px;}
+  .vid{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md);background:#000;}
+  .vid image-slot{width:100%;height:300px;display:block;}
+  .vid .play{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;}
+  .vid .play i{width:66px;height:66px;border-radius:50%;background:rgba(244,122,24,.95);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .vid .play svg{width:26px;height:26px;color:#fff;margin-left:3px;}
+  .vid .cap{position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(transparent,rgba(11,11,46,.92));color:#fff;}
+  .vid .cap b{font-family:var(--font-head);font-weight:700;display:block;}
+  .vid .cap span{font-size:.82rem;color:var(--on-dark-muted);}
+
+  .google{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:46px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 30px;box-shadow:var(--sh-sm);}
+  .google .glogo{font-family:var(--font-head);font-weight:700;font-size:1.5rem;display:flex;align-items:center;gap:2px;}
+  .google .glogo .b{color:#4285F4;}.google .glogo .r{color:#EA4335;}.google .glogo .y{color:#FBBC05;}.google .glogo .g{color:#34A853;}
+  .google .grate{font-family:var(--font-display);font-weight:800;font-size:2.6rem;color:var(--navy-700);line-height:1;}
+  .google .stars{color:#FBBC05;font-size:1.3rem;letter-spacing:2px;}
+  .google .gsub{font-size:.86rem;color:var(--muted);}
+  .google .sep{width:1px;height:46px;background:var(--line);}
+
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  .rev{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);}
+  .rev .rh{display:flex;align-items:center;gap:12px;}
+  .rev .rh image-slot{width:44px;height:44px;display:block;}
+  .rev .rh b{font-family:var(--font-head);font-weight:700;color:var(--navy-700);display:block;font-size:.92rem;}
+  .rev .rh .gg{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
+  .rev .rstars{color:#FBBC05;font-size:.95rem;letter-spacing:1px;margin:12px 0 8px;}
+  .rev p{font-size:.92rem;color:var(--ink);margin:0;}
+
+  @media(max-width:920px){
+    .hero-in,.fran{grid-template-columns:1fr;}
+    .hero-side{order:-1;align-items:flex-start;}
+    .steps,.feat-grid,.moto-grid{grid-template-columns:1fr 1fr;}
+    .plan-grid{grid-template-columns:1fr;}
+    .vids,.rev-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:560px){
+    .steps,.feat-grid,.moto-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo-lockup-white.png" alt="LokMais" style="width: 172px; height: 49px"></a>
+    <nav class="nav-links">
+      <a href="planos.html">Planos</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="motos.html">Motos</a>
+      <a href="unidades.html">Unidades</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="lp-seja-franqueado.html">Seja franqueado</a>
+    </nav>
+    <a class="btn btn-primary" href="#planos">Alugar agora</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video">
+    <!-- Substitua YOUR_VIDEO_ID pelo ID do vídeo institucional LokMais no YouTube. -->
+    <iframe id="hero-yt" src="" title="LokMais" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="kicker on-dark"></span>
+      <h1 style="margin-top:16px;">Sua liberdade <span class="o">merece mais</span></h1>
+      <p class="lead on-dark">Alugue uma moto Honda com planos semanais sem burocracia, manutenção inclusa e a opção de chamar a moto de sua. A estrada é sua.</p>
+      <div class="cta-row">
+        <a class="btn btn-lg btn-wa" href="#planos">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+          Alugar pelo WhatsApp
+        </a>
+        <a class="btn btn-lg btn-ghost" href="simulador.html" style="color:#fff;">Simular valor</a>
+      </div>
+      <div class="mini">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> +1.200 motos rodando</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta ao SPC/Serasa</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="play-card">
+        <div class="pi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <div><b>Vídeo institucional</b><span>Conheça a LokMais</span></div>
+      </div>
+      <div class="hero-badge"><b>R$ 265</b><span>por semana · a partir de</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section" id="como">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker eyebrow">Como funciona</span>
+      <h2 style="margin-top:14px;">Sua moto em <span class="o">4 passos simples</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Escolha o plano</h3><p>Trimestral, 30 ou 36 meses. Você decide o prazo que cabe no seu bolso.</p></div>
+      <div class="step"><div class="num">02</div><h3>Documentação simples</h3><p>CNH e poucos documentos. Sem consulta a SPC/Serasa e sem burocracia.</p></div>
+      <div class="step"><div class="num">03</div><h3>Retire sua moto</h3><p>Pague a caução única e retire sua Honda revisada e pronta para rodar.</p></div>
+      <div class="step"><div class="num">04</div><h3>Caia na estrada</h3><p>Manutenção inclusa e suporte LokMais. É só rodar e aproveitar a liberdade.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="section cloud" id="planos">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker eyebrow">Planos e preços</span>
+      <h2 style="margin-top:14px;">Escolha o plano da sua <span class="o">liberdade</span></h2>
+      <p class="lead">Valores semanais. Caução única de R$ 800 em todos os planos. Manutenção inclusa.</p>
+    </div>
+    <div class="plan-grid">
+      <div class="plan">
+        <div class="pname">Trimestral</div>
+        <div class="pdesc">Ideal para começar com baixo custo e total flexibilidade.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 265<small>/sem</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 (2024/2025)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800</li>
+        </ul>
+        <a class="btn btn-navy" href="#contato">Quero este plano</a>
+      </div>
+      <div class="plan feat-plan">
+        <div class="ribbon">Mais escolhido</div>
+        <div class="pname">30 meses</div>
+        <div class="pdesc">A moto roda com você no caminho de ser sua, em 0 km ou seminova.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 419<small>,90/sem</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Fan 2026 0 km / Start seminova</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Freio a disco e roda de liga leve</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800</li>
+        </ul>
+        <a class="btn btn-primary" href="#contato">Quero este plano</a>
+      </div>
+      <div class="plan">
+        <div class="pname">36 meses</div>
+        <div class="pdesc">O menor valor semanal, com prazo estendido para caber no orçamento.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 399<small>,90/sem</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Fan 2026 0 km / Start seminova</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Menor parcela semanal</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800</li>
+        </ul>
+        <a class="btn btn-navy" href="#contato">Quero este plano</a>
+      </div>
+    </div>
+    <p class="center" style="color:var(--muted-2);font-size:.82rem;margin-top:26px;font-style:italic;">* Valores de referência (tabela maio/2026). Podem variar conforme modelo e disponibilidade da unidade.</p>
+  </div>
+</section>
+
+<!-- MOTOS -->
+<section class="section" id="motos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker eyebrow">Nossas motos</span>
+      <h2 style="margin-top:14px;">Frota <span class="o">Honda</span>, revisada e pronta</h2>
+      <p class="lead">Trabalhamos com a marca líder em confiabilidade e valorização do mercado.</p>
+    </div>
+    <div class="moto-grid">
+      <div class="moto">
+        <image-slot id="moto1" placeholder="Foto" shape="rect"></image-slot>
+        <div class="mb"><span class="tag">Trimestral</span><h3>Start 160 · 2024</h3><div class="specs"><span>160cc</span><span>Confiável</span><span>Econômica</span></div></div>
+      </div>
+      <div class="moto">
+        <image-slot id="moto2" placeholder="Foto" shape="rect"></image-slot>
+        <div class="mb"><span class="tag">Trimestral</span><h3>Start 160 · 2025</h3><div class="specs"><span>Freio a disco</span><span>Roda liga leve</span></div></div>
+      </div>
+      <div class="moto">
+        <image-slot id="moto3" placeholder="Foto" shape="rect"></image-slot>
+        <div class="mb"><span class="tag navy">0 km</span><h3>Fan 2026</h3><div class="specs"><span>Zero km</span><span>Freio a disco</span><span>Roda liga</span></div></div>
+      </div>
+      <div class="moto">
+        <image-slot id="moto4" placeholder="Foto" shape="rect"></image-slot>
+        <div class="mb"><span class="tag">Seminova</span><h3>Start 160 Semi Nova</h3><div class="specs"><span>Revisada</span><span>Menor valor</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="section cloud">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker eyebrow">Por que LokMais</span>
+      <h2 style="margin-top:14px;">Mais que uma moto, <span class="o">liberdade com suporte</span></h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 1.5 1.5 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.4-1.4 2.2-2z"/></svg></div><h3>Manutenção inclusa</h3><p>Oficina própria LokMais para manter sua moto sempre rodando, sem custo extra.</p></div>
+      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><h3>Segurança e rastreio</h3><p>Frota monitorada com tecnologia, garantindo tranquilidade no dia a dia.</p></div>
+      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>Atendimento humano</h3><p>Time dedicado para te ajudar do primeiro contato ao último dia do contrato.</p></div>
+      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></div><h3>Sua moto valoriza</h3><p>Honda é líder em valorização — a CG 160 desvaloriza só 4,6% em um ano de uso.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FRANCHISE BAND -->
+<section class="section">
+  <div class="wrap">
+    <div class="fran">
+      <div>
+        <span class="kicker on-dark" style="color:#fff;">Para investidores</span>
+        <h2 style="margin-top:10px;">Quer empreender com a LokMais?</h2>
+        <p>Entre num mercado que não para de crescer com um modelo validado, parceria Honda e suporte completo. Seja um franqueado e transforme demanda em resultado.</p>
+      </div>
+      <div style="text-align:right;">
+        <a class="btn btn-lg btn-white" href="lp-seja-franqueado.html" style="background:#fff;color:var(--orange-deep);">Seja franqueado</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS / GOOGLE -->
+<section class="section" id="depoimentos">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker eyebrow">Quem anda com a gente</span>
+      <h2 style="margin-top:14px;">Histórias de quem <span class="o">conquistou a liberdade</span></h2>
+      <p class="lead">Depoimentos reais de clientes que rodam todos os dias com a LokMais.</p>
+    </div>
+    <div class="vids">
+      <div class="vid">
+        <image-slot id="vid1" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
+        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
+        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
+      </div>
+      <div class="vid">
+        <image-slot id="vid2" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
+        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
+        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
+      </div>
+      <div class="vid">
+        <image-slot id="vid3" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
+        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
+        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
+      </div>
+    </div>
+
+    <div class="google">
+      <div class="glogo"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></div>
+      <div class="sep"></div>
+      <div style="text-align:center;"><div class="grate">4,9</div><div class="stars">★★★★★</div></div>
+      <div class="sep"></div>
+      <div class="gsub">Avaliação média dos clientes<br>no Google · <b>placeholder</b></div>
+    </div>
+
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="rh"><image-slot id="rev1" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
+        <div class="rstars">★★★★★</div>
+        <p>“Atendimento rápido e sem burocracia. Saí com a moto no mesmo dia e a manutenção inclusa é um diferencial enorme.”</p>
+      </div>
+      <div class="rev">
+        <div class="rh"><image-slot id="rev2" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
+        <div class="rstars">★★★★★</div>
+        <p>“Uso para trabalhar nos apps e nunca me deixou na mão. Moto econômica e suporte de verdade quando preciso.”</p>
+      </div>
+      <div class="rev">
+        <div class="rh"><image-slot id="rev3" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
+        <div class="rstars">★★★★★</div>
+        <p>“Melhor custo-benefício da cidade. Plano que cabe no bolso e a moto sempre revisada. Recomendo demais!”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section cloud" id="faq">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker eyebrow">Dúvidas frequentes</span>
+      <h2 style="margin-top:14px;">Perguntas sobre o <span class="o">aluguel</span></h2>
+    </div>
+    <div class="faq">
+      <div class="qa"><button>Quanto é a caução?<span class="pl">+</span></button><div class="ans"><p>A caução é única, de R$ 800, válida para todos os planos. Ela é devolvida no fim do contrato conforme as condições de uso.</p></div></div>
+      <div class="qa"><button>A manutenção está inclusa?<span class="pl">+</span></button><div class="ans"><p>Sim. Contamos com oficina própria LokMais para manter sua moto sempre em dia, sem custo adicional de manutenção preventiva.</p></div></div>
+      <div class="qa"><button>Preciso ter nome limpo?<span class="pl">+</span></button><div class="ans"><p>Não fazemos consulta a SPC/Serasa. A documentação é simples — basta CNH válida e poucos documentos.</p></div></div>
+      <div class="qa"><button>No fim do plano a moto fica minha?<span class="pl">+</span></button><div class="ans"><p>Nos planos de 30 e 36 meses você caminha rumo à sua moto. Fale com a gente para entender as condições do seu plano.</p></div></div>
+      <div class="qa"><button>Posso usar para trabalhar em aplicativos?<span class="pl">+</span></button><div class="ans"><p>Com certeza. Nossas motos são perfeitas para entregadores e motoristas de aplicativo — econômicas, confiáveis e com manutenção inclusa.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO / CTA -->
+<section class="section deep" id="contato" style="text-align:center;">
+  <div class="wrap">
+    <span class="kicker on-dark" style="justify-content:center;display:inline-flex;">Fale com a LokMais</span>
+    <h2 style="margin-top:14px;font-size:clamp(2.2rem,4.5vw,3.4rem);">Bora <span style="color:var(--orange-bright);">colocar você na estrada?</span></h2>
+    <p class="lead on-dark" style="max-width:560px;margin:14px auto 0;">Chama no WhatsApp e garanta sua moto hoje mesmo. Rápido, sem burocracia e com atendimento de verdade.</p>
+    <a class="btn btn-lg btn-wa" href="#" style="margin-top:28px;">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><img src="assets/logo-lockup-white.png" alt="LokMais"></div>
+        <p style="color:var(--on-dark-muted);max-width:300px;">O modelo de locação de motos mais completo do Brasil. Sua liberdade merece mais.</p>
+      </div>
+      <div class="foot-col"><h4>Alugar</h4><a href="planos.html">Planos</a><a href="como-funciona.html">Como funciona</a><a href="motos.html">Motos</a><a href="faq.html">Dúvidas</a></div>
+      <div class="foot-col"><h4>Empresa</h4><a href="sobre.html">Sobre</a><a href="unidades.html">Unidades</a><a href="lp-seja-franqueado.html">Seja franqueado</a></div>
+      <div class="foot-col"><h4>Contato</h4><a href="contato.html">Fale com a gente</a><a href="#">WhatsApp</a></div>
+    </div>
+    <p style="margin-top:46px;font-size:.78rem;color:var(--on-dark-muted);">© 2026 LokMais · Locação de motos. Sua liberdade merece mais.</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+</a>
+
+<script src="assets/image-slot.js"></script>
+<script>
+// === Configuração do vídeo de fundo do hero ===
+// Substitua YT_ID pelo ID do vídeo institucional LokMais (ex: "dQw4w9WgXcQ")
+const YT_ID = "5qap5aO4i9A"; // <-- placeholder. Troque pelo ID do vídeo LokMais
+const yt = document.getElementById('hero-yt');
+if (yt) {
+  yt.src = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1`;
+}
+
+document.querySelectorAll('.qa button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const qa=b.parentElement;
+    document.querySelectorAll('.qa').forEach(o=>{if(o!==qa)o.classList.remove('open');});
+    qa.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Planos e Preços</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:#fff;}
+  .nav .brand b{font-style:normal;}
+
+  /* tabs */
+  .tabs{display:inline-flex;background:var(--cloud);border-radius:var(--r-pill);padding:5px;margin-top:30px;}
+  .tabs button{background:none;border:0;padding:11px 22px;font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:.04em;color:var(--muted);border-radius:var(--r-pill);cursor:pointer;transition:.18s var(--ease);}
+  .tabs button.on{background:#fff;color:var(--navy-700);box-shadow:var(--sh-sm);}
+
+  .planos-detail{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px;}
+  .pd{position:relative;background:#fff;border:2px solid var(--line);border-radius:var(--r-xl);padding:34px 30px;transition:.2s var(--ease);}
+  .pd:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:transparent;}
+  .pd.featured{background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-color:transparent;box-shadow:var(--sh-lg);}
+  .pd .ribbon{position:absolute;top:-13px;left:30px;white-space:nowrap;background:var(--orange);color:#fff;font-family:var(--font-head);font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-pill);box-shadow:var(--sh-orange);}
+  .pd .pname{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.7rem;color:var(--navy-700);line-height:1;}
+  .pd.featured .pname{color:#fff;}
+  .pd .psub{color:var(--muted);font-size:.92rem;margin-top:6px;}
+  .pd.featured .psub{color:var(--on-dark-muted);}
+  .pd .apartir{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--orange-deep);font-family:var(--font-head);font-weight:700;margin-top:22px;}
+  .pd.featured .apartir{color:var(--orange-bright);}
+  .pd .price{font-family:var(--font-display);font-weight:800;font-size:3.4rem;line-height:1;color:var(--ink);}
+  .pd.featured .price{color:var(--orange-bright);}
+  .pd .price small{font-size:.92rem;font-weight:600;color:var(--muted);}
+  .pd.featured .price small{color:var(--on-dark-muted);}
+  .pd .priceall{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);}
+  .pd.featured .priceall{border-color:rgba(255,255,255,.2);}
+  .pd .priceall .row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;font-size:.92rem;}
+  .pd .priceall .row b{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--ink);}
+  .pd.featured .priceall .row b{color:#fff;}
+  .pd .priceall .row span{color:var(--muted);font-weight:600;}
+  .pd.featured .priceall .row span{color:var(--on-dark-muted);}
+  .pd ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:11px;}
+  .pd li{display:flex;gap:10px;align-items:flex-start;font-size:.94rem;}
+  .pd.featured li{color:var(--on-dark);}
+  .pd li svg{flex:0 0 auto;width:18px;height:18px;color:var(--orange);margin-top:2px;}
+  .pd .btn{width:100%;justify-content:center;margin-top:26px;}
+
+  .caucao{margin-top:54px;display:grid;grid-template-columns:1fr 1.4fr;gap:30px;align-items:center;background:linear-gradient(120deg,var(--orange),var(--orange-deep));color:#fff;border-radius:var(--r-xl);padding:42px;position:relative;overflow:hidden;}
+  .caucao::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 2px,transparent 2.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000);}
+  .caucao>*{position:relative;z-index:2;}
+  .caucao .big{font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,7vw,5rem);line-height:1;}
+  .caucao h3{font-size:1.5rem;}
+
+  .matrix{margin-top:64px;background:var(--cloud);border-radius:var(--r-xl);padding:34px;overflow-x:auto;}
+  .matrix table{width:100%;border-collapse:collapse;font-family:var(--font-body);min-width:560px;}
+  .matrix th,.matrix td{padding:14px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:.92rem;}
+  .matrix th{font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.74rem;color:var(--navy-700);}
+  .matrix td:first-child{font-family:var(--font-head);font-weight:700;color:var(--ink);}
+  .matrix .ok{color:var(--orange);font-weight:800;}
+
+  @media(max-width:920px){.planos-detail{grid-template-columns:1fr;}.caucao{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo-lockup-white.png" alt="LokMais"></a>
+    <nav class="nav-links">
+      <a href="planos.html" class="active">Planos</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="motos.html">Motos</a>
+      <a href="unidades.html">Unidades</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="lp-seja-franqueado.html">Seja franqueado</a>
+    </nav>
+    <a class="btn btn-primary" href="contato.html">Alugar agora</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="diag"></div>
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Início</a> / <span>Planos e Preços</span></div>
+    <h1>Escolha o plano da sua <span class="o">liberdade</span></h1>
+    <p class="lead">Planos com valores semanais, manutenção inclusa e a opção de levar a moto pra casa no fim. Caução única de R$ 800 — reembolsável.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="planos-detail">
+      <!-- TRIMESTRAL -->
+      <div class="pd">
+        <div class="pname">Trimestral</div>
+        <div class="psub">3 meses de aluguel · ideal para começar.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 265<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 · 2024</span><b>R$ 265,00</b></div>
+          <div class="row"><span>Fan 160 · 2025</span><b>R$ 315,00</b></div>
+          <div class="row"><span>Start 160 · 2025</span><b>R$ 335,00</b></div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Fan 160</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta a SPC/Serasa</li>
+        </ul>
+        <a class="btn btn-navy" href="contato.html">Quero este plano</a>
+      </div>
+
+      <!-- 30 MESES -->
+      <div class="pd featured">
+        <div class="ribbon">Mais escolhido</div>
+        <div class="pname">30 meses</div>
+        <div class="psub">A moto roda com você no caminho de ser sua.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 419,90<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 Semi Nova</span><b>R$ 419,90</b></div>
+          <div class="row"><span>Fan 2026 · 0 km</span><b>R$ 449,90</b></div>
+          <div class="row"><span>Start 160 · 0 km</span><b>R$ 465,90</b></div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda 0 km ou seminova</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Freio a disco e roda de liga</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
+        </ul>
+        <a class="btn btn-primary" href="contato.html">Quero este plano</a>
+      </div>
+
+      <!-- 36 MESES -->
+      <div class="pd">
+        <div class="pname">36 meses</div>
+        <div class="psub">Menor parcela semanal · prazo estendido.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 399,90<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 Semi Nova</span><b>R$ 399,90</b></div>
+          <div class="row"><span>Fan 2026 · 0 km</span><b>R$ 419,90</b></div>
+          <div class="row"><span>Start 160 · 0 km</span><b>R$ 444,90</b></div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda 0 km ou seminova</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Menor parcela do mercado</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
+        </ul>
+        <a class="btn btn-navy" href="contato.html">Quero este plano</a>
+      </div>
+    </div>
+
+    <!-- CAUÇÃO -->
+    <div class="caucao">
+      <div>
+        <div class="big">R$ 800</div>
+        <div style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:.8rem;margin-top:6px;opacity:.92;">Caução única · reembolsável</div>
+      </div>
+      <div>
+        <h3>Caução única em todos os planos</h3>
+        <p style="margin-top:8px;max-width:520px;opacity:.95;">Você paga uma única vez, no início do contrato, e o valor é devolvido ao final conforme as condições de uso e devolução da moto. Sem mensalidades escondidas e sem surpresas.</p>
+      </div>
+    </div>
+
+    <!-- MATRIX -->
+    <div class="matrix">
+      <h3 style="color:var(--navy-700);font-size:1.4rem;margin-bottom:14px;">Tabela completa de planos</h3>
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:18px;">Valores semanais por modelo e plano. Caução única de R$ 800 em todos.</p>
+      <table>
+        <tr>
+          <th>Moto</th><th>Trimestral</th><th>30 meses</th><th>36 meses</th>
+        </tr>
+        <tr><td>Start 160 · 2024</td><td class="ok">R$ 265,00</td><td>—</td><td>—</td></tr>
+        <tr><td>Fan 160 · 2025</td><td class="ok">R$ 315,00</td><td>—</td><td>—</td></tr>
+        <tr><td>Start 160 · 2025</td><td class="ok">R$ 335,00</td><td>—</td><td>—</td></tr>
+        <tr><td>Start 160 Semi Nova</td><td>—</td><td class="ok">R$ 419,90</td><td class="ok">R$ 399,90</td></tr>
+        <tr><td>Fan 2026 · 0 km</td><td>—</td><td class="ok">R$ 449,90</td><td class="ok">R$ 419,90</td></tr>
+        <tr><td>Start 160 · 0 km</td><td>—</td><td class="ok">R$ 465,90</td><td class="ok">R$ 444,90</td></tr>
+      </table>
+      <p style="color:var(--muted-2);font-size:.78rem;margin-top:18px;font-style:italic;">* Valores de referência da tabela LokMais (maio/2026). Podem variar conforme disponibilidade e unidade.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section cloud" style="text-align:center;">
+  <div class="wrap">
+    <span class="kicker eyebrow" style="justify-content:center;display:inline-flex;">Não sabe qual escolher?</span>
+    <h2 style="margin-top:14px;font-size:clamp(2rem,4vw,3rem);color:var(--navy-700);">Use o <span class="em-orange">simulador</span> e veja na hora</h2>
+    <p class="lead" style="max-width:520px;margin:14px auto 0;">Escolha plano, moto e período de uso, e a gente mostra exatamente quanto vai custar.</p>
+    <a class="btn btn-lg btn-primary" href="simulador.html" style="margin-top:24px;">Abrir simulador</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;">
+    <div>
+      <div style="margin-bottom:16px;"><img src="assets/logo-lockup-white.png" alt="LokMais" style="height:42px;"></div>
+      <p style="color:var(--on-dark-muted);max-width:300px;">O modelo de locação de motos mais completo do Brasil. Sua liberdade merece mais.</p>
+    </div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Alugar</h4><a href="planos.html" style="display:block;margin-bottom:10px;">Planos</a><a href="como-funciona.html" style="display:block;margin-bottom:10px;">Como funciona</a><a href="motos.html" style="display:block;margin-bottom:10px;">Motos</a><a href="faq.html" style="display:block;margin-bottom:10px;">Dúvidas</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Empresa</h4><a href="sobre.html" style="display:block;margin-bottom:10px;">Sobre</a><a href="unidades.html" style="display:block;margin-bottom:10px;">Unidades</a><a href="lp-seja-franqueado.html" style="display:block;margin-bottom:10px;">Seja franqueado</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Contato</h4><a href="contato.html" style="display:block;margin-bottom:10px;">Fale com a gente</a><a href="#" style="display:block;margin-bottom:10px;">WhatsApp</a></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+</a>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Sobre</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:#fff;}
+  .nav .brand b{font-style:normal;}
+
+  .manifesto{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;}
+  .manifesto image-slot{width:100%;height:480px;display:block;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%);}
+  .manifesto h2{color:var(--navy-700);font-size:clamp(2rem,4vw,3rem);}
+  .manifesto p{color:var(--muted);font-size:1.05rem;margin-top:14px;}
+  .manifesto p.intro{font-size:1.2rem;color:var(--ink);font-weight:500;}
+
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px;}
+  .pillar{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 22px;box-shadow:var(--sh-sm);}
+  .pillar .pv{font-family:var(--font-display);font-weight:800;font-size:2.2rem;color:var(--orange);line-height:1;}
+  .pillar .pl{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.78rem;letter-spacing:.04em;color:var(--navy-700);margin-top:8px;}
+  .pillar .pd{font-size:.86rem;color:var(--muted);margin-top:4px;}
+
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px;}
+  .val{background:linear-gradient(160deg,var(--navy-700),var(--navy-900));color:#fff;border-radius:var(--r-lg);padding:30px 26px;box-shadow:var(--sh-md);}
+  .val .vi{width:56px;height:56px;border-radius:14px;background:linear-gradient(160deg,var(--orange),var(--orange-deep));display:grid;place-items:center;transform:skewX(-8deg);margin-bottom:18px;box-shadow:var(--sh-orange);}
+  .val .vi svg{width:26px;height:26px;color:#fff;transform:skewX(8deg);}
+  .val h3{font-size:1.2rem;color:#fff;}
+  .val p{color:var(--on-dark-muted);margin-top:8px;font-size:.95rem;}
+
+  .partner{margin-top:64px;background:linear-gradient(120deg,var(--orange),var(--orange-deep));color:#fff;border-radius:var(--r-xl);padding:50px;display:grid;grid-template-columns:1fr 1.2fr;gap:30px;align-items:center;position:relative;overflow:hidden;}
+  .partner::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 2px,transparent 2.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000);}
+  .partner>*{position:relative;z-index:2;}
+  .partner .lab{font-family:var(--font-head);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;}
+  .partner h2{font-size:clamp(2.2rem,4.5vw,3.2rem);margin-top:8px;}
+  .partner p{margin-top:10px;font-size:1.05rem;opacity:.95;max-width:520px;}
+
+  @media(max-width:820px){.manifesto,.partner{grid-template-columns:1fr;}.pillars,.values{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.pillars,.values{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo-lockup-white.png" alt="LokMais"></a>
+    <nav class="nav-links">
+      <a href="planos.html">Planos</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="motos.html">Motos</a>
+      <a href="unidades.html">Unidades</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="lp-seja-franqueado.html">Seja franqueado</a>
+    </nav>
+    <a class="btn btn-primary" href="contato.html">Alugar agora</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="diag"></div>
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Início</a> / <span>Sobre</span></div>
+    <h1>Mobilidade em <span class="o">oportunidades reais</span></h1>
+    <p class="lead">A LokMais nasceu para transformar a forma como as pessoas se relacionam com a moto: menos burocracia, mais liberdade.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="manifesto">
+      <image-slot id="sobre-hero" placeholder="Foto: equipe / unidade / motoboy" shape="rect"></image-slot>
+      <div>
+        <span class="kicker eyebrow">Quem somos</span>
+        <h2 style="margin-top:14px;">A liberdade <span class="em-orange">não pode esperar</span></h2>
+        <p class="intro">Unimos operação eficiente, marketing estratégico e parceria sólida com a Honda para entregar o modelo de locação de motos mais completo do Brasil.</p>
+        <p>Desde 2021 colocamos motos na rua para entregadores, motoristas de aplicativo e qualquer pessoa que precisa rodar — sem letras miúdas, sem análise de crédito e com manutenção inclusa.</p>
+        <p>Hoje somos <b style="color:var(--navy-700);">+1.200 motos rodando em 3 estados</b>, validando todos os dias um modelo que coloca a liberdade da pessoa em primeiro lugar.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar"><div class="pv">+1.200</div><div class="pl">Motos rodando</div><div class="pd">em operação ativa</div></div>
+      <div class="pillar"><div class="pv">3</div><div class="pl">Estados</div><div class="pd">presença geográfica</div></div>
+      <div class="pillar"><div class="pv">2021</div><div class="pl">No mercado</div><div class="pd">modelo validado</div></div>
+      <div class="pillar"><div class="pv">Honda</div><div class="pl">Parceria</div><div class="pd">100% da frota</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section cloud">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker eyebrow">Nossos valores</span><h2 style="margin-top:14px;">O que nos move <span class="em-orange">todos os dias</span></h2></div>
+    <div class="values">
+      <div class="val">
+        <div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9-9-4-9-9z"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Agilidade</h3>
+        <p>Decisões rápidas, processos simples. O cliente sai com a moto no mesmo dia.</p>
+      </div>
+      <div class="val">
+        <div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Confiança</h3>
+        <p>Contratos claros, suporte humano e a marca Honda como base da frota.</p>
+      </div>
+      <div class="val">
+        <div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></div>
+        <h3>Crescimento</h3>
+        <p>Para o cliente que quer ter a própria moto. Para o franqueado que quer escalar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="partner">
+      <div>
+        <span class="lab">Parceria</span>
+        <h2>Honda do começo ao fim</h2>
+      </div>
+      <div>
+        <p>Trabalhamos exclusivamente com Honda porque é a moto com a melhor combinação de durabilidade, baixo custo de manutenção e <b>desvalorização de apenas 4,6% em 1 ano</b> de uso. Sua liberdade rodando na marca líder do mercado.</p>
+        <a class="btn btn-white" href="motos.html" style="background:#fff;color:var(--orange-deep);margin-top:18px;">Conheça a frota</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" style="text-align:center;">
+  <div class="wrap">
+    <span class="kicker on-dark" style="justify-content:center;display:inline-flex;">Vem com a gente</span>
+    <h2 style="margin-top:14px;font-size:clamp(2rem,4vw,3rem);color:#fff;">Sua liberdade <span style="color:var(--orange-bright);">merece mais</span></h2>
+    <p class="lead on-dark" style="max-width:520px;margin:14px auto 0;">Alugue sua moto ou seja parte da próxima unidade LokMais.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+      <a class="btn btn-lg btn-primary" href="contato.html">Alugar moto</a>
+      <a class="btn btn-lg btn-ghost" href="lp-seja-franqueado.html" style="color:#fff;">Seja franqueado</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;">
+    <div>
+      <div style="margin-bottom:16px;"><img src="assets/logo-lockup-white.png" alt="LokMais" style="height:42px;"></div>
+      <p style="color:var(--on-dark-muted);max-width:300px;">O modelo de locação de motos mais completo do Brasil. Sua liberdade merece mais.</p>
+    </div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Alugar</h4><a href="planos.html" style="display:block;margin-bottom:10px;">Planos</a><a href="como-funciona.html" style="display:block;margin-bottom:10px;">Como funciona</a><a href="motos.html" style="display:block;margin-bottom:10px;">Motos</a><a href="faq.html" style="display:block;margin-bottom:10px;">Dúvidas</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Empresa</h4><a href="sobre.html" style="display:block;margin-bottom:10px;">Sobre</a><a href="unidades.html" style="display:block;margin-bottom:10px;">Unidades</a><a href="lp-seja-franqueado.html" style="display:block;margin-bottom:10px;">Seja franqueado</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Contato</h4><a href="contato.html" style="display:block;margin-bottom:10px;">Fale com a gente</a><a href="#" style="display:block;margin-bottom:10px;">WhatsApp</a></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+</a>
+
+<script src="assets/image-slot.js"></script>
+</body>
+</html>

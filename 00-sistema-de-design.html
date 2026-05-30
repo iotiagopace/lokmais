@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Sistema de Design</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:var(--cloud);}
+  .ds-hero{background:radial-gradient(130% 130% at 85% -20%,rgba(244,122,24,.28),transparent 55%),var(--navy-900);color:var(--on-dark);padding:96px 0 84px;position:relative;overflow:hidden;}
+  .ds-hero .wrap{position:relative;z-index:2;}
+  .ds-hero .big{font-family:var(--font-display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(3rem,9vw,7.5rem);line-height:.86;letter-spacing:-.02em;}
+  .ds-hero .big .o{color:var(--orange);}
+  .ghost-word{position:absolute;right:-2%;top:8%;font-family:var(--font-display);font-style:italic;font-weight:900;font-size:34vw;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;z-index:1;text-transform:uppercase;}
+  .spec{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .block{background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:clamp(28px,4vw,52px);margin:26px 0;}
+  .block h2{color:var(--navy-700);font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:.2em;}
+  .seclabel{font-family:var(--font-head);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);font-size:.8rem;margin-bottom:10px;}
+  .grid{display:grid;gap:18px;}
+  .swatch{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sh-sm);font-family:var(--font-head);}
+  .swatch .chip{height:104px;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700;}
+  .swatch .meta{padding:12px 14px;background:#fff;font-size:.82rem;}
+  .swatch .meta b{display:block;font-size:.95rem;color:var(--ink);}
+  .swatch .meta span{color:var(--muted);font-family:var(--font-body);}
+  .type-row{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:18px 0;}
+  .type-row:last-child{border-bottom:0;}
+  .type-row .tag2{font-family:var(--font-body);font-size:.78rem;color:var(--muted);min-width:130px;}
+  .logo-cell{border-radius:var(--r-md);display:grid;place-items:center;padding:34px;min-height:150px;}
+  .principle{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line);}
+  .principle:last-child{border-bottom:0;}
+  .principle .n{font-family:var(--font-display);font-style:italic;font-weight:900;color:var(--orange);font-size:1.7rem;line-height:1;min-width:42px;}
+  .principle b{font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.02em;}
+  .btn-demo{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+  .toc{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;}
+  .toc a{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;padding:9px 16px;border-radius:var(--r-pill);background:rgba(255,255,255,.08);color:var(--on-dark);border:1px solid var(--line-dark);transition:.18s;}
+  .toc a:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
+  .note{font-size:.85rem;color:var(--muted);border-left:3px solid var(--orange);padding:6px 0 6px 14px;margin:14px 0;}
+  .cardmock{position:relative;border-radius:var(--r-lg);overflow:hidden;background:linear-gradient(160deg,var(--navy-700),var(--navy-900));color:#fff;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;box-shadow:var(--sh-lg);}
+  .cardmock .price{font-family:var(--font-display);font-style:italic;font-weight:900;font-size:3rem;line-height:1;color:var(--orange-bright);}
+</style>
+</head>
+<body>
+
+<header class="ds-hero">
+  <div class="ghost-word">+</div>
+  <div class="wrap">
+    <div class="kicker on-dark">Sistema de Design · v1</div>
+    <div class="big">LOK<span class="o">MAIS</span></div>
+    <p class="lead on-dark" style="max-width:620px;margin-top:18px;font-size:1.25rem;">
+      A identidade visual da locação de motos LokMais — <b style="color:#fff;">azul-marinho + laranja</b>,
+      tipografia condensada e em movimento, e a promessa: <i style="color:var(--orange-bright);">sua liberdade merece.</i>
+    </p>
+    <div class="toc">
+      <a href="#contexto">Contexto</a>
+      <a href="#cor">Cor</a>
+      <a href="#tipo">Tipografia</a>
+      <a href="#logo">Logo</a>
+      <a href="#botoes">Botões</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#movimento">Movimento</a>
+    </div>
+  </div>
+</header>
+
+<main class="spec" style="padding-top:34px;padding-bottom:80px;">
+
+  <!-- CONTEXTO -->
+  <section class="block" id="contexto">
+    <div class="seclabel">Para o gestor — antes de começarmos</div>
+    <h2>O raciocínio</h2>
+    <p class="lead">Resumo das premissas que assumi a partir dos materiais (apresentação, tabela de planos e logo). Me corrija no que estiver errado antes de eu seguir para as páginas.</p>
+    <div style="margin-top:18px;">
+      <div class="principle"><div class="n">01</div><div><b>Quem é a LokMais</b><br>Locação de motos (Honda Start 160, Fan 2024–2026) com planos semanais. Público: pessoas que querem uma moto para o dia a dia e liberdade de ir e vir.</div></div>
+      <div class="principle"><div class="n">02</div><div><b>Tom: esportivo e veloz</b><br>A asa do logo e o itálico do wordmark pedem energia. Uso tipografia condensada inclinada, cortes diagonais e "speed lines". Nada corporativo-engessado.</div></div>
+      <div class="principle"><div class="n">03</div><div><b>Objetivo nº 1: gerar lead no WhatsApp</b><br>Todo bloco termina com uma chamada para ação. Botão verde de WhatsApp fixo na tela e CTAs laranja por toda a navegação.</div></div>
+      <div class="principle"><div class="n">04</div><div><b>Cor da marca, não do sistema importado</b><br>Os sistemas de design anexados não batem com moto-rental. Construí tudo a partir do logo real da LokMais: marinho profundo + laranja.</div></div>
+      <div class="principle"><div class="n">05</div><div><b>Fotos = placeholders por enquanto</b><br>Uso blocos/áreas elegantes marcados como "FOTO" até você enviar imagens reais ou aprovar fotos genéricas de moto/entrega.</div></div>
+    </div>
+  </section>
+
+  <!-- COR -->
+  <section class="block" id="cor">
+    <div class="seclabel">Cor</div>
+    <h2>Paleta</h2>
+    <p class="lead">Marinho como base sólida e confiável; laranja como energia e ação. Neutros frios para respiro.</p>
+
+    <h3 style="color:var(--ink);font-size:1.1rem;margin:26px 0 12px;">Azul-marinho</h3>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="swatch"><div class="chip" style="background:#0B0B2E;">900</div><div class="meta"><b>#0B0B2E</b><span>fundo profundo</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#111146;">800</div><div class="meta"><b>#111146</b><span>seções escuras</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#191970;">700</div><div class="meta"><b>#191970</b><span>marinho primário</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#222291;">600</div><div class="meta"><b>#222291</b><span>hover / realce</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2D2DB4;">500</div><div class="meta"><b>#2D2DB4</b><span>detalhes</span></div></div>
+    </div>
+
+    <h3 style="color:var(--ink);font-size:1.1rem;margin:26px 0 12px;">Laranja</h3>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="swatch"><div class="chip" style="background:#CE6407;">deep</div><div class="meta"><b>#CE6407</b><span>texto sobre claro</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F47A18;">base</div><div class="meta"><b>#F47A18</b><span>laranja primário</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FB970A;">bright</div><div class="meta"><b>#FB970A</b><span>hover / destaque</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFEAD3;color:#CE6407;">soft</div><div class="meta"><b>#FFEAD3</b><span>tags / fundos</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#25D366;color:#0a2e1a;">whats</div><div class="meta"><b>#25D366</b><span>WhatsApp CTA</span></div></div>
+    </div>
+
+    <h3 style="color:var(--ink);font-size:1.1rem;margin:26px 0 12px;">Neutros</h3>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+      <div class="swatch"><div class="chip" style="background:#13132B;">ink</div><div class="meta"><b>#13132B</b><span>texto principal</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#666C86;">muted</div><div class="meta"><b>#666C86</b><span>texto secundário</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F4F5FB;color:#666;">cloud</div><div class="meta"><b>#F4F5FB</b><span>fundo de seção</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#fff;color:#666;border:1px solid var(--line);">paper</div><div class="meta"><b>#FFFFFF</b><span>cartões</span></div></div>
+    </div>
+  </section>
+
+  <!-- TIPOGRAFIA -->
+  <section class="block" id="tipo">
+    <div class="seclabel">Tipografia</div>
+    <h2>Tipos</h2>
+    <p class="lead"><b>Saira Condensed</b> (display, itálico, caixa-alta) carrega a energia. <b>Saira</b> para títulos de UI. <b>Barlow</b> para texto corrido.</p>
+    <div style="margin-top:14px;">
+      <div class="type-row"><span class="tag2">Display · 900 itálico</span><span class="display" style="font-size:clamp(2.4rem,6vw,4.5rem);">SUA LIBERDADE MERECE</span></div>
+      <div class="type-row"><span class="tag2">H2 · 900 itálico</span><span style="font-family:var(--font-display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:2.4rem;">Alugue sua moto hoje</span></div>
+      <div class="type-row"><span class="tag2">Saira · 700</span><span style="font-family:var(--font-head);font-weight:700;font-size:1.5rem;">Planos semanais sem burocracia</span></div>
+      <div class="type-row"><span class="tag2">Kicker · 800 0.18em</span><span class="kicker" style="color:var(--orange);">Como funciona</span></div>
+      <div class="type-row"><span class="tag2">Barlow · corpo</span><span style="font-family:var(--font-body);font-size:1.05rem;max-width:540px;color:var(--muted);">Texto de apoio em Barlow: legível, técnico e amigável. Usado em parágrafos, listas e descrições dos planos.</span></div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section class="block" id="logo">
+    <div class="seclabel">Logo</div>
+    <h2>Uso do logo</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px;">
+      <div>
+        <div class="logo-cell" style="background:var(--cloud);"><img src="assets/logo-full.png" alt="LokMais" style="max-height:96px;"></div>
+        <p class="note">Versão principal sobre fundo claro.</p>
+      </div>
+      <div>
+        <div class="logo-cell" style="background:var(--navy-900);">
+          <div style="display:flex;align-items:center;gap:12px;"><img src="assets/icon-orange.png" style="height:54px;"><b style="font-family:var(--font-display);font-style:italic;font-weight:900;color:#fff;font-size:2.2rem;text-transform:uppercase;">LOKMAIS</b></div>
+        </div>
+        <p class="note">Sobre fundo escuro: ícone + wordmark em branco.</p>
+      </div>
+      <div>
+        <div class="logo-cell" style="background:var(--orange);"><img src="assets/icon-navy.png" style="max-height:78px;"></div>
+        <p class="note">Ícone isolado (favicon, avatar, selo).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTÕES -->
+  <section class="block" id="botoes">
+    <div class="seclabel">Botões</div>
+    <h2>Botões</h2>
+    <div class="btn-demo" style="margin-top:18px;">
+      <button class="btn btn-primary">Quero alugar</button>
+      <button class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9 .9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+        WhatsApp
+      </button>
+      <button class="btn btn-navy">Ver planos</button>
+      <button class="btn btn-white" style="background:var(--cloud-2);">Catálogo</button>
+    </div>
+    <div class="btn-demo" style="margin-top:22px;padding:22px;background:var(--navy-900);border-radius:var(--r-md);">
+      <button class="btn btn-primary">Quero alugar</button>
+      <button class="btn btn-ghost" style="color:#fff;">Fale conosco</button>
+      <button class="btn btn-lg btn-primary">Seja franqueado</button>
+    </div>
+    <p class="note">Cantos pílula (999px). Laranja = ação principal · verde = WhatsApp · marinho/branco = secundário · ghost = sobre escuro.</p>
+  </section>
+
+  <!-- COMPONENTES -->
+  <section class="block" id="componentes">
+    <div class="seclabel">Componentes</div>
+    <h2>Blocos-chave</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:18px;">
+      <div class="cardmock skew-cut">
+        <span class="tag" style="position:absolute;top:18px;left:18px;">Mais popular</span>
+        <div style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.8;">Plano semanal</div>
+        <div style="font-family:var(--font-display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:1.6rem;">Honda Start 160</div>
+        <div class="price">R$265<span style="font-size:1rem;font-style:normal;opacity:.7;">/sem</span></div>
+        <button class="btn btn-primary" style="margin-top:14px;width:100%;justify-content:center;">Alugar agora</button>
+      </div>
+      <div style="background:var(--cloud);border-radius:var(--r-lg);padding:26px;">
+        <span class="tag navy">Como funciona</span>
+        <div style="font-family:var(--font-display);font-style:italic;font-weight:900;font-size:3rem;color:var(--orange);line-height:1;margin-top:10px;">01</div>
+        <b style="font-family:var(--font-head);font-weight:800;text-transform:uppercase;display:block;margin-top:6px;">Escolha o plano</b>
+        <p style="color:var(--muted);font-size:.95rem;margin-top:6px;">Semanal, sem entrada complicada. Caução única de R$800.</p>
+      </div>
+      <div style="border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md);">
+        <div style="aspect-ratio:4/3;background:repeating-linear-gradient(45deg,var(--cloud-2),var(--cloud-2) 12px,var(--cloud) 12px,var(--cloud) 24px);display:grid;place-items:center;color:var(--muted-2);font-family:var(--font-head);font-weight:800;letter-spacing:.1em;">FOTO · MOTO</div>
+        <div style="padding:18px;background:#fff;">
+          <b style="font-family:var(--font-display);font-style:italic;font-weight:900;text-transform:uppercase;font-size:1.3rem;color:var(--navy-700);">Fan 2026 · 0 km</b>
+          <p style="color:var(--muted);font-size:.9rem;margin:4px 0 0;">Freio a disco · roda de liga leve</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">Placeholder de foto = hachura diagonal rotulada. Trocaremos por imagens reais quando você enviar.</p>
+  </section>
+
+  <!-- MOVIMENTO -->
+  <section class="block" id="movimento">
+    <div class="seclabel">Movimento</div>
+    <h2>Movimento & ritmo</h2>
+    <div style="margin-top:14px;">
+      <div class="principle"><div class="n">→</div><div><b>Cortes diagonais</b><br>Seções e cartões com recorte inclinado (clip-path) sugerindo velocidade.</div></div>
+      <div class="principle"><div class="n">→</div><div><b>Speed lines</b><br>Linhas horizontais em laranja desaparecendo, atrás de números e títulos.</div></div>
+      <div class="principle"><div class="n">→</div><div><b>Entradas suaves</b><br>Fade-up de 26px em 600ms ao rolar. Hover sobe 2px. Sem exageros.</div></div>
+      <div class="principle"><div class="n">→</div><div><b>Itálico = direção</b><br>Títulos inclinados para a direita, sempre "indo pra frente".</div></div>
+    </div>
+  </section>
+
+  <p style="text-align:center;color:var(--muted);font-family:var(--font-head);font-weight:600;margin-top:40px;">
+    Aprovado? O próximo passo é a <b style="color:var(--navy-700);">Home</b> em 2–3 variações, depois as demais páginas em sequência.
+  </p>
+</main>
+
+</body>
+</html>

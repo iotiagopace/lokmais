@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Simule o aluguel da sua moto</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:var(--cloud);}
+  .nav .brand b{font-style:normal;}
+
+  .sim-hero{position:relative;overflow:hidden;background:
+     radial-gradient(120% 130% at 88% -20%,rgba(244,122,24,.30),transparent 52%),
+     linear-gradient(180deg,var(--navy-900),var(--navy-800));color:var(--on-dark);padding:64px 0 180px;}
+  .sim-hero .wrap{position:relative;z-index:3;max-width:1120px;}
+  .sim-hero h1{font-size:clamp(2.4rem,5.4vw,4.2rem);line-height:.98;}
+  .sim-hero h1 .o{color:var(--orange);}
+  .diag{position:absolute;top:0;right:0;height:100%;width:44%;background:linear-gradient(135deg,var(--orange),var(--orange-deep));clip-path:polygon(40% 0,100% 0,100% 100%,0 100%);opacity:.13;z-index:1;}
+
+  .sim-wrap{max-width:1120px;margin:-135px auto 0;padding:0 24px 80px;position:relative;z-index:5;}
+  .panel{background:#fff;border-radius:var(--r-xl);box-shadow:var(--sh-lg);padding:clamp(24px,3.4vw,42px);}
+
+  .step-label{display:flex;align-items:center;gap:12px;margin:0 0 18px;}
+  .step-label .n{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1rem;flex:0 0 auto;}
+  .step-label h2{color:var(--navy-700);font-size:1.3rem;}
+  .step-label.muted .n{background:var(--cloud-2);color:var(--muted);}
+
+  /* plano chips */
+  .planos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pchip{border:2px solid var(--line);background:#fff;border-radius:var(--r-lg);padding:18px 20px;cursor:pointer;text-align:left;transition:.18s var(--ease);}
+  .pchip:hover{border-color:var(--orange);transform:translateY(-2px);}
+  .pchip.on{border-color:var(--orange);background:linear-gradient(180deg,#fff,var(--orange-soft));box-shadow:var(--sh-sm);}
+  .pchip .pt{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.4rem;color:var(--navy-700);line-height:1;}
+  .pchip .ps{font-size:.84rem;color:var(--muted);margin-top:4px;}
+
+  /* moto cards */
+  .motos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
+  .mcard{border:2px solid var(--line);background:#fff;border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:.18s var(--ease);text-align:left;display:flex;flex-direction:column;}
+  .mcard:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:var(--sh-md);}
+  .mcard.on{border-color:var(--orange);box-shadow:var(--sh-md);}
+  .mcard.on::after{content:"✓";position:absolute;top:10px;right:12px;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:700;}
+  .mcard{position:relative;}
+  .mcard image-slot{width:100%;height:130px;display:block;background:var(--cloud);}
+  .mcard .mb{padding:16px;flex:1;display:flex;flex-direction:column;}
+  .mcard .mtag{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.66rem;letter-spacing:.05em;color:var(--orange-deep);background:var(--orange-soft);padding:4px 9px;border-radius:var(--r-pill);align-self:flex-start;}
+  .mcard h3{font-size:1.05rem;color:var(--navy-700);margin-top:10px;}
+  .mcard .specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .mcard .specs span{font-size:.68rem;background:var(--cloud);color:var(--muted);padding:4px 8px;border-radius:var(--r-pill);font-family:var(--font-head);font-weight:600;}
+  .mcard .mp{margin-top:auto;padding-top:12px;}
+  .mcard .mp b{font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--ink);}
+  .mcard .mp small{font-size:.78rem;color:var(--muted);font-weight:600;}
+
+  /* period slider */
+  .period{margin-top:30px;background:var(--cloud);border-radius:var(--r-lg);padding:24px 26px;}
+  .period .top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;}
+  .period .pv{font-family:var(--font-display);font-weight:800;color:var(--orange);font-size:2.2rem;line-height:1;}
+  .period .pv small{font-size:.9rem;color:var(--muted);font-weight:600;}
+  .period .ptot{text-align:right;}
+  .period .ptot .tv{font-family:var(--font-display);font-weight:800;color:var(--navy-700);font-size:2rem;line-height:1;}
+  .period .ptot .tl{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-family:var(--font-head);font-weight:600;}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:99px;background:var(--cloud-2);margin-top:20px;outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:32px;height:32px;border-radius:50%;background:var(--orange);border:5px solid #fff;box-shadow:var(--sh-orange);cursor:grab;transition:transform .12s;}
+  input[type=range]::-webkit-slider-thumb:active{cursor:grabbing;transform:scale(1.12);}
+  input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--orange);border:5px solid #fff;cursor:grab;}
+  .period .ticks{display:flex;justify-content:space-between;margin-top:10px;font-size:.72rem;color:var(--muted-2);font-family:var(--font-head);font-weight:600;}
+  .period .hint{font-size:.8rem;color:var(--muted);margin-top:12px;display:flex;align-items:center;gap:7px;}
+  .period .hint svg{width:1em;height:1em;color:var(--orange);}
+
+  /* result */
+  .result{background:linear-gradient(160deg,var(--navy-700),var(--navy-900));color:#fff;border-radius:var(--r-xl);padding:clamp(24px,3vw,38px);position:relative;overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;margin-top:22px;}
+  .result::after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(244,122,24,.34),transparent 70%);}
+  .result>*{position:relative;z-index:2;}
+  .result .rl{font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;color:var(--on-dark-muted);}
+  .result .rmoto{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.4rem;line-height:1;margin:4px 0 2px;}
+  .result .rplano{font-size:.9rem;color:var(--on-dark-muted);}
+  .result .big{font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,7vw,4.6rem);line-height:.9;color:var(--orange-bright);letter-spacing:-.02em;}
+  .result .big small{font-size:1.1rem;color:var(--on-dark-muted);font-weight:600;letter-spacing:0;}
+  .result .meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;}
+  .result .mpill{background:rgba(255,255,255,.1);border:1px solid var(--line-dark);border-radius:var(--r-md);padding:10px 14px;}
+  .result .mpill .v{font-family:var(--font-display);font-weight:800;font-size:1.2rem;}
+  .result .mpill .l{font-size:.7rem;color:var(--on-dark-muted);text-transform:uppercase;letter-spacing:.04em;}
+  .result .btn{width:100%;justify-content:center;}
+  .result .nocredit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--font-head);font-weight:700;font-size:.8rem;color:var(--green-300,#9ff0c0);}
+  .result .nocredit svg{width:1.1em;height:1.1em;}
+
+  .disc{max-width:1120px;margin:18px auto 0;padding:0 24px;color:var(--muted-2);font-size:.8rem;font-style:italic;}
+
+  @media(max-width:820px){
+    .planos,.motos{grid-template-columns:1fr;}
+    .motos{grid-template-columns:1fr 1fr;}
+    .result{grid-template-columns:1fr;}
+  }
+  @media(max-width:520px){.motos{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo-lockup-white.png" alt="LokMais"></a>
+    <nav class="nav-links">
+      <a href="index.html#planos">Planos</a>
+      <a href="index.html#como">Como funciona</a>
+      <a href="index.html#motos">Motos</a>
+      <a href="#" class="active">Simulador</a>
+      <a href="lp-seja-franqueado.html">Seja franqueado</a>
+    </nav>
+    <a class="btn btn-primary" href="#result">Alugar agora</a>
+  </div>
+</header>
+
+<section class="sim-hero">
+  <div class="diag"></div>
+  <div class="wrap">
+    <span class="kicker on-dark">Simulador de aluguel</span>
+    <h1 style="margin-top:14px;">Monte sua moto e veja <span class="o">o valor na hora</span></h1>
+    <p class="lead on-dark" style="max-width:540px;margin-top:14px;font-size:1.15rem;">Escolha o plano e a moto. Sem análise de crédito, sem consulta ao SPC/Serasa. Sua liberdade começa aqui.</p>
+  </div>
+</section>
+
+<div class="sim-wrap">
+  <div class="panel">
+    <!-- STEP 1 -->
+    <div class="step-label"><div class="n">1</div><h2>Escolha o plano</h2></div>
+    <div class="planos" id="planos"></div>
+
+    <!-- STEP 2 -->
+    <div class="step-label" style="margin-top:34px;"><div class="n">2</div><h2>Escolha a moto</h2></div>
+    <div class="motos" id="motos"></div>
+
+    <!-- STEP 3 — período (arraste) -->
+    <div class="step-label" style="margin-top:34px;"><div class="n">3</div><h2>Arraste e escolha o período</h2></div>
+    <div class="period">
+      <div class="top">
+        <div>
+          <div class="rl" style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.74rem;color:var(--muted);">Tempo de uso</div>
+          <div class="pv"><span id="p-weeks">8</span><small> semanas</small> <span style="color:var(--muted-2);font-size:1rem;font-weight:600;">(≈ <span id="p-months">2</span> meses)</span></div>
+        </div>
+        <div class="ptot">
+          <div class="tv" id="p-total">R$ 2.120</div>
+          <div class="tl">Total estimado no período</div>
+        </div>
+      </div>
+      <input type="range" id="period" min="1" max="13" value="8">
+      <div class="ticks"><span>1 sem</span><span id="tick-mid">—</span><span id="tick-max">13 sem</span></div>
+      <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Arraste para simular quanto vai investir no período escolhido — a caução de R$ 800 é à parte e reembolsável.</div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="result">
+      <div>
+        <div class="rl">Você escolheu</div>
+        <div class="rmoto" id="r-moto">Honda Start 160</div>
+        <div class="rplano" id="r-plano">Plano Trimestral · caução única de R$ 800</div>
+        <div class="meta">
+          <div class="mpill"><div class="v" id="r-dia">R$ 38</div><div class="l">por dia</div></div>
+          <div class="mpill"><div class="v" id="r-mes">R$ 2.120</div><div class="l">total no período</div></div>
+          <div class="mpill"><div class="v">R$ 800</div><div class="l">caução única</div></div>
+        </div>
+        <div class="nocredit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          Sem análise de crédito
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div class="rl">Valor semanal</div>
+        <div class="big">R$ <span id="r-sem">265</span><small>/sem</small></div>
+        <a class="btn btn-wa btn-lg" id="r-cta" href="#" style="margin-top:16px;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+          Alugar pelo WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="disc">* Valores de referência da tabela LokMais (maio/2026). Podem variar conforme modelo, ano e disponibilidade da unidade. Caução única de R$ 800 reembolsável ao fim do contrato.</p>
+</div>
+
+<a class="wa-float" href="#result" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+</a>
+
+<script src="assets/image-slot.js"></script>
+<script>
+// ---- Tabela LokMais (valor semanal, R$) ----
+const PLANOS = {
+  trimestral: { label:'Trimestral', sub:'3 meses · flexível', weeks:13, motos:[
+    {id:'tri-start24', nome:'Honda Start 160', tag:'2024',  specs:['160cc','Confiável'],            sem:265.00},
+    {id:'tri-fan25',   nome:'Honda Fan 160',   tag:'2025',  specs:['Freio a disco','Roda liga'],    sem:315.00},
+    {id:'tri-start25', nome:'Honda Start 160', tag:'2025',  specs:['160cc','Econômica'],            sem:335.00},
+  ]},
+  m30: { label:'30 meses', sub:'rumo à sua moto', weeks:130, motos:[
+    {id:'m30-semi',  nome:'Honda Start 160 Semi Nova', tag:'Seminova', specs:['Revisada','Menor valor'], sem:419.90},
+    {id:'m30-fan',   nome:'Honda Fan 2026',            tag:'0 km',     specs:['Zero km','Freio a disco'], sem:449.90},
+    {id:'m30-start', nome:'Honda Start 160',           tag:'0 km',     specs:['Zero km','Roda liga'],     sem:465.90},
+  ]},
+  m36: { label:'36 meses', sub:'menor parcela', weeks:156, motos:[
+    {id:'m36-semi',  nome:'Honda Start 160 Semi Nova', tag:'Seminova', specs:['Revisada','Menor valor'], sem:399.90},
+    {id:'m36-fan',   nome:'Honda Fan 2026',            tag:'0 km',     specs:['Zero km','Freio a disco'], sem:419.90},
+    {id:'m36-start', nome:'Honda Start 160',           tag:'0 km',     specs:['Zero km','Roda liga'],     sem:444.90},
+  ]},
+};
+const CAUCAO = 800;
+const WA = '5500000000000'; // <- substituir pelo WhatsApp oficial da LokMais
+
+const brl = n => n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const brl0 = n => Math.round(n).toLocaleString('pt-BR');
+const $ = s => document.querySelector(s);
+
+let planoKey = 'trimestral';
+let motoIdx = 0;
+let weeks = 8;
+
+function syncPeriod(){
+  const max = PLANOS[planoKey].weeks;
+  const r = $('#period');
+  r.max = max;
+  if(weeks>max) weeks = max;
+  r.value = weeks;
+  $('#tick-max').textContent = max + ' sem';
+  $('#tick-mid').textContent = Math.round(max/2) + ' sem';
+}
+
+function renderPlanos(){
+  $('#planos').innerHTML = Object.entries(PLANOS).map(([k,p])=>`
+    <button class="pchip ${k===planoKey?'on':''}" data-k="${k}">
+      <div class="pt">${p.label}</div><div class="ps">${p.sub}</div>
+    </button>`).join('');
+  $('#planos').querySelectorAll('.pchip').forEach(b=>b.onclick=()=>{planoKey=b.dataset.k;motoIdx=0;syncPeriod();renderPlanos();renderMotos();renderResult();});
+}
+function renderMotos(){
+  const motos = PLANOS[planoKey].motos;
+  $('#motos').innerHTML = motos.map((m,i)=>`
+    <button class="mcard ${i===motoIdx?'on':''}" data-i="${i}">
+      <image-slot id="sim-${m.id}" placeholder="Foto" shape="rect"></image-slot>
+      <div class="mb">
+        <span class="mtag">${m.tag}</span>
+        <h3>${m.nome}</h3>
+        <div class="specs">${m.specs.map(s=>`<span>${s}</span>`).join('')}</div>
+        <div class="mp"><b>R$ ${brl(m.sem)}</b><small> /semana</small></div>
+      </div>
+    </button>`).join('');
+  $('#motos').querySelectorAll('.mcard').forEach(b=>b.onclick=()=>{motoIdx=+b.dataset.i;renderMotos();renderResult();});
+}
+function renderResult(){
+  const p = PLANOS[planoKey];
+  const m = p.motos[motoIdx];
+  const dia = m.sem/7;
+  const total = m.sem*weeks;
+  const months = weeks/4.345;
+  // bloco de período
+  $('#p-weeks').textContent = weeks;
+  $('#p-months').textContent = months < 1 ? months.toFixed(1).replace('.',',') : Math.round(months);
+  $('#p-total').textContent = 'R$ ' + brl0(total);
+  // bloco de resultado
+  $('#r-moto').textContent = m.nome + ' · ' + m.tag;
+  $('#r-plano').textContent = 'Plano ' + p.label + ' · ' + weeks + ' semanas · caução R$ 800';
+  $('#r-sem').textContent = brl(m.sem);
+  $('#r-dia').textContent = 'R$ ' + brl0(dia);
+  $('#r-mes').textContent = 'R$ ' + brl0(total);
+  const msg = `Olá! Quero alugar uma moto na LokMais.%0A%0AMoto: ${encodeURIComponent(m.nome+' ('+m.tag+')')}%0APlano: ${encodeURIComponent(p.label)}%0APeríodo: ${weeks} semanas%0AValor semanal: R$ ${encodeURIComponent(brl(m.sem))}%0ATotal estimado: R$ ${encodeURIComponent(brl0(total))}`;
+  $('#r-cta').href = `https://wa.me/${WA}?text=${msg}`;
+}
+$('#period').addEventListener('input',e=>{weeks=+e.target.value;renderResult();});
+syncPeriod(); renderPlanos(); renderMotos(); renderResult();
+</script>
+</body>
+</html>

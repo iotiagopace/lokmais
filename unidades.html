@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokMais — Unidades</title>
+<link rel="stylesheet" href="lokmais.css">
+<style>
+  body{background:#fff;}
+  .nav .brand b{font-style:normal;}
+
+  .map-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;margin-top:46px;align-items:stretch;}
+  .units{display:flex;flex-direction:column;gap:14px;max-height:600px;overflow-y:auto;padding-right:6px;}
+  .units::-webkit-scrollbar{width:6px;}.units::-webkit-scrollbar-thumb{background:var(--cloud-2);border-radius:99px;}
+  .ucard{position:relative;background:#fff;border:2px solid var(--line);border-radius:var(--r-lg);padding:22px;cursor:pointer;transition:.18s var(--ease);}
+  .ucard:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:var(--sh-sm);}
+  .ucard.on{border-color:var(--orange);background:linear-gradient(180deg,#fff,var(--orange-soft));box-shadow:var(--sh-md);}
+  .ucard .uh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+  .ucard .ut{font-family:var(--font-head);font-weight:800;text-transform:uppercase;font-size:.7rem;letter-spacing:.06em;color:var(--orange-deep);background:var(--orange-soft);padding:5px 11px;border-radius:var(--r-pill);}
+  .ucard h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.45rem;color:var(--navy-700);margin-top:6px;line-height:1;}
+  .ucard p.addr{color:var(--muted);font-size:.92rem;margin-top:8px;display:flex;gap:8px;align-items:flex-start;}
+  .ucard p.addr svg{width:16px;height:16px;color:var(--orange);flex:0 0 auto;margin-top:3px;}
+  .ucard .meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:.82rem;color:var(--muted);}
+  .ucard .meta span{display:inline-flex;gap:6px;align-items:center;}
+  .ucard .meta svg{width:14px;height:14px;color:var(--navy-700);}
+  .ucard .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .ucard .actions a{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.72rem;letter-spacing:.04em;padding:8px 13px;border-radius:var(--r-pill);background:var(--navy-700);color:#fff;display:inline-flex;gap:6px;align-items:center;transition:.15s;}
+  .ucard .actions a:hover{background:var(--navy-600);}
+  .ucard .actions a.wa{background:#25D366;color:#0a2e1a;}
+  .ucard .actions a.wa:hover{background:#2ee87a;}
+  .ucard .actions a svg{width:14px;height:14px;}
+
+  .mapbox{position:sticky;top:90px;height:600px;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(160deg,var(--navy-700),var(--navy-900));box-shadow:var(--sh-lg);position:relative;}
+  .mapbox::before{content:"";position:absolute;inset:0;background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:40px 40px;}
+  .mapbox::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 40%,rgba(244,122,24,.18),transparent 60%);}
+  .mapbox .label{position:absolute;left:24px;top:24px;font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:var(--on-dark-muted);z-index:5;}
+  .mapbox .label::before{content:"●";color:var(--orange);margin-right:6px;}
+
+  .pin{position:absolute;width:42px;height:42px;border-radius:50%;background:var(--orange);border:4px solid #fff;box-shadow:var(--sh-orange);transform:translate(-50%,-100%);transition:.25s var(--ease);cursor:pointer;display:grid;place-items:center;z-index:3;}
+  .pin svg{width:18px;height:18px;color:#fff;}
+  .pin::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid #fff;}
+  .pin.on{transform:translate(-50%,-100%) scale(1.25);z-index:5;background:var(--orange-bright);box-shadow:0 0 0 8px rgba(244,122,24,.22),var(--sh-orange);}
+  .pin .city{position:absolute;left:50%;bottom:calc(100% + 14px);transform:translateX(-50%);background:#fff;color:var(--navy-700);font-family:var(--font-head);font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.04em;padding:6px 10px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);white-space:nowrap;opacity:0;transition:.18s;}
+  .pin.on .city{opacity:1;}
+
+  .empty-cta{margin-top:60px;background:var(--cloud);border-radius:var(--r-xl);padding:42px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center;}
+  .empty-cta h2{color:var(--navy-700);font-size:clamp(1.6rem,3vw,2.4rem);}
+  .empty-cta p{color:var(--muted);margin-top:8px;}
+
+  @media(max-width:920px){.map-wrap{grid-template-columns:1fr;}.mapbox{position:static;height:380px;order:-1;}.empty-cta{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo-lockup-white.png" alt="LokMais"></a>
+    <nav class="nav-links">
+      <a href="planos.html">Planos</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="motos.html">Motos</a>
+      <a href="unidades.html" class="active">Unidades</a>
+      <a href="simulador.html">Simulador</a>
+      <a href="lp-seja-franqueado.html">Seja franqueado</a>
+    </nav>
+    <a class="btn btn-primary" href="contato.html">Alugar agora</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="diag"></div>
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Início</a> / <span>Unidades</span></div>
+    <h1>Encontre a unidade <span class="o">mais perto de você</span></h1>
+    <p class="lead">A LokMais está em 3 estados e crescendo. Escolha a unidade, fale direto com a equipe local e retire sua moto.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker eyebrow">Onde estamos</span><h2 style="margin-top:14px;">Unidades <span class="em-orange">LokMais</span></h2></div>
+
+    <div class="map-wrap">
+      <!-- LISTA -->
+      <div class="units" id="units">
+        <div class="ucard on" data-id="1">
+          <div class="uh"><span class="ut">Unidade · 01</span></div>
+          <h3>LokMais Salvador</h3>
+          <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Tancredo Neves, 0000 · Caminho das Árvores · Salvador / BA · 41820-020</p>
+          <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg–Sáb · 08h–18h</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.18 4.18 2 2 0 0 1 4.18 2h3.08a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68a2 2 0 0 1 1.72 2.05z"/></svg> (71) 0000-0000</span></div>
+          <div class="actions">
+            <a class="wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp</a>
+            <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Como chegar</a>
+          </div>
+        </div>
+
+        <div class="ucard" data-id="2">
+          <div class="uh"><span class="ut">Unidade · 02</span></div>
+          <h3>LokMais Feira de Santana</h3>
+          <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Getúlio Vargas, 0000 · Centro · Feira de Santana / BA · 44000-000</p>
+          <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg–Sáb · 08h–18h</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg> (75) 0000-0000</span></div>
+          <div class="actions">
+            <a class="wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp</a>
+            <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Como chegar</a>
+          </div>
+        </div>
+
+        <div class="ucard" data-id="3">
+          <div class="uh"><span class="ut">Unidade · 03</span></div>
+          <h3>LokMais Aracaju</h3>
+          <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Beira Mar, 0000 · Atalaia · Aracaju / SE · 49000-000</p>
+          <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg–Sáb · 08h–18h</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 16.92V20a2 2 0 0 1-2.18 2"/></svg> (79) 0000-0000</span></div>
+          <div class="actions">
+            <a class="wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp</a>
+            <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Como chegar</a>
+          </div>
+        </div>
+
+        <div class="ucard" data-id="4">
+          <div class="uh"><span class="ut">Unidade · 04</span></div>
+          <h3>LokMais Maceió</h3>
+          <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Fernandes Lima, 0000 · Farol · Maceió / AL · 57000-000</p>
+          <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg–Sáb · 08h–18h</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 16.92V20a2 2 0 0 1-2.18 2"/></svg> (82) 0000-0000</span></div>
+          <div class="actions">
+            <a class="wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp</a>
+            <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Como chegar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAPA (estilizado — Brasil) -->
+      <div class="mapbox" id="mapbox">
+        <div class="label">Mapa de unidades · Brasil</div>
+        <!-- silhueta simples do Nordeste como pano de fundo -->
+        <svg viewBox="0 0 400 600" style="position:absolute;inset:0;width:100%;height:100%;opacity:.35;" preserveAspectRatio="xMidYMid slice">
+          <path d="M120 200 C 140 160, 180 130, 230 150 C 290 175, 340 220, 350 290 C 360 360, 320 420, 260 460 C 200 490, 140 470, 110 410 C 90 360, 95 270, 120 200 Z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-dasharray="4 6"/>
+        </svg>
+        <!-- pinos posicionados em % aproximada (Salvador / Feira / Aracaju / Maceió) -->
+        <div class="pin on" data-id="1" style="left:48%;top:62%;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><div class="city">Salvador</div></div>
+        <div class="pin" data-id="2" style="left:42%;top:55%;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><div class="city">Feira de Santana</div></div>
+        <div class="pin" data-id="3" style="left:60%;top:46%;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><div class="city">Aracaju</div></div>
+        <div class="pin" data-id="4" style="left:70%;top:36%;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg><div class="city">Maceió</div></div>
+      </div>
+    </div>
+
+    <div class="empty-cta">
+      <div>
+        <span class="kicker eyebrow">Sua cidade ainda não está no mapa?</span>
+        <h2 style="margin-top:10px;">Leve a LokMais <span class="em-orange">pra sua região</span></h2>
+        <p>A LokMais está em expansão. Seja franqueado e abra a unidade da sua cidade com um modelo validado e suporte completo.</p>
+      </div>
+      <div style="text-align:right;">
+        <a class="btn btn-lg btn-primary" href="lp-seja-franqueado.html">Quero ser franqueado</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;">
+    <div>
+      <div style="margin-bottom:16px;"><img src="assets/logo-lockup-white.png" alt="LokMais" style="height:42px;"></div>
+      <p style="color:var(--on-dark-muted);max-width:300px;">O modelo de locação de motos mais completo do Brasil.</p>
+    </div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Alugar</h4><a href="planos.html" style="display:block;margin-bottom:10px;">Planos</a><a href="como-funciona.html" style="display:block;margin-bottom:10px;">Como funciona</a><a href="motos.html" style="display:block;margin-bottom:10px;">Motos</a><a href="faq.html" style="display:block;margin-bottom:10px;">Dúvidas</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Empresa</h4><a href="sobre.html" style="display:block;margin-bottom:10px;">Sobre</a><a href="unidades.html" style="display:block;margin-bottom:10px;">Unidades</a><a href="lp-seja-franqueado.html" style="display:block;margin-bottom:10px;">Seja franqueado</a></div>
+    <div><h4 style="color:#fff;margin-bottom:14px;">Contato</h4><a href="contato.html" style="display:block;margin-bottom:10px;">Fale com a gente</a><a href="#" style="display:block;margin-bottom:10px;">WhatsApp</a></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg>
+</a>
+
+<script>
+// sync pin <-> card selection
+function selectUnit(id){
+  document.querySelectorAll('.ucard').forEach(c=>c.classList.toggle('on',c.dataset.id===id));
+  document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('on',p.dataset.id===id));
+  const card = document.querySelector('.ucard.on');
+  if(card) card.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+document.querySelectorAll('.ucard').forEach(c=>c.onclick=()=>selectUnit(c.dataset.id));
+document.querySelectorAll('.pin').forEach(p=>p.onclick=()=>selectUnit(p.dataset.id));
+</script>
+</body>
+</html>
