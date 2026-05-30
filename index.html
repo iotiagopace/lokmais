@@ -140,40 +140,11 @@
   .foot-col h4{font-size:.95rem;color:#fff;margin-bottom:14px;letter-spacing:.04em;}
   .foot-col a{display:block;margin-bottom:10px;font-size:.95rem;}
 
-  /* DEPOIMENTOS / GOOGLE */
-  .vids{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px;}
-  .vid{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-md);background:#000;}
-  .vid image-slot{width:100%;height:300px;display:block;}
-  .vid .play{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;}
-  .vid .play i{width:66px;height:66px;border-radius:50%;background:rgba(244,122,24,.95);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);}
-  .vid .play svg{width:26px;height:26px;color:#fff;margin-left:3px;}
-  .vid .cap{position:absolute;left:0;right:0;bottom:0;padding:18px;background:linear-gradient(transparent,rgba(11,11,46,.92));color:#fff;}
-  .vid .cap b{font-family:var(--font-head);font-weight:700;display:block;}
-  .vid .cap span{font-size:.82rem;color:var(--on-dark-muted);}
-
-  .google{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:46px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 30px;box-shadow:var(--sh-sm);}
-  .google .glogo{font-family:var(--font-head);font-weight:700;font-size:1.5rem;display:flex;align-items:center;gap:2px;}
-  .google .glogo .b{color:#4285F4;}.google .glogo .r{color:#EA4335;}.google .glogo .y{color:#FBBC05;}.google .glogo .g{color:#34A853;}
-  .google .grate{font-family:var(--font-display);font-weight:800;font-size:2.6rem;color:var(--navy-700);line-height:1;}
-  .google .stars{color:#FBBC05;font-size:1.3rem;letter-spacing:2px;}
-  .google .gsub{font-size:.86rem;color:var(--muted);}
-  .google .sep{width:1px;height:46px;background:var(--line);}
-
-  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
-  .rev{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-sm);}
-  .rev .rh{display:flex;align-items:center;gap:12px;}
-  .rev .rh image-slot{width:44px;height:44px;display:block;}
-  .rev .rh b{font-family:var(--font-head);font-weight:700;color:var(--navy-700);display:block;font-size:.92rem;}
-  .rev .rh .gg{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
-  .rev .rstars{color:#FBBC05;font-size:.95rem;letter-spacing:1px;margin:12px 0 8px;}
-  .rev p{font-size:.92rem;color:var(--ink);margin:0;}
-
   @media(max-width:920px){
     .hero-in,.fran{grid-template-columns:1fr;}
     .hero-side{order:-1;align-items:flex-start;}
     .steps,.feat-grid,.moto-grid{grid-template-columns:1fr 1fr;}
     .plan-grid{grid-template-columns:1fr;}
-    .vids,.rev-grid{grid-template-columns:1fr;}
   }
   @media(max-width:560px){
     .steps,.feat-grid,.moto-grid{grid-template-columns:1fr;}
@@ -385,60 +356,6 @@
       </div>
       <div style="text-align:right;">
         <a class="btn btn-lg btn-white" href="lp-seja-franqueado.html" style="background:#fff;color:var(--orange-deep);">Seja franqueado</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DEPOIMENTOS / GOOGLE -->
-<section class="section" id="depoimentos">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="kicker eyebrow">Quem anda com a gente</span>
-      <h2 style="margin-top:14px;">Histórias de quem <span class="o">conquistou a liberdade</span></h2>
-      <p class="lead">Depoimentos reais de clientes que rodam todos os dias com a LokMais.</p>
-    </div>
-    <div class="vids">
-      <div class="vid">
-        <image-slot id="vid1" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
-        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
-        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
-      </div>
-      <div class="vid">
-        <image-slot id="vid2" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
-        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
-        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
-      </div>
-      <div class="vid">
-        <image-slot id="vid3" placeholder="Solte o vídeo/thumb do depoimento" shape="rect"></image-slot>
-        <div class="play"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></i></div>
-        <div class="cap"><b>Depoimento em vídeo</b><span>Cliente LokMais · placeholder</span></div>
-      </div>
-    </div>
-
-    <div class="google">
-      <div class="glogo"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></div>
-      <div class="sep"></div>
-      <div style="text-align:center;"><div class="grate">4,9</div><div class="stars">★★★★★</div></div>
-      <div class="sep"></div>
-      <div class="gsub">Avaliação média dos clientes<br>no Google · <b>placeholder</b></div>
-    </div>
-
-    <div class="rev-grid">
-      <div class="rev">
-        <div class="rh"><image-slot id="rev1" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
-        <div class="rstars">★★★★★</div>
-        <p>“Atendimento rápido e sem burocracia. Saí com a moto no mesmo dia e a manutenção inclusa é um diferencial enorme.”</p>
-      </div>
-      <div class="rev">
-        <div class="rh"><image-slot id="rev2" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
-        <div class="rstars">★★★★★</div>
-        <p>“Uso para trabalhar nos apps e nunca me deixou na mão. Moto econômica e suporte de verdade quando preciso.”</p>
-      </div>
-      <div class="rev">
-        <div class="rh"><image-slot id="rev3" shape="circle" placeholder="Foto"></image-slot><div><b>Cliente · placeholder</b><span class="gg">Avaliação no Google</span></div></div>
-        <div class="rstars">★★★★★</div>
-        <p>“Melhor custo-benefício da cidade. Plano que cabe no bolso e a moto sempre revisada. Recomendo demais!”</p>
       </div>
     </div>
   </div>
