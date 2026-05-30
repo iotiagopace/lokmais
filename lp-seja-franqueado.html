@@ -24,10 +24,13 @@
   .nav .btn{margin-left:8px;}
 
   /* ---- HERO ---- */
-  .hero{position:relative;overflow:hidden;background:
-     radial-gradient(120% 120% at 92% 0%,rgba(244,122,24,.30),transparent 50%),
-     linear-gradient(180deg,var(--navy-900),var(--navy-800));color:var(--on-dark);}
-  .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:600px;padding:70px 0;}
+  .hero{position:relative;overflow:hidden;background:var(--navy-900);color:var(--on-dark);}
+  .hero-video{position:absolute;inset:0;overflow:hidden;z-index:0;}
+  .hero-video iframe{position:absolute;top:50%;left:50%;width:max(100vw,177vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%);pointer-events:none;border:0;opacity:.55;}
+  .hero-overlay{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(110deg,rgba(11,11,46,.92) 0%,rgba(11,11,46,.80) 38%,rgba(17,17,70,.60) 65%,rgba(11,11,46,.45) 100%),
+    radial-gradient(120% 120% at 90% 10%,rgba(244,122,24,.28),transparent 55%);}
+  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:600px;padding:70px 0;}
   .hero h1{font-size:clamp(2.6rem,5.4vw,4.6rem);line-height:.98;}
   .hero h1 .o{color:var(--orange);}
   .hero .lead{max-width:520px;margin-top:18px;font-size:1.2rem;}
@@ -37,12 +40,11 @@
   .hero .trust .tn{font-family:var(--font-display);font-weight:800;font-size:1.7rem;color:#fff;line-height:1;}
   .hero .trust .tl{font-size:.78rem;color:var(--on-dark-muted);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-head);font-weight:600;margin-top:4px;}
   .hero-photo{position:relative;}
-  .hero-photo image-slot{width:100%;height:480px;display:block;box-shadow:var(--sh-lg);clip-path:polygon(14% 0,100% 0,100% 86%,86% 100%,0 100%,0 14%);}
+  .hero-photo img{width:100%;height:480px;display:block;object-fit:cover;box-shadow:var(--sh-lg);clip-path:polygon(14% 0,100% 0,100% 86%,86% 100%,0 100%,0 14%);}
   .hero-badge{position:absolute;left:-18px;bottom:30px;background:#fff;color:var(--navy-700);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--sh-lg);display:flex;align-items:center;gap:12px;}
   .hero-badge img{height:34px;}
   .hero-badge b{font-family:var(--font-head);font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.02em;}
   .hero-badge span{display:block;font-size:.74rem;color:var(--muted);font-weight:500;}
-  .diag-strip{position:absolute;left:0;top:0;width:120px;height:100%;background:repeating-linear-gradient(120deg,var(--orange) 0 14px,transparent 14px 70px);opacity:.10;}
 
   /* section helpers */
   .eyebrow{display:inline-flex;align-items:center;gap:10px;}
@@ -167,10 +169,10 @@
   .pillar .pd{font-size:.78rem;color:var(--muted);margin-top:4px;}
 
   /* slide 9 — modelos de franquia */
-  .models{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px;}
-  .model{position:relative;background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-radius:var(--r-xl);padding:30px;box-shadow:var(--sh-lg);overflow:hidden;}
+  .models{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+  .model{position:relative;background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-radius:var(--r-xl);padding:30px;padding-top:36px;box-shadow:var(--sh-lg);}
   .model.alt{background:#fff;color:var(--ink);border:2px dashed var(--line);box-shadow:var(--sh-sm);}
-  .model .star{position:absolute;top:-12px;right:24px;background:var(--orange);color:#fff;font-family:var(--font-head);font-weight:800;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-pill);box-shadow:var(--sh-orange);white-space:nowrap;}
+  .model .star{position:absolute;top:-6px;right:24px;background:var(--orange);color:#fff;font-family:var(--font-head);font-weight:800;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-pill);box-shadow:var(--sh-orange);white-space:nowrap;}
   .model .mhead{display:flex;align-items:center;gap:14px;}
   .model .mico{width:54px;height:54px;border-radius:13px;background:linear-gradient(160deg,var(--orange),var(--orange-deep));display:grid;place-items:center;color:#fff;flex:0 0 auto;box-shadow:var(--sh-orange);}
   .model .mico svg{width:28px;height:28px;}
@@ -227,10 +229,13 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="diag-strip"></div>
+  <div class="hero-video">
+    <iframe id="hero-yt" src="" title="LokMais" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+  <div class="hero-overlay"></div>
   <div class="wrap hero-in">
     <div>
-      <span class="kicker on-dark">Business Plan · Franquia LokMais</span>
+      <span class="kicker on-dark">Franquia LokMais</span>
       <h1 style="margin-top:16px;">Sua liberdade <span class="o">merece mais</span></h1>
       <p class="lead on-dark">O modelo de locação de motos mais completo do Brasil, com operação estruturada, tecnologia e alta demanda para gerar resultados consistentes.</p>
       <div class="cta-row">
@@ -245,7 +250,7 @@
       </div>
     </div>
     <div class="hero-photo">
-      <image-slot id="lp-hero" placeholder="Solte uma foto: motoboy / moto LokMais" shape="rect" src=""></image-slot>
+      <img src="assets/motos/fan-2026-mov-1.jpg" alt="Moto Honda Fan 2026 LokMais em movimento">
       <div class="hero-badge">
         <img src="assets/icon-navy.png" alt="">
         <div><b>A partir de R$ 108 mil</b><span>para abrir a sua unidade</span></div>
@@ -346,7 +351,7 @@
         <div class="chk"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div><div><b>Oficina própria LokMais</b><span>Estrutura completa para manter sua frota sempre na atividade, com menor custo.</span></div></div>
       </div>
     </div>
-    <image-slot id="lp-honda" placeholder="Solte uma foto: moto Honda CG / oficina" shape="rect"></image-slot>
+    <img src="assets/motos/linha-cg-2026.jpg" alt="Linha Honda CG 2026 LokMais" style="width:100%;height:440px;display:block;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 86%,86% 100%,0 100%);">
   </div>
 </section>
 
@@ -546,6 +551,12 @@
 
 <script src="assets/image-slot.js"></script>
 <script>
+// Hero YouTube background
+const YT_ID = "5qap5aO4i9A";
+const yt = document.getElementById('hero-yt');
+if (yt) {
+  yt.src = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1`;
+}
 // FAQ accordion
 document.querySelectorAll('.qa button').forEach(b=>{
   b.addEventListener('click',()=>{
