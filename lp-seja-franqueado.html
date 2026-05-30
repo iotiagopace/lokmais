@@ -513,6 +513,7 @@
       <h3>Quero ser franqueado</h3>
       <div class="field"><label>Nome completo</label><input required name="nome" placeholder="Seu nome"></div>
       <div class="field"><label>WhatsApp</label><input required name="fone" inputmode="tel" placeholder="(00) 00000-0000"></div>
+      <div class="field"><label>E-mail</label><input required name="email" type="email" inputmode="email" placeholder="seu@email.com"></div>
       <div class="field"><label>Cidade / UF</label><input required name="cidade" placeholder="Cidade onde quer atuar"></div>
       <div class="field"><label>Capital disponível para investir</label>
         <select required name="capital">
@@ -572,7 +573,7 @@ document.querySelectorAll('.qa button').forEach(b=>{
 function enviarLead(e){
   e.preventDefault();
   const f=e.target;
-  const msg=`Olá! Quero ser franqueado LokMais.%0A%0ANome: ${encodeURIComponent(f.nome.value)}%0AWhatsApp: ${encodeURIComponent(f.fone.value)}%0ACidade: ${encodeURIComponent(f.cidade.value)}%0ACapital: ${encodeURIComponent(f.capital.value)}`;
+  const msg=`Olá! Quero ser franqueado LokMais.%0A%0ANome: ${encodeURIComponent(f.nome.value)}%0AWhatsApp: ${encodeURIComponent(f.fone.value)}%0AE-mail: ${encodeURIComponent(f.email.value)}%0ACidade: ${encodeURIComponent(f.cidade.value)}%0ACapital: ${encodeURIComponent(f.capital.value)}`;
   // WhatsApp padrão da LokMais
   window.open(`https://wa.me/5531972285918?text=${msg}`,'_blank');
   return false;
