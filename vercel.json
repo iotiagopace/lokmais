@@ -1,0 +1,35 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lp-seja-franqueado.html",
+      "destination": "/seja-franqueado",
+      "permanent": true
+    },
+    {
+      "source": "/lp-seja-franqueado",
+      "destination": "/seja-franqueado",
+      "permanent": true
+    },
+    {
+      "source": "/seja-franqueado.html",
+      "destination": "/seja-franqueado",
+      "permanent": true
+    },
+    {
+      "source": "/sejafranqueado.html",
+      "destination": "/seja-franqueado",
+      "permanent": true
+    },
+    {
+      "source": "/sejafranqueado",
+      "destination": "/seja-franqueado",
+      "permanent": true
+    }
+  ]
+}

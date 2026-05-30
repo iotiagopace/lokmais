@@ -20,7 +20,7 @@ Site institucional + landing pages da **LokMais** — locação de motos Honda c
 ├── faq.html                    ← Dúvidas frequentes (categorizadas)
 ├── contato.html                ← Formulário + canais de atendimento
 ├── simulador.html              ← Simulador de aluguel (plano → moto → período)
-├── lp-seja-franqueado.html     ← LP de alta conversão para franqueados
+├── seja-franqueado.html        ← LP de alta conversão para franqueados
 ├── 00-sistema-de-design.html   ← Documentação visual do sistema
 ├── DESIGN.md                   ← Sistema de design (Markdown)
 ├── lokmais.css                 ← Tokens (cor, tipografia, espaço, raio, sombra)

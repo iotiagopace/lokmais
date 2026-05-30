@@ -6,47 +6,47 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/planos.html</loc>
+    <loc>https://lokmais.vercel.app/planos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/motos.html</loc>
+    <loc>https://lokmais.vercel.app/motos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/simulador.html</loc>
+    <loc>https://lokmais.vercel.app/simulador</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/como-funciona.html</loc>
+    <loc>https://lokmais.vercel.app/como-funciona</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/faq.html</loc>
+    <loc>https://lokmais.vercel.app/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/unidades.html</loc>
+    <loc>https://lokmais.vercel.app/unidades</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/sobre.html</loc>
+    <loc>https://lokmais.vercel.app/sobre</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/contato.html</loc>
+    <loc>https://lokmais.vercel.app/contato</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/lp-seja-franqueado.html</loc>
+    <loc>https://lokmais.vercel.app/seja-franqueado</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
