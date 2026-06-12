@@ -198,7 +198,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
 <script>
-document.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('load', function(){
 const UNITS = [
   { id:'1', name:'LokMais Contagem',               lat:-19.9321, lng:-44.0534, addr:'Av. Juscelino Kubitscheck, 855 · Contagem / MG' },
   { id:'2', name:'LokMais Grande BH',              lat:-19.7697, lng:-43.9050, addr:'Av. Brasília, 137 · Santa Luzia / MG' },
@@ -244,7 +244,8 @@ function selectUnit(id){
 }
 
 document.querySelectorAll('.ucard[data-id]').forEach(c=>c.onclick=()=>selectUnit(c.dataset.id));
-}); // DOMContentLoaded
+setTimeout(()=>map.invalidateSize(),200);
+}); // load
 </script>
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
