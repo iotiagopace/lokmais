@@ -39,16 +39,17 @@
   .mthumb img{width:60px;height:46px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:.55;border:2px solid transparent;transition:.15s;flex:0 0 auto;}
   .mthumb img.on,.mthumb img:hover{opacity:1;border-color:var(--orange);}
   .mcard .tagrow{display:flex;gap:6px;flex-wrap:wrap;}
-  .mcard h3{font-size:1.25rem;color:var(--navy-700);margin-top:12px;}
-  .mcard .sub{font-size:.86rem;color:var(--muted);margin-top:2px;}
-  .specs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+  .mcard h3{font-size:1.15rem;color:var(--navy-700);margin-top:12px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .mcard .sub{font-size:.86rem;color:var(--muted);margin-top:6px;line-height:1.45;min-height:2.9em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+  .specs span{font-size:.76rem;font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--navy-700);background:var(--cloud);padding:4px 10px;border-radius:var(--r-pill);}
   .specs div{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--ink);}
   .specs svg{width:16px;height:16px;color:var(--orange);flex:0 0 auto;}
-  .priceblk{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:flex-end;}
+  .priceblk{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);}
   .priceblk .lab{font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.7rem;color:var(--muted);letter-spacing:.04em;}
-  .priceblk b{font-family:var(--font-display);font-weight:800;font-size:1.7rem;color:var(--ink);display:block;line-height:1;}
+  .priceblk b{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--ink);display:block;line-height:1.1;margin-top:2px;}
   .priceblk small{font-size:.8rem;color:var(--muted);font-weight:600;}
-  .mcard .btn{margin-top:18px;width:100%;justify-content:center;}
+  .mcard .btn{margin-top:auto;padding-top:18px;width:100%;justify-content:center;}
 
   .compare{margin-top:80px;background:linear-gradient(160deg,var(--navy-700),var(--navy-900));color:#fff;border-radius:var(--r-xl);padding:48px;box-shadow:var(--sh-lg);}
   .compare h2{font-size:clamp(1.7rem,3vw,2.4rem);}
