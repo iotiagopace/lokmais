@@ -47,6 +47,9 @@
   .hero-badge img{height:34px;}
   .hero-badge b{font-family:var(--font-head);font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.02em;}
   .hero-badge span{display:block;font-size:.74rem;color:var(--muted);font-weight:500;}
+  .hero .formcard{max-width:440px;margin-left:auto;border:1px solid rgba(255,255,255,.18);}
+  .hero .formcard .field{margin-top:12px;}
+  .hero .formcard h3{font-size:1.35rem;}
 
   /* section helpers */
   .eyebrow{display:inline-flex;align-items:center;gap:10px;}
@@ -118,6 +121,23 @@
   .tcard .who b{font-family:var(--font-head);font-weight:700;color:var(--navy-700);display:block;font-size:.92rem;}
   .tcard .who span{color:var(--muted);font-size:.8rem;}
   .stars{color:var(--orange);letter-spacing:2px;font-size:1rem;}
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;}
+  .video-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);}
+  .video-card iframe{width:100%;aspect-ratio:9/16;display:block;border:0;background:#000;}
+  .video-card .vcopy{padding:18px;}
+  .video-card h3{font-size:1rem;color:var(--navy-700);}
+  .video-card p{font-size:.9rem;color:var(--muted);margin-top:6px;}
+  .eco{position:relative;margin-top:46px;min-height:360px;display:grid;place-items:center;}
+  .eco::before{content:"";position:absolute;inset:32px;border:1px dashed rgba(244,122,24,.45);border-radius:50%;}
+  .eco-center,.eco-node{position:relative;z-index:1;background:#fff;border:1px solid var(--line);box-shadow:var(--sh-md);text-align:center;}
+  .eco-center{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,var(--navy-700),var(--navy-900));color:#fff;}
+  .eco-center b{font-family:var(--font-display);font-size:1.65rem;text-transform:uppercase;color:var(--orange-bright);}
+  .eco-center span{display:block;font-size:.82rem;color:var(--on-dark-muted);margin-top:6px;}
+  .eco-node{position:absolute;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;padding:18px;font-family:var(--font-head);font-weight:800;color:var(--navy-700);}
+  .eco-node small{display:block;font-family:var(--font-body);font-weight:500;color:var(--muted);font-size:.72rem;margin-top:5px;}
+  .eco-node.n1{top:0;left:50%;transform:translateX(-50%);}
+  .eco-node.n2{bottom:18px;left:10%;}
+  .eco-node.n3{bottom:18px;right:10%;}
 
   /* FAQ */
   .faq{max-width:820px;margin:46px auto 0;}
@@ -154,11 +174,16 @@
 
   @media(max-width:920px){
     .hero-in,.split,.simcta,.formwrap{grid-template-columns:1fr;}
-    .mstats,.feat-grid,.ind-grid,.steps,.tgrid{grid-template-columns:1fr 1fr;}
+    .mstats,.feat-grid,.ind-grid,.steps,.tgrid,.video-grid{grid-template-columns:1fr 1fr;}
     .hero-photo{order:-1;}
   }
   @media(max-width:560px){
-    .mstats,.feat-grid,.ind-grid,.steps,.tgrid,.growthbar{grid-template-columns:1fr;}
+    .hero h1{font-size:clamp(2.35rem,11.5vw,3rem);}
+    .hero-in{padding:54px 0;}
+    .mstats,.feat-grid,.ind-grid,.steps,.tgrid,.video-grid,.growthbar{grid-template-columns:1fr;}
+    .eco{min-height:auto;display:flex;flex-direction:column;gap:14px;}
+    .eco::before{display:none;}
+    .eco-center,.eco-node{position:static;transform:none!important;width:100%;height:auto;border-radius:var(--r-lg);}
     .growthbar{display:none;}
     .foot-grid{grid-template-columns:1fr;}
   }
@@ -239,28 +264,28 @@
     <div>
       <span class="kicker on-dark">Franquia LokMais</span>
       <h1 style="margin-top:16px;">Sua liberdade <span class="o">merece mais</span></h1>
-      <p class="lead on-dark">O modelo de locação de motos mais completo do Brasil, com operação estruturada, tecnologia e alta demanda para gerar resultados consistentes.</p>
+      <p class="lead on-dark">Operação estruturada, tecnologia e alta demanda para gerar resultados consistentes em locação de motos.</p>
       <div class="cta-row">
         <a class="btn btn-lg btn-primary" href="#form">Quero ser franqueado</a>
         <a class="btn btn-lg btn-ghost" href="#modelos" style="color:#fff;">Ver modelos</a>
       </div>
       <div class="trust">
-        <div class="ti"><span class="tn">+1.200</span><span class="tl">Motos em operação</span></div>
+        <div class="ti"><span class="tn">+2.000</span><span class="tl">Motos em operação</span></div>
         <div class="ti"><span class="tn">3</span><span class="tl">Estados</span></div>
         <div class="ti"><span class="tn">2021</span><span class="tl">Modelo validado</span></div>
         <div class="ti"><span class="tn">Honda</span><span class="tl">Parceria estratégica</span></div>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="assets/motos/fan-2026-mov-1.jpg" alt="Moto Honda Fan 2026 LokMais em movimento">
-      <div class="hero-badge">
-        <div>
-          <span style="display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-family:var(--font-head);font-weight:600;">a partir de</span>
-          <b style="font-family:var(--font-display);font-weight:800;font-size:1.9rem;line-height:1;color:var(--navy-700);display:block;">R$ 108 mil</b>
-          <span style="display:block;font-size:.78rem;color:var(--muted);margin-top:3px;">para abrir a sua unidade</span>
-        </div>
-      </div>
-    </div>
+    <form class="formcard" onsubmit="return enviarLead(event)">
+      <h3>Quero ser franqueado</h3>
+      <div class="field"><label>Nome</label><input required name="nome" placeholder="Seu nome"></div>
+      <div class="field"><label>Telefone</label><input required name="fone" inputmode="tel" placeholder="(00) 00000-0000"></div>
+      <div class="field"><label>Cidade</label><input required name="cidade" placeholder="Cidade onde quer atuar"></div>
+      <div class="field"><label>E-mail</label><input required name="email" type="email" inputmode="email" placeholder="seu@email.com"></div>
+      <input type="hidden" name="capital" value="Não informado no hero">
+      <button class="btn btn-wa btn-lg" type="submit">Quero ser um franqueado</button>
+      <p class="fineprint">Atendimento comercial pelo WhatsApp.</p>
+    </form>
   </div>
 </section>
 
@@ -273,7 +298,7 @@
       <p class="lead">A LokMais nasceu para transformar a mobilidade em oportunidades reais. Unimos operação eficiente, marketing estratégico e parceria sólida para entregar um modelo de locação de motos <b style="color:var(--orange-deep);">escalável, seguro e altamente rentável.</b></p>
     </div>
     <div class="pillars">
-      <div class="pillar"><div class="pv">+1.200</div><div class="pl">Motos</div><div class="pd">em operação</div></div>
+      <div class="pillar"><div class="pv">+2.000</div><div class="pl">Motos</div><div class="pd">em operação</div></div>
       <div class="pillar"><div class="pv">3</div><div class="pl">Estados</div><div class="pd">brasileiros</div></div>
       <div class="pillar"><div class="pv">2021</div><div class="pl">Validado</div><div class="pd">desde</div></div>
       <div class="pillar"><div class="pv">Honda</div><div class="pl">Parceria</div><div class="pd">estratégica</div></div>
@@ -320,24 +345,67 @@
     <div class="feat-grid">
       <div class="feat">
         <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
-        <h3>Demanda estruturada</h3>
-        <p>Captação ativa de clientes com marketing validado e geração constante de leads qualificados.</p>
+        <h3>Marketing estratégico</h3>
+        <p>Captação constante de demanda com ações regionais e campanhas estruturadas.</p>
+      </div>
+      <div class="feat">
+        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M8 19v-7M12 19V9M16 19v-4M20 19V7"/></svg></div>
+        <h3>Gestão financeira eficiente</h3>
+        <p>Modelo desenvolvido para maximizar rentabilidade e controle operacional.</p>
       </div>
       <div class="feat">
         <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 12l3-3 2 2 4-4"/></svg></div>
-        <h3>Tecnologia e inteligência</h3>
-        <p>Sistema próprio de gestão de frota, acompanhamento em tempo real e otimização contínua da operação.</p>
+        <h3>Sistema exclusivo</h3>
+        <p>Painel com visibilidade de investimentos, performance, locações e indicadores.</p>
       </div>
       <div class="feat">
         <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Controle total da frota</h3>
-        <p>Rastreamento, bloqueio e monitoramento completo para garantir segurança e previsibilidade.</p>
+        <h3>Segurança patrimonial</h3>
+        <p>Rastreamento, validação, controle operacional e gestão preventiva da frota.</p>
       </div>
       <div class="feat">
-        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 0 1 16 0M4 12v4a2 2 0 0 0 2 2h1v-6H6a2 2 0 0 0-2 2zM20 12v4a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/></svg></div>
-        <h3>Suporte especializado</h3>
-        <p>Time dedicado acompanhando o franqueado na operação e no crescimento da unidade.</p>
+        <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3>Demanda regionalizada</h3>
+        <p>Trabalho local para aumentar ocupação das motos e acelerar resultados.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVAS SOCIAIS -->
+<section class="section cloud">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker eyebrow">Prova social</span>
+      <h2 style="margin-top:14px;">A operação vista por quem <span class="o">vive a LokMais</span></h2>
+      <p class="lead">Vídeos reais ajudam a transformar diferencial em credibilidade: operação, suporte, atendimento e resultados na prática.</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/wWyn5bTMXRA" title="Prova social LokMais" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="vcopy"><h3>Experiência operacional</h3><p>Material real para mostrar suporte, rotina e confiança no modelo.</p></div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/opnB49WUkaU" title="Depoimento LokMais" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="vcopy"><h3>Credibilidade comprovada</h3><p>Depoimentos aproximam o investidor da operação em funcionamento.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSSISTEMA -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head center" style="margin:0 auto;text-align:center;">
+      <span class="kicker eyebrow" style="justify-content:center;">Pilar central</span>
+      <h2 style="margin-top:14px;">Um ecossistema desenhado para <span class="o">reter clientes</span></h2>
+      <p class="lead">Nosso foco está em entregar a melhor experiência ao cliente. É isso que gera retenção, previsibilidade e crescimento sustentável.</p>
+    </div>
+    <div class="eco" aria-label="Ecossistema LokMais">
+      <div class="eco-node n1">Franqueadora<small>marca, tecnologia e suporte</small></div>
+      <div class="eco-node n2">Franqueado<small>operação local e atendimento</small></div>
+      <div class="eco-node n3">Investidor<small>ativos, escala e retorno</small></div>
+      <div class="eco-center"><div><b>Cliente</b><span>experiência, retenção e ocupação da frota</span></div></div>
     </div>
   </div>
 </section>
@@ -356,7 +424,7 @@
         <div class="chk"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div><div><b>Oficina própria LokMais</b><span>Estrutura completa para manter sua frota sempre na atividade, com menor custo.</span></div></div>
       </div>
     </div>
-    <img src="assets/motos/linha-cg-2026.jpg" alt="Linha Honda CG 2026 LokMais" style="width:100%;height:440px;display:block;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 86%,86% 100%,0 100%);">
+    <img data-cms-img="honda_split" src="assets/motos/linha-cg-2026.jpg" alt="Linha Honda CG 2026 LokMais" style="width:100%;height:440px;display:block;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 86%,86% 100%,0 100%);">
   </div>
 </section>
 
@@ -369,12 +437,12 @@
       <p class="lead">Alta lucratividade, baixo custo operacional e demanda contínua — com transparência total sobre o quanto custa abrir sua unidade.</p>
     </div>
     <div class="ind-grid">
-      <div class="ind" style="background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;"><div class="iv" style="color:var(--orange-bright);">R$ 108 mil</div><div class="il" style="color:#fff;">Investimento a partir de</div><div class="id" style="color:var(--on-dark-muted);">para abrir a sua unidade Lok Invest Start.</div></div>
-      <div class="ind"><div class="iv">R$ 50 mil</div><div class="il">Taxa de franquia</div><div class="id">valor único para entrar na rede LokMais.</div></div>
+      <div class="ind" style="background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;"><div class="iv" style="color:var(--orange-bright);">R$ 112 mil</div><div class="il" style="color:#fff;">Investimento a partir de</div><div class="id" style="color:var(--on-dark-muted);">franquia inclusa para abrir sua unidade Start.</div></div>
+      <div class="ind"><div class="iv">3,5% a 5%</div><div class="il">Rentabilidade estimada</div><div class="id">potencial mensal conforme praça, frota e performance.</div></div>
       <div class="ind"><div class="iv">18–24</div><div class="il">Meses de payback</div><div class="id">prazo médio de retorno do investimento.</div></div>
       <div class="ind"><div class="iv">53%</div><div class="il">Margem líquida</div><div class="id">do faturamento da operação, sem juros e tarifas.</div></div>
       <div class="ind"><div class="iv">45–55%</div><div class="il">Lucratividade por locação</div><div class="id">retorno consistente em cada moto da frota.</div></div>
-      <div class="ind"><div class="iv">5% · 2%</div><div class="il">Royalties · Marketing</div><div class="id">taxas mensais sobre o faturamento da unidade.</div></div>
+      <div class="ind"><div class="iv">Honda</div><div class="il">Menor depreciação</div><div class="id">estratégia construída para preservar liquidez na renovação da frota.</div></div>
     </div>
   </div>
 </section>
@@ -404,7 +472,7 @@
     <div class="sec-head">
       <span class="kicker eyebrow">Modelos de franquia</span>
       <h2 style="margin-top:14px;">Modelos flexíveis para <span class="o">cada perfil de investidor</span></h2>
-      <p class="lead">Escolha o ponto de partida ideal e conte com o suporte completo da LokMais para crescer com segurança e lucratividade. <b style="color:var(--navy-700);">Investimento a partir de R$ 108 mil</b>, com modelos sob medida para o seu perfil.</p>
+      <p class="lead">Escolha o ponto de partida ideal e conte com o suporte completo da LokMais para crescer com segurança e lucratividade. <b style="color:var(--navy-700);">Investimento a partir de R$ 112 mil</b>, com modelos sob medida para o seu perfil.</p>
     </div>
     <div class="models">
       <div class="model">
@@ -416,7 +484,7 @@
         <div class="mrow"><span class="ml">Lucro líquido médio</span><span class="mv">R$ 3.063<span style="font-size:.7rem;font-weight:600;opacity:.7;">/mês</span></span></div>
         <div class="mrow" style="padding-bottom:0;border-bottom:0;">
           <span class="ml">Investimento a partir de</span>
-          <span class="mv org" style="font-size:1.7rem;">R$ 108 mil</span>
+          <span class="mv org" style="font-size:1.7rem;">R$ 112 mil</span>
         </div>
         <div class="mfoot"><a class="btn btn-primary" href="#form">Quero este modelo</a></div>
       </div>
@@ -430,7 +498,7 @@
         <div class="mrow"><span class="ml">Lucro líquido médio</span><span class="mv">R$ 10.210<span style="font-size:.7rem;font-weight:600;opacity:.7;">/mês</span></span></div>
         <div class="mrow" style="padding-bottom:0;border-bottom:0;">
           <span class="ml">Investimento a partir de</span>
-          <span class="mv org" style="font-size:1.7rem;">R$ 248 mil</span>
+          <span class="mv org" style="font-size:1.7rem;">R$ 252 mil</span>
         </div>
         <div class="mfoot"><a class="btn btn-primary" href="#form">Quero este modelo</a></div>
       </div>
@@ -462,21 +530,6 @@
       <div class="step"><div class="num">02</div><h3>Conversa</h3><p>Um especialista LokMais apresenta o modelo e tira todas as suas dúvidas.</p></div>
       <div class="step"><div class="num">03</div><h3>Plano sob medida</h3><p>Montamos o modelo de unidade ideal para o seu perfil e capital.</p></div>
       <div class="step"><div class="num">04</div><h3>Inauguração</h3><p>Implantação com suporte completo: frota, tecnologia, marketing e operação.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- DEPOIMENTOS -->
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="kicker eyebrow">Quem já é LokMais</span>
-      <h2 style="margin-top:14px;">Franqueados que <span class="o">aceleraram resultados</span></h2>
-    </div>
-    <div class="tgrid">
-      <div class="tcard"><div class="stars">★★★★★</div><p>“Em poucos meses minha frota já estava rodando no positivo. O suporte na operação fez toda a diferença.”</p><div class="who"><image-slot id="lp-t1" shape="circle" placeholder="Foto"></image-slot><div><b>Franqueado · placeholder</b><span>Unidade · Cidade/UF</span></div></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p>“O modelo é simples de operar e a demanda por motos é real. Reinvesti o lucro e já ampliei a frota.”</p><div class="who"><image-slot id="lp-t2" shape="circle" placeholder="Foto"></image-slot><div><b>Franqueado · placeholder</b><span>Unidade · Cidade/UF</span></div></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p>“Tecnologia, oficina própria e marca forte. Entrei num mercado em alta com segurança e previsibilidade.”</p><div class="who"><image-slot id="lp-t3" shape="circle" placeholder="Foto"></image-slot><div><b>Franqueado · placeholder</b><span>Unidade · Cidade/UF</span></div></div></div>
     </div>
   </div>
 </section>
@@ -555,12 +608,12 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
 </a>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cms-config.js"></script>
 <script src="assets/image-slot.js"></script>
+<script src="assets/cms-public.js"></script>
 <script>
 // Hero YouTube background
-const YT_ID = "5qap5aO4i9A";
+const YT_ID = "IZzNOIcdNOA";
 const yt = document.getElementById('hero-yt');
 if (yt) {
   yt.src = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1`;
@@ -575,11 +628,6 @@ document.querySelectorAll('.qa button').forEach(b=>{
   });
 });
 
-// ── Supabase client (usa config do cms-config.js) ──────────────────
-const C = window.CMS_CONFIG || {};
-const DEMO = !C.supabaseUrl || C.supabaseUrl.includes('SEU-PROJETO');
-const db = DEMO ? null : window.supabase.createClient(C.supabaseUrl, C.supabaseAnonKey);
-
 // ── Formulário de lead ──────────────────────────────────────────────
 async function enviarLead(e) {
   e.preventDefault();
@@ -588,20 +636,21 @@ async function enviarLead(e) {
   const lead = {
     nome:    f.nome.value.trim(),
     fone:    f.fone.value.trim(),
+    phone:   f.fone.value.trim(),
     email:   f.email.value.trim(),
     cidade:  f.cidade.value.trim(),
     capital: f.capital.value,
+    subject: 'Lead de franquia',
+    message: `Capital disponivel: ${f.capital.value}`,
     status:  'new',
   };
 
-  // Salva no Supabase (silencioso se ainda em demo)
-  if (db) {
-    btn.disabled = true;
-    btn.textContent = 'Enviando…';
-    const { error } = await db.from('leads').insert(lead);
-    if (error) console.warn('Supabase lead error:', error.message);
-    btn.disabled = false;
-  }
+  const btnText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  await window.CmsTurso?.submitLead(f, { subject: 'Lead de franquia' });
+  btn.disabled = false;
+  btn.textContent = btnText;
 
   // Redireciona para WhatsApp com os dados
   const msg = `Olá! Quero ser franqueado LokMais.%0A%0ANome: ${encodeURIComponent(lead.nome)}%0AWhatsApp: ${encodeURIComponent(lead.fone)}%0AE-mail: ${encodeURIComponent(lead.email)}%0ACidade: ${encodeURIComponent(lead.cidade)}%0ACapital: ${encodeURIComponent(lead.capital)}`;

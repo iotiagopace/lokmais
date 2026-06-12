@@ -83,7 +83,6 @@
       <a href="/como-funciona">Como funciona</a>
       <a href="/motos">Motos</a>
       <a href="/unidades">Unidades</a>
-      <a href="/simulador">Simulador</a>
       <a href="/seja-franqueado">Seja franqueado</a>
     </nav>
     <a class="btn btn-primary" href="#form">Alugar agora</a>
@@ -188,11 +187,27 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg>
 </a>
 
+<script src="cms-config.js"></script>
+<script src="assets/cms-public.js"></script>
 <script>
 const WA = '5531972285918'; // <- substituir pelo WhatsApp oficial
-function enviarLead(e){
+async function enviarLead(e){
   e.preventDefault();
   const f=e.target;
+  const btn = f.querySelector('button[type=submit]');
+  const btnText = btn?.textContent;
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+  }
+  await window.CmsTurso?.submitLead(f, {
+    subject: f.motivo.value,
+    message: f.msg.value || `Plano: ${f.plano.value || 'Nao informado'}`
+  });
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = btnText;
+  }
   const m=`Olá! Quero falar com a LokMais.%0A%0ANome: ${encodeURIComponent(f.nome.value)}%0AWhatsApp: ${encodeURIComponent(f.fone.value)}%0ACidade: ${encodeURIComponent(f.cidade.value)}%0AMotivo: ${encodeURIComponent(f.motivo.value)}%0APlano: ${encodeURIComponent(f.plano.value||'—')}%0AMensagem: ${encodeURIComponent(f.msg.value||'—')}`;
   window.open(`https://wa.me/${WA}?text=${m}`,'_blank');
   return false;

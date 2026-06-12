@@ -4,7 +4,7 @@ Site institucional + landing pages da **LokMais** — locação de motos Honda c
 *Sua liberdade merece mais.*
 
 > Stack: HTML puro + CSS (com tokens compartilhados em `lokmais.css`) + JavaScript vanilla.
-> Sem build, sem framework. Pode ser hospedado direto em qualquer static host (Cloud Run, Vercel, Netlify, GitHub Pages, Firebase Hosting).
+> O site publico continua estatico, mas o painel admin e a API CMS rodam em Vercel Functions com Turso/libSQL.
 
 ---
 
@@ -19,8 +19,12 @@ Site institucional + landing pages da **LokMais** — locação de motos Honda c
 ├── unidades.html               ← Mapa interativo de unidades
 ├── faq.html                    ← Dúvidas frequentes (categorizadas)
 ├── contato.html                ← Formulário + canais de atendimento
-├── simulador.html              ← Simulador de aluguel (plano → moto → período)
+├── arquivados/simulador.html   ← Simulador de aluguel arquivado temporariamente
 ├── seja-franqueado.html        ← LP de alta conversão para franqueados
+├── admin.html                  ← Painel CMS Turso
+├── cms-config.js               ← Configuração das seções editáveis do CMS
+├── schema.sql                  ← Schema Turso/libSQL do CMS
+├── api/cms/                    ← API Vercel conectada ao Turso
 ├── 00-sistema-de-design.html   ← Documentação visual do sistema
 ├── DESIGN.md                   ← Sistema de design (Markdown)
 ├── lokmais.css                 ← Tokens (cor, tipografia, espaço, raio, sombra)
@@ -29,8 +33,32 @@ Site institucional + landing pages da **LokMais** — locação de motos Honda c
     ├── logo-full.png           ← Logo completo
     ├── icon-orange.png         ← Ícone (laranja, fundo escuro)
     ├── icon-navy.png           ← Ícone (navy, fundo claro)
-    └── image-slot.js           ← Drag-and-drop para preencher imagens
+    ├── image-slot.js           ← Drag-and-drop para preencher imagens
+    └── cms-public.js           ← Hidratação publica via /api/cms/public
 ```
+
+---
+
+## CMS Turso
+
+O painel fica em `/admin.html` e usa as rotas em `/api/cms`. Configure no ambiente do deploy:
+
+```bash
+TURSO_DATABASE_URL=libsql://...
+TURSO_AUTH_TOKEN=...
+ADMIN_EMAIL=admin@cliente.com
+ADMIN_PASSWORD=senha-forte
+ADMIN_SESSION_SECRET=string-longa-aleatoria
+```
+
+Rotas principais:
+
+- `GET /api/cms/public/sections/:section?status=published`
+- `GET /api/cms/public/settings/home_images`
+- `POST /api/cms/leads`
+- `POST /api/cms/auth/login`
+
+As paginas publicas preservam o HTML atual. Quando o Turso tiver itens publicados, `assets/cms-public.js` substitui os blocos de motos, planos, unidades, FAQ, depoimentos e imagens editaveis. Se o banco estiver vazio, o conteudo estatico atual permanece visivel.
 
 ---
 
@@ -63,7 +91,7 @@ Estes pontos têm valores genéricos no código. **Trocar antes de subir para pr
 
 ## Como rodar localmente
 
-Por ser HTML estático, basta abrir `index.html` em qualquer servidor estático local:
+Para testar apenas o HTML estatico, basta abrir `index.html` em qualquer servidor local:
 
 ```bash
 # com Python
@@ -75,6 +103,16 @@ npx serve
 # ou com PHP
 php -S localhost:8000
 ```
+
+Para testar as rotas `/api/cms`, use Vercel local:
+
+```bash
+npm install
+npx vercel dev --listen 127.0.0.1:3000
+npm run check
+```
+
+No ambiente local (`localhost` ou `127.0.0.1`), o `/admin.html` abre em modo demonstração com qualquer e-mail/senha se a API de autenticação ainda não tiver `ADMIN_EMAIL` e `ADMIN_PASSWORD`. Em produção, o login sempre exige as variáveis reais.
 
 ---
 

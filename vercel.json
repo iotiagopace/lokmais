@@ -7,6 +7,16 @@
       "permanent": true
     },
     {
+      "source": "/simulador",
+      "destination": "/planos",
+      "permanent": true
+    },
+    {
+      "source": "/simulador.html",
+      "destination": "/planos",
+      "permanent": true
+    },
+    {
       "source": "/lp-seja-franqueado.html",
       "destination": "/seja-franqueado",
       "permanent": true
