@@ -46,10 +46,10 @@
   .ucard .actions a.wa:hover{background:#2ee87a;}
   .ucard .actions a svg{width:14px;height:14px;}
 
-  .mapbox{position:sticky;top:90px;height:600px;border-radius:var(--r-xl);overflow:hidden;background:var(--cloud);box-shadow:var(--sh-lg);}
+  .mapbox{position:sticky;top:90px;height:600px;border-radius:var(--r-xl);overflow:hidden;background:var(--cloud);box-shadow:var(--sh-lg);position:relative;}
   .mapbox .label{position:absolute;left:14px;top:14px;font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:#fff;z-index:500;background:rgba(11,11,46,.82);padding:10px 14px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);}
   .mapbox .label::before{content:"●";color:#f47a18;margin-right:6px;}
-  #map{position:absolute;inset:0;border-radius:var(--r-xl);}
+  #map{width:100%;height:600px;}
 
   .empty-cta{margin-top:60px;background:var(--cloud);border-radius:var(--r-xl);padding:42px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center;}
   .empty-cta h2{color:var(--navy-700);font-size:clamp(1.6rem,3vw,2.4rem);}
@@ -198,6 +198,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
 <script>
+document.addEventListener('DOMContentLoaded', function(){
 const UNITS = [
   { id:'1', name:'LokMais Contagem',               lat:-19.9321, lng:-44.0534, addr:'Av. Juscelino Kubitscheck, 855 · Contagem / MG' },
   { id:'2', name:'LokMais Grande BH',              lat:-19.7697, lng:-43.9050, addr:'Av. Brasília, 137 · Santa Luzia / MG' },
@@ -243,6 +244,7 @@ function selectUnit(id){
 }
 
 document.querySelectorAll('.ucard[data-id]').forEach(c=>c.onclick=()=>selectUnit(c.dataset.id));
+}); // DOMContentLoaded
 </script>
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
