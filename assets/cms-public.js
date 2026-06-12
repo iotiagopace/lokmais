@@ -35,18 +35,21 @@
   }
 
   const LOCAL_MOTO_IMGS = [
-    { keys: ["seminova", "semi nova", "semi-nova"],          src: "assets/motos/start-160-2025-lateral.webp" },
-    { keys: ["titan"],                                        src: "assets/motos/titan-160-2024-azul.jpeg" },
-    { keys: ["start", "2026", "0 km", "0km"],                src: "assets/motos/start-160-2026-lateral.webp" },
-    { keys: ["start", "2025"],                               src: "assets/motos/start-160-2025-lateral.webp" },
-    { keys: ["fan", "2026"],                                  src: "assets/motos/fan-160-2026-lateral.webp" },
-    { keys: ["fan", "2025"],                                  src: "assets/motos/fan-160-2025-lateral.webp" },
+    { test: h => /semi[\s-]?nova|seminova/.test(h),                          src: "assets/motos/start-160-2025-lateral.webp" },
+    { test: h => h.includes("titan"),                                         src: "assets/motos/titan-160-2024-azul.jpeg" },
+    { test: h => h.includes("start") && /(2026|0\s?km)/.test(h),             src: "assets/motos/start-160-2026-lateral.webp" },
+    { test: h => h.includes("start") && h.includes("2025"),                  src: "assets/motos/start-160-2025-lateral.webp" },
+    { test: h => h.includes("start") && h.includes("2024"),                  src: "assets/motos/titan-160-2024-azul.jpeg" },
+    { test: h => h.includes("fan")   && h.includes("2026"),                  src: "assets/motos/fan-160-2026-lateral.webp" },
+    { test: h => h.includes("fan")   && h.includes("2025"),                  src: "assets/motos/fan-160-2025-lateral.webp" },
+    { test: h => h.includes("fan"),                                           src: "assets/motos/fan-160-2026-lateral.webp" },
+    { test: h => h.includes("start"),                                         src: "assets/motos/start-160-2025-lateral.webp" },
   ];
 
   function localMotoImg(item) {
     const hay = [item.modelo, item.title, item.tag, item.category, item.filtro].join(" ").toLowerCase();
     for (const rule of LOCAL_MOTO_IMGS) {
-      if (rule.keys.every(k => hay.includes(k))) return rule.src;
+      if (rule.test(hay)) return rule.src;
     }
     return null;
   }
