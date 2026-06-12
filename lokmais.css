@@ -196,24 +196,45 @@ p{margin:0 0 1em;}
 .wa-float:hover{transform:scale(1.08);}
 .wa-float svg{width:32px;height:32px;}
 
-/* Hamburger */
-.ham{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;width:36px;height:36px;flex:0 0 auto;}
-.ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s var(--ease);transform-origin:center;}
+/* Hamburger button */
+.ham{display:none;flex-direction:column;justify-content:center;gap:5px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:10px;cursor:pointer;padding:8px;width:42px;height:42px;flex:0 0 auto;transition:.2s var(--ease);}
+.ham:hover{background:rgba(255,255,255,.14);}
+.ham span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:.28s var(--ease);transform-origin:center;}
+.ham.open{background:transparent;border-color:transparent;position:fixed;right:16px;top:16px;z-index:101;}
 .ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-/* Mobile nav drawer */
-.mobile-nav{display:none;flex-direction:column;background:var(--navy-900);border-top:1px solid rgba(255,255,255,.08);padding:8px 0 20px;}
-.mobile-nav.open{display:flex;}
-.mobile-nav a{color:rgba(255,255,255,.82);font-family:var(--font-head);font-weight:600;font-size:.92rem;text-transform:uppercase;letter-spacing:.04em;padding:14px var(--gap);border-bottom:1px solid rgba(255,255,255,.06);transition:.15s;}
-.mobile-nav a:hover{color:#fff;background:rgba(255,255,255,.06);}
-.mobile-nav .mnav-ctas{display:flex;flex-direction:column;gap:10px;padding:16px var(--gap) 0;}
+/* Compact mobile CTAs in navbar */
+.nav-cta-mobile{display:none;align-items:center;gap:8px;margin-left:auto;}
+.nav-cta-mobile a{font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.7rem;padding:9px 14px;border-radius:999px;white-space:nowrap;line-height:1;}
+.nav-cta-mobile .nca-rent{background:var(--orange);color:#fff;box-shadow:var(--sh-orange);}
+.nav-cta-mobile .nca-fran{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);}
+
+/* Mobile nav fullscreen overlay */
+.mobile-nav{position:fixed;inset:0;z-index:100;background:linear-gradient(160deg,var(--navy-900) 0%,#1a1a52 100%);display:flex;flex-direction:column;padding:80px 28px 32px;transform:translateY(-100%);opacity:0;visibility:hidden;transition:transform .35s var(--ease),opacity .25s,visibility 0s linear .35s;overflow-y:auto;}
+.mobile-nav.open{transform:translateY(0);opacity:1;visibility:visible;transition:transform .35s var(--ease),opacity .25s,visibility 0s;}
+.mobile-nav::before{content:"";position:absolute;top:0;right:0;width:60%;height:50%;background:radial-gradient(circle at 80% 20%,rgba(244,122,24,.22),transparent 60%);pointer-events:none;}
+.mobile-nav a{position:relative;color:#fff;font-family:var(--font-display);font-weight:800;font-size:1.9rem;text-transform:uppercase;letter-spacing:-.01em;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:.18s;display:flex;align-items:center;justify-content:space-between;}
+.mobile-nav a::after{content:"›";font-family:var(--font-display);color:var(--orange);font-size:1.4rem;opacity:.6;transition:.18s;}
+.mobile-nav a:hover{color:var(--orange-bright);padding-left:8px;}
+.mobile-nav a:hover::after{transform:translateX(4px);opacity:1;}
+.mobile-nav .mnav-ctas{display:flex;flex-direction:column;gap:12px;margin-top:32px;}
+.mobile-nav .mnav-ctas .btn{width:100%;justify-content:center;padding:18px;font-size:.95rem;}
+.mobile-nav .mnav-foot{margin-top:auto;padding-top:28px;color:rgba(255,255,255,.5);font-size:.78rem;display:flex;flex-direction:column;gap:6px;}
+.mobile-nav .mnav-foot a{font-family:var(--font-body);font-size:.85rem;font-weight:500;text-transform:none;padding:6px 0;border:0;color:rgba(255,255,255,.7);letter-spacing:0;}
+.mobile-nav .mnav-foot a::after{content:none;}
+
+body.mnav-lock{overflow:hidden;}
 
 @media(max-width:1000px){
   .nav-links{display:none;}
-  .nav-in .btn{display:none;}
+  .nav-in > .btn{display:none;}
   .ham{display:flex;}
+  .nav-cta-mobile{display:flex;}
+}
+@media(max-width:420px){
+  .nav-cta-mobile .nca-fran{display:none;}
 }
 @media(max-width:860px){
   body{font-size:17px;}

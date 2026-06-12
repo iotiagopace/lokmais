@@ -2,16 +2,19 @@
   var ham=document.getElementById('ham');
   var mnav=document.getElementById('mnav');
   if(!ham||!mnav) return;
-  ham.addEventListener('click',function(){
-    var open=mnav.classList.toggle('open');
+  function setOpen(open){
+    mnav.classList.toggle('open',open);
     ham.classList.toggle('open',open);
+    document.body.classList.toggle('mnav-lock',open);
     ham.setAttribute('aria-expanded',open);
+  }
+  ham.addEventListener('click',function(){
+    setOpen(!mnav.classList.contains('open'));
   });
-  document.addEventListener('click',function(e){
-    if(!ham.contains(e.target)&&!mnav.contains(e.target)){
-      mnav.classList.remove('open');
-      ham.classList.remove('open');
-      ham.setAttribute('aria-expanded','false');
-    }
+  mnav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ setOpen(false); });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') setOpen(false);
   });
 })();
