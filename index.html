@@ -60,14 +60,7 @@
   .hero .mini div{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--on-dark);}
   .hero .mini svg{width:20px;height:20px;color:var(--orange-bright);flex:0 0 auto;}
   .hero-side{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
-  .yt-thumb{position:relative;border-radius:var(--r-lg);overflow:hidden;display:block;width:360px;max-width:100%;box-shadow:0 8px 32px rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.18);text-decoration:none;flex-shrink:0;}
-  .yt-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
-  .yt-thumb .yt-overlay{position:absolute;inset:0;background:rgba(0,0,0,.22);display:grid;place-items:center;transition:.2s;}
-  .yt-thumb:hover .yt-overlay{background:rgba(0,0,0,.1);}
-  .yt-thumb .yt-btn{width:50px;height:50px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:var(--sh-orange);}
-  .yt-thumb .yt-btn svg{width:20px;height:20px;color:#fff;margin-left:3px;}
-  .yt-thumb .yt-label{position:absolute;bottom:10px;left:12px;right:12px;font-family:var(--font-head);font-size:.75rem;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6);}
-  .hero-moto-mobile{display:none;width:100%;max-height:260px;object-fit:cover;object-position:center;border-radius:var(--r-lg);box-shadow:0 8px 32px rgba(0,0,0,.4);}
+  .hero-photo-main{width:100%;max-width:480px;height:380px;object-fit:cover;object-position:center;border-radius:var(--r-xl);box-shadow:0 12px 48px rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.14);}
   .hero-badge{position:relative;background:var(--orange);color:#fff;border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh-orange);align-self:flex-end;}
   .hero-badge b{font-family:var(--font-display);font-weight:800;font-size:1.7rem;display:block;line-height:1;}
   .hero-badge span{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-family:var(--font-head);font-weight:600;}
@@ -157,9 +150,7 @@
     .hero-side{order:-1;align-items:flex-start;}
     .steps,.feat-grid,.moto-grid{grid-template-columns:1fr 1fr;}
     .plan-grid{grid-template-columns:1fr;}
-    .hero-moto-mobile{display:block;}
-    .yt-thumb{display:none;}
-    .hero-badge{display:none;}
+    .hero-photo-main{max-height:260px;}
   }
   @media(max-width:560px){
     .steps,.feat-grid,.moto-grid{grid-template-columns:1fr;}
@@ -249,14 +240,7 @@
       </div>
     </div>
     <div class="hero-side">
-      <img class="hero-moto-mobile" src="assets/motos/fan-160-2026-lateral.webp" alt="Honda Fan 160 2026" loading="lazy">
-      <a class="yt-thumb" href="https://www.youtube.com/watch?v=IZzNOIcdNOA" target="_blank" rel="noopener" aria-label="Assistir vídeo institucional LokMais no YouTube">
-        <img src="https://img.youtube.com/vi/IZzNOIcdNOA/hqdefault.jpg" alt="Vídeo institucional LokMais" loading="lazy">
-        <div class="yt-overlay">
-          <div class="yt-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <span class="yt-label">Conheça a LokMais</span>
-      </a>
+      <img class="hero-photo-main" src="assets/hero-moto.jpg" alt="Entregador em Honda pelas ruas do Brasil" loading="lazy">
       <div class="hero-badge"><b>R$ 265</b><span>por semana · a partir de</span></div>
     </div>
   </div>
