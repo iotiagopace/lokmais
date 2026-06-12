@@ -20,6 +20,7 @@
 <meta name="twitter:description" content="Encontre a unidade LokMais mais próxima de você. Alugue motos Honda com planos semanais, manutenção inclusa e suporte completo na sua cidade.">
 <meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
 <link rel="stylesheet" href="lokmais.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <style>
   body{background:#fff;}
   .nav .brand b{font-style:normal;}
@@ -45,18 +46,10 @@
   .ucard .actions a.wa:hover{background:#2ee87a;}
   .ucard .actions a svg{width:14px;height:14px;}
 
-  .mapbox{position:sticky;top:90px;height:600px;border-radius:var(--r-xl);overflow:hidden;background:var(--navy-900);box-shadow:var(--sh-lg);position:relative;}
-  .mapbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.95) contrast(1.02);}
-  .mapbox .label{position:absolute;left:24px;top:24px;font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:#fff;z-index:5;background:rgba(11,11,46,.82);padding:10px 14px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);}
-  .mapbox .label::before{content:"●";color:var(--orange);margin-right:6px;}
-  .mapbox .map-note{position:absolute;left:24px;right:24px;bottom:24px;z-index:5;background:rgba(255,255,255,.94);color:var(--muted);border-radius:var(--r-md);padding:12px 14px;font-size:.82rem;box-shadow:var(--sh-md);}
-
-  .pin{position:absolute;width:42px;height:42px;border-radius:50%;background:var(--orange);border:4px solid #fff;box-shadow:var(--sh-orange);transform:translate(-50%,-100%);transition:.25s var(--ease);cursor:pointer;display:grid;place-items:center;z-index:3;}
-  .pin svg{width:18px;height:18px;color:#fff;}
-  .pin::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid #fff;}
-  .pin.on{transform:translate(-50%,-100%) scale(1.25);z-index:5;background:var(--orange-bright);box-shadow:0 0 0 8px rgba(244,122,24,.22),var(--sh-orange);}
-  .pin .city{position:absolute;left:50%;bottom:calc(100% + 14px);transform:translateX(-50%);background:#fff;color:var(--navy-700);font-family:var(--font-head);font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.04em;padding:6px 10px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);white-space:nowrap;opacity:0;transition:.18s;}
-  .pin.on .city{opacity:1;}
+  .mapbox{position:sticky;top:90px;height:600px;border-radius:var(--r-xl);overflow:hidden;background:var(--cloud);box-shadow:var(--sh-lg);}
+  .mapbox .label{position:absolute;left:14px;top:14px;font-family:var(--font-head);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:#fff;z-index:500;background:rgba(11,11,46,.82);padding:10px 14px;border-radius:var(--r-pill);box-shadow:var(--sh-sm);}
+  .mapbox .label::before{content:"●";color:#f47a18;margin-right:6px;}
+  #map{position:absolute;inset:0;border-radius:var(--r-xl);}
 
   .empty-cta{margin-top:60px;background:var(--cloud);border-radius:var(--r-xl);padding:42px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center;}
   .empty-cta h2{color:var(--navy-700);font-size:clamp(1.6rem,3vw,2.4rem);}
@@ -98,8 +91,8 @@
       <!-- LISTA -->
       <div class="units" id="units">
 
-        <div class="ucard on" data-id="1" data-map="https://www.google.com/maps?q=Av.+Juscelino+Kubitscheck,+855,+Contagem,+MG&output=embed">
-          <div class="uh"><span class="ut">Unidade · 01 · Matriz</span></div>
+        <div class="ucard on" data-id="1">
+          <div class="uh"><span class="ut">Matriz</span></div>
           <h3>LokMais Contagem</h3>
           <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Juscelino Kubitscheck, 855 · Contagem / MG · CEP 32223-400</p>
           <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg a Sáb · 08h às 18h</span></div>
@@ -109,8 +102,7 @@
           </div>
         </div>
 
-        <div class="ucard" data-id="2" data-map="https://www.google.com/maps?q=Av.+Brasília,+137,+Santa+Luzia,+MG&output=embed">
-          <div class="uh"><span class="ut">Unidade · 02</span></div>
+        <div class="ucard" data-id="2">
           <h3>LokMais Grande BH</h3>
           <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Av. Brasília, 137 · Centro · Santa Luzia / MG · CEP 33120-440</p>
           <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg a Sáb · 08h às 18h</span></div>
@@ -120,8 +112,7 @@
           </div>
         </div>
 
-        <div class="ucard" data-id="3" data-map="https://www.google.com/maps?q=Rua+Rio+das+Bicas,+175,+Manaus,+AM&output=embed">
-          <div class="uh"><span class="ut">Unidade · 03</span></div>
+        <div class="ucard" data-id="3">
           <h3>LokMais Manaus</h3>
           <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Rua Rio das Bicas, 175 · Manaus / AM · CEP 69057-200</p>
           <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg a Sáb · 08h às 18h</span></div>
@@ -131,8 +122,8 @@
           </div>
         </div>
 
-        <div class="ucard" data-id="4" data-map="https://www.google.com/maps?q=Rua+Jair+Martins+Mil+Homens,+500,+São+José+do+Rio+Preto,+SP&output=embed">
-          <div class="uh"><span class="ut">Unidade · 04 · Comercial</span></div>
+        <div class="ucard" data-id="4">
+          <div class="uh"><span class="ut">Comercial</span></div>
           <h3>LokMais São José do Rio Preto</h3>
           <p class="addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg> Rua Jair Martins Mil Homens, 500, sala 1217 · São José do Rio Preto / SP · CEP 15090-080</p>
           <div class="meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Seg a Sex · 08h às 18h</span></div>
@@ -168,10 +159,10 @@
 
       </div>
 
-      <!-- MAPA GOOGLE -->
+      <!-- MAPA LEAFLET -->
       <div class="mapbox" id="mapbox">
-        <iframe id="unit-map" title="Mapa Google da unidade LokMais" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Av.+Juscelino+Kubitscheck,+855,+Contagem,+MG&output=embed"></iframe>
-        <div class="label">Google Maps · unidades</div>
+        <div id="map"></div>
+        <div class="label">Unidades LokMais</div>
       </div>
     </div>
 
@@ -205,18 +196,53 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg>
 </a>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
 <script>
-// sync pin <-> card selection
+const UNITS = [
+  { id:'1', name:'LokMais Contagem',               lat:-19.9321, lng:-44.0534, addr:'Av. Juscelino Kubitscheck, 855 · Contagem / MG' },
+  { id:'2', name:'LokMais Grande BH',              lat:-19.7697, lng:-43.9050, addr:'Av. Brasília, 137 · Santa Luzia / MG' },
+  { id:'3', name:'LokMais Manaus',                 lat:-3.1190,  lng:-60.0217, addr:'Rua Rio das Bicas, 175 · Manaus / AM' },
+  { id:'4', name:'LokMais São José do Rio Preto',  lat:-20.8113, lng:-49.3758, addr:'Rua Jair Martins Mil Homens, 500 · SJRP / SP' },
+];
+
+const map = L.map('map',{zoomControl:true,scrollWheelZoom:false});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom:18
+}).addTo(map);
+
+function mkIcon(active){
+  return L.divIcon({
+    className:'',
+    html:`<div style="width:34px;height:34px;background:${active?'#f47a18':'#0b0b2e'};border:3px solid #fff;border-radius:50%;box-shadow:0 3px 10px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;transition:.2s;"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 22s8-8 8-13a8 8 0 0 0-16 0c0 5 8 13 8 13z"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg></div>`,
+    iconSize:[34,34], iconAnchor:[17,17], popupAnchor:[0,-20]
+  });
+}
+
+const markers = {};
+UNITS.forEach(u=>{
+  const m = L.marker([u.lat,u.lng],{icon:mkIcon(u.id==='1')})
+    .bindPopup(`<b style="font-family:sans-serif">${u.name}</b><br><span style="font-size:.85rem;color:#666">${u.addr}</span>`,{maxWidth:220})
+    .addTo(map);
+  markers[u.id] = m;
+  if(u.id==='1') m.openPopup();
+});
+
+const group = L.featureGroup(Object.values(markers));
+map.fitBounds(group.getBounds().pad(0.25));
+
 function selectUnit(id){
   document.querySelectorAll('.ucard').forEach(c=>c.classList.toggle('on',c.dataset.id===id));
-  document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('on',p.dataset.id===id));
-  const card = document.querySelector('.ucard.on');
-  const map = document.getElementById('unit-map');
-  if(card && map && card.dataset.map) map.src = card.dataset.map;
+  Object.entries(markers).forEach(([mid,m])=>m.setIcon(mkIcon(mid===id)));
+  if(markers[id]){
+    map.flyTo(markers[id].getLatLng(),13,{animate:true,duration:.8});
+    markers[id].openPopup();
+  }
+  const card=document.querySelector('.ucard.on');
   if(card) card.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-document.querySelectorAll('.ucard').forEach(c=>c.onclick=()=>selectUnit(c.dataset.id));
-document.querySelectorAll('.pin').forEach(p=>p.onclick=()=>selectUnit(p.dataset.id));
+
+document.querySelectorAll('.ucard[data-id]').forEach(c=>c.onclick=()=>selectUnit(c.dataset.id));
 </script>
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
