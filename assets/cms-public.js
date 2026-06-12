@@ -34,6 +34,23 @@
     return item.cover_image_url || item.cover || (Array.isArray(item.gallery_images) && item.gallery_images[0]) || "";
   }
 
+  const LOCAL_MOTO_IMGS = [
+    { keys: ["seminova", "semi nova", "semi-nova"],          src: "assets/motos/start-160-2025-lateral.webp" },
+    { keys: ["titan"],                                        src: "assets/motos/titan-160-2024-azul.jpeg" },
+    { keys: ["start", "2026", "0 km", "0km"],                src: "assets/motos/start-160-2026-lateral.webp" },
+    { keys: ["start", "2025"],                               src: "assets/motos/start-160-2025-lateral.webp" },
+    { keys: ["fan", "2026"],                                  src: "assets/motos/fan-160-2026-lateral.webp" },
+    { keys: ["fan", "2025"],                                  src: "assets/motos/fan-160-2025-lateral.webp" },
+  ];
+
+  function localMotoImg(item) {
+    const hay = [item.modelo, item.title, item.tag, item.category, item.filtro].join(" ").toLowerCase();
+    for (const rule of LOCAL_MOTO_IMGS) {
+      if (rule.keys.every(k => hay.includes(k))) return rule.src;
+    }
+    return null;
+  }
+
   function renderMotos(items) {
     const targets = [
       document.querySelector(".moto-grid"),
@@ -43,7 +60,7 @@
 
     const html = items.map((item) => {
       const title = item.modelo || item.title || "Moto LokMais";
-      const img = imageOf(item);
+      const img = localMotoImg(item) || imageOf(item);
       const specs = String(item.specs || "").split("·").map((s) => s.trim()).filter(Boolean);
       const filters = item.filtro || [item.category, item.tag, title].join(" ").toLowerCase();
       return `
