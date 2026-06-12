@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>LokMais Admin</title>
+<title>Painel Administrativo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
 <style>
@@ -423,14 +423,16 @@ button,input,select,textarea{font:inherit}
 <input type="file" id="after-input"  accept="image/*" hidden onchange="onBeforeAfter('after',this)">
 <input type="file" id="home-input"   accept="image/*" hidden onchange="onHomeChosen(this)">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cms-config.js"></script>
 <script>
 // ─── SETUP ────────────────────────────────────────────────────────────────────
 const C    = window.CMS_CONFIG;
-const DEMO = C.supabaseUrl.includes('SEU-PROJETO');
-const db   = DEMO ? null : window.supabase.createClient(C.supabaseUrl, C.supabaseAnonKey);
+const API  = (C.apiBaseUrl || '/api/cms').replace(/\/$/, '');
+const DEMO = C.demoMode === true;
+const LOCAL_DEMO_FALLBACK = ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
 const SECTIONS = C.sections || [];
+const TOKEN_KEY = `turso_cms_token_${C.shortName || 'site'}`;
+const USER_KEY  = `turso_cms_user_${C.shortName || 'site'}`;
 
 const PALETTE = [
   {cls:'c-blue'  ,hex:'#5b6af0'},{cls:'c-green' ,hex:'#22c55e'},
@@ -471,22 +473,30 @@ buildSectionPages();
 document.getElementById('auth-form').addEventListener('submit', async e => {
   e.preventDefault();
   if (DEMO) { bootApp('demo'); return; }
-  const { error } = await db.auth.signInWithPassword({
-    email: document.getElementById('email').value.trim(),
-    password: document.getElementById('password').value
-  });
-  if (error) { showAuthErr(); return; }
-  const { data:{ user } } = await db.auth.getUser();
-  bootApp(user?.email || 'Admin');
+  try {
+    const email = document.getElementById('email').value.trim();
+    const data = await apiFetch('/auth/login', {
+      method: 'POST',
+      body: { email, password: document.getElementById('password').value }
+    });
+    localStorage.setItem(TOKEN_KEY, data.access_token);
+    localStorage.setItem(USER_KEY, data.user?.email || email);
+    bootApp(data.user?.email || email);
+  } catch (err) {
+    if (LOCAL_DEMO_FALLBACK) {
+      console.warn('CMS admin API unavailable locally; opening demo mode.', err);
+      bootApp('demo');
+      return;
+    }
+    showAuthErr();
+  }
 });
 
 window.addEventListener('load', async () => {
   if (DEMO) return;
-  const { data } = await db.auth.getSession();
-  if (data.session) {
-    const { data:{ user } } = await db.auth.getUser();
-    bootApp(user?.email || 'Admin');
-  }
+  const token = localStorage.getItem(TOKEN_KEY);
+  const email = localStorage.getItem(USER_KEY);
+  if (token && email) bootApp(email);
 });
 
 async function bootApp(email) {
@@ -495,7 +505,7 @@ async function bootApp(email) {
   const name = email === 'demo' ? 'demo' : email.split('@')[0];
   document.getElementById('tb-email').textContent  = name;
   document.getElementById('tb-avatar').textContent = name.slice(0,2).toUpperCase();
-  if (DEMO) { loadDemoData(); loadDemoSettings(); }
+  if (DEMO || email === 'demo') { loadDemoData(); loadDemoSettings(); }
   else      { await Promise.all([loadAllSections(), loadLeads(), loadSettings()]); }
   updateDashboard();
   updateLeadDot();
@@ -512,8 +522,23 @@ function showAuthErr() {
 }
 
 async function logout() {
-  if (!DEMO) await db.auth.signOut();
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
   location.reload();
+}
+
+async function apiFetch(path, options={}) {
+  const headers = { 'Content-Type':'application/json', ...(options.headers || {}) };
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const res = await fetch(`${API}${path}`, {
+    method: options.method || 'GET',
+    headers,
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Erro ${res.status}`);
+  return data;
 }
 
 // ─── BRANDING ─────────────────────────────────────────────────────────────────
@@ -523,7 +548,7 @@ function applyBranding() {
   document.getElementById('auth-short').textContent = C.shortName;
   document.getElementById('sb-short').textContent   = C.shortName;
   document.getElementById('sb-name').textContent    = C.brandName;
-  if (DEMO) document.getElementById('auth-sub').textContent = 'Modo demonstração ativo. Use qualquer e-mail e senha.';
+  if (DEMO || LOCAL_DEMO_FALLBACK) document.getElementById('auth-sub').textContent = 'No ambiente local, use qualquer e-mail e senha para abrir em modo demonstração.';
   if (C.logoUrl) {
     ['auth-logo','sb-logo'].forEach(id => {
       const el = document.getElementById(id);
@@ -579,10 +604,12 @@ async function loadAllSections() {
   await Promise.all(SECTIONS.map(s => loadSection(s)));
 }
 async function loadSection(sec) {
-  const { data, error } = await db.from(sec.table).select('*')
-    .order('display_order',{ascending:true}).order('created_at',{ascending:false});
-  if (error) { sectionData[sec.id]=[]; return; }
-  sectionData[sec.id] = (data||[]).map(r => rowToItem(r, sec));
+  try {
+    const { data } = await apiFetch(`/sections/${sec.id}`);
+    sectionData[sec.id] = (data||[]).map(r => rowToItem(r, sec));
+  } catch {
+    sectionData[sec.id]=[];
+  }
 }
 function rowToItem(row, sec) {
   const dynamic={};
@@ -604,14 +631,17 @@ function itemToRow(item, sec) {
 
 // ─── LEADS DATA ───────────────────────────────────────────────────────────────
 async function loadLeads() {
-  const { data, error } = await db.from(C.leadsTableName||'leads').select('*').order('created_at',{ascending:false});
-  if (error) { leadsData=[]; return; }
-  leadsData = data||[];
+  try {
+    const { data } = await apiFetch('/leads');
+    leadsData = data || [];
+  } catch {
+    leadsData=[];
+  }
 }
 async function updateLeadStatus(id, status) {
   if (!DEMO) {
-    const { error } = await db.from(C.leadsTableName||'leads').update({status}).eq('id',id);
-    if (error) { alert(error.message); return; }
+    try { await apiFetch(`/leads/${id}`, { method:'PATCH', body:{ status } }); }
+    catch (err) { alert(err.message); return; }
   }
   const lead = leadsData.find(l=>l.id===id);
   if (lead) lead.status = status;
@@ -625,8 +655,12 @@ function updateLeadDot() {
 
 // ─── SETTINGS DATA ────────────────────────────────────────────────────────────
 async function loadSettings() {
-  const { data } = await db.from(C.settingsTableName).select('value').eq('key','global_config').maybeSingle();
-  settingsData = data?.value || defaultSettings();
+  try {
+    const { data } = await apiFetch('/settings/global_config');
+    settingsData = data || defaultSettings();
+  } catch {
+    settingsData = defaultSettings();
+  }
 }
 function defaultSettings() {
   return { phone:'', whatsapp:'', email:'', address:'',
@@ -641,8 +675,8 @@ async function saveSettings() {
     if (el) settingsData[id] = el.value;
   });
   if (DEMO) { alert('Configurações salvas!'); return; }
-  const { error } = await db.from(C.settingsTableName).upsert({key:'global_config',value:settingsData},{onConflict:'key'});
-  if (error) { alert(error.message); return; }
+  try { await apiFetch('/settings/global_config', { method:'PUT', body:{ value:settingsData } }); }
+  catch (err) { alert(err.message); return; }
   alert('Configurações salvas com sucesso!');
 }
 function loadDemoSettings() {
@@ -950,9 +984,10 @@ async function saveItem() {
       if(idx>=0)sectionData[sec.id][idx]=item;else sectionData[sec.id].unshift(item);
     }else{
       const row=itemToRow(item,sec);
-      const q=editing?db.from(sec.table).update(row).eq('id',editing.id).select().single():db.from(sec.table).insert(row).select().single();
-      const{data,error}=await q;if(error)throw error;
-      const saved=rowToItem(data,sec);
+      const result = editing
+        ? await apiFetch(`/sections/${sec.id}/${editing.id}`, { method:'PUT', body:row })
+        : await apiFetch(`/sections/${sec.id}`, { method:'POST', body:row });
+      const saved=rowToItem(result.data,sec);
       if(!sectionData[sec.id])sectionData[sec.id]=[];
       const idx=sectionData[sec.id].findIndex(i=>i.id===saved.id);
       if(idx>=0)sectionData[sec.id][idx]=saved;else sectionData[sec.id].unshift(saved);
@@ -965,7 +1000,10 @@ async function saveItem() {
 async function deleteItem(id,sectionId) {
   if(!confirm('Excluir este item?'))return;
   const sec=SECTIONS.find(s=>s.id===sectionId);if(!sec)return;
-  if(!DEMO){const{error}=await db.from(sec.table).delete().eq('id',id);if(error){alert(error.message);return;}}
+  if(!DEMO){
+    try { await apiFetch(`/sections/${sec.id}/${id}`, { method:'DELETE' }); }
+    catch (err) { alert(err.message); return; }
+  }
   sectionData[sec.id]=(sectionData[sec.id]||[]).filter(i=>i.id!==id);
   updateDashboard();renderGrid(sec);
 }
@@ -1007,6 +1045,7 @@ function renderLeads() {
 
   list.forEach(l => {
     const st=l.status||'new';
+    const id = typeof l.id === 'number' ? l.id : `'${String(l.id).replace(/'/g,'\\\'')}'`;
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td><div class="lead-name">${esc(l.name||'—')}</div><div class="lead-contact">${esc(l.email||'')} ${l.phone?'· '+esc(l.phone):''}</div></td>
@@ -1014,9 +1053,9 @@ function renderLeads() {
       <td><div class="lead-date">${formatDate(l.created_at)}</div></td>
       <td><span class="status-badge ${statusClass[st]||'new'}">${statusLabel[st]||'Novo'}</span></td>
       <td><div class="lead-actions">
-        <button class="btn secondary sm" onclick="openLead(${l.id})">Ver</button>
-        ${st==='new' ?`<button class="btn sm" style="background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe" onclick="updateLeadStatus(${l.id},'read')">Marcar lido</button>`:''}
-        ${st!=='done'?`<button class="btn success sm" onclick="updateLeadStatus(${l.id},'done')">Respondido</button>`:''}
+        <button class="btn secondary sm" onclick="openLead(${id})">Ver</button>
+        ${st==='new' ?`<button class="btn sm" style="background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe" onclick="updateLeadStatus(${id},'read')">Marcar lido</button>`:''}
+        ${st!=='done'?`<button class="btn success sm" onclick="updateLeadStatus(${id},'done')">Respondido</button>`:''}
       </div></td>`;
     tbody.appendChild(tr);
   });
@@ -1025,6 +1064,7 @@ function renderLeads() {
 function openLead(id) {
   const l=leadsData.find(x=>x.id===id);if(!l)return;
   const st=l.status||'new';
+  const safeId = typeof l.id === 'number' ? l.id : `'${String(l.id).replace(/'/g,'\\\'')}'`;
   const statusLabel={new:'Novo',read:'Lido',done:'Respondido'};
   const statusClass={new:'new',read:'read',done:'done'};
   document.getElementById('lead-body').innerHTML=`
@@ -1038,8 +1078,8 @@ function openLead(id) {
     <div class="lead-detail-msg">${esc(l.message||'—')}</div>`;
   document.getElementById('lead-foot').innerHTML=`
     <button class="btn secondary" onclick="closeLead()">Fechar</button>
-    ${st==='new' ?`<button class="btn" style="background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe" onclick="updateLeadStatus(${l.id},'read');closeLead()">Marcar como lido</button>`:''}
-    ${st!=='done'?`<button class="btn success" onclick="updateLeadStatus(${l.id},'done');closeLead()">Marcar como respondido</button>`:''}`;
+    ${st==='new' ?`<button class="btn" style="background:#eff6ff;color:#3b82f6;border:1px solid #bfdbfe" onclick="updateLeadStatus(${safeId},'read');closeLead()">Marcar como lido</button>`:''}
+    ${st!=='done'?`<button class="btn success" onclick="updateLeadStatus(${safeId},'done');closeLead()">Marcar como respondido</button>`:''}`;
   if(st==='new') updateLeadStatus(id,'read');
   document.getElementById('lead-overlay').classList.add('on');
 }
@@ -1057,8 +1097,12 @@ async function loadAndRenderHome() {
   if(DEMO){
     homeImages={...defaults,hero_main:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80',hero_side:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80',about:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80'};
   }else{
-    const{data,error}=await db.from(C.settingsTableName).select('value').eq('key','home_images').maybeSingle();
-    homeImages=error?defaults:{...defaults,...(data?.value||{})};
+    try {
+      const { data } = await apiFetch('/settings/home_images');
+      homeImages={...defaults,...(data||{})};
+    } catch {
+      homeImages=defaults;
+    }
   }
   renderHomeImages();
 }
@@ -1077,8 +1121,8 @@ async function saveHomeImages(){
   try{
     const out={};
     for(const f of homeFields) out[f.key]=await uploadMaybe(homeImages[f.key],`home/${f.key}`,'image');
-    const{error}=await db.from(C.settingsTableName).upsert({key:'home_images',value:out},{onConflict:'key'});
-    if(error)throw error;homeImages=out;alert('Imagens salvas!');
+    await apiFetch('/settings/home_images', { method:'PUT', body:{ value:out } });
+    homeImages=out;alert('Imagens salvas!');
   }catch(err){alert(err.message);}
 }
 
@@ -1090,11 +1134,8 @@ function closeMobile(){document.getElementById('sidebar').classList.remove('open
 async function uploadMaybe(value,folder,name){
   if(!value||DEMO)return value||'';
   if(!String(value).startsWith('data:'))return value;
-  const blob=dataUrlToBlob(value);const ext=blob.type.includes('png')?'png':'jpg';
-  const path=`${folder}/${Date.now()}-${name}.${ext}`;
-  const{error}=await db.storage.from(C.imageBucket).upload(path,blob,{contentType:blob.type});
-  if(error)throw error;
-  return db.storage.from(C.imageBucket).getPublicUrl(path).data.publicUrl;
+  const { url } = await apiFetch('/upload', { method:'POST', body:{ dataUrl:value, folder, name } });
+  return url;
 }
 function compress(file,cb){const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{const max=1600;let w=img.width,h=img.height;if(w>max){h=Math.round(h*max/w);w=max}if(h>max){w=Math.round(w*max/h);h=max}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);cb(c.toDataURL('image/jpeg',.84))};img.src=e.target.result};r.readAsDataURL(file);}
 function dataUrlToBlob(url){const[head,body]=url.split(',');const type=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';const bin=atob(body);const arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);return new Blob([arr],{type});}

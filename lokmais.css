@@ -133,6 +133,8 @@ p{margin:0 0 1em;}
 .btn-lg{padding:20px 38px;font-size:var(--t-base);}
 .btn-wa{background:#25D366;color:#0a2e1a;}
 .btn-wa:hover{background:#2ee87a;transform:translateY(-2px);box-shadow:0 16px 36px rgba(37,211,102,.45);}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-2px);}
 
 /* ---------- Header ---------- */
 .nav{
@@ -194,9 +196,24 @@ p{margin:0 0 1em;}
 .wa-float:hover{transform:scale(1.08);}
 .wa-float svg{width:32px;height:32px;}
 
+/* Hamburger */
+.ham{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;width:36px;height:36px;flex:0 0 auto;}
+.ham span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s var(--ease);transform-origin:center;}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.mobile-nav{display:none;flex-direction:column;background:var(--navy-900);border-top:1px solid rgba(255,255,255,.08);padding:8px 0 20px;}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{color:rgba(255,255,255,.82);font-family:var(--font-head);font-weight:600;font-size:.92rem;text-transform:uppercase;letter-spacing:.04em;padding:14px var(--gap);border-bottom:1px solid rgba(255,255,255,.06);transition:.15s;}
+.mobile-nav a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.mobile-nav .mnav-ctas{display:flex;flex-direction:column;gap:10px;padding:16px var(--gap) 0;}
+
 @media(max-width:1000px){
   .nav-links{display:none;}
-  .nav-in .btn{margin-left:auto;}
+  .nav-in .btn{display:none;}
+  .ham{display:flex;}
 }
 @media(max-width:860px){
   body{font-size:17px;}
