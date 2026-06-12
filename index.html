@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LokMais — Locação de Motos · Sua liberdade merece mais</title>
+<title>LokMais | Locação de Motos · Sua liberdade merece mais</title>
 <meta name="description" content="Alugue motos Honda com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. A LokMais é o modelo de locação de motos mais completo do Brasil.">
 <link rel="canonical" href="https://lokmais.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="LokMais">
-<meta property="og:title" content="LokMais — Locação de Motos · Sua liberdade merece mais">
+<meta property="og:title" content="LokMais | Locação de Motos · Sua liberdade merece mais">
 <meta property="og:description" content="Alugue motos Honda com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. A LokMais é o modelo de locação de motos mais completo do Brasil.">
 <meta property="og:url" content="https://lokmais.vercel.app/">
 <meta property="og:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LokMais — Locação de Motos · Sua liberdade merece mais">
+<meta name="twitter:title" content="LokMais | Locação de Motos · Sua liberdade merece mais">
 <meta name="twitter:description" content="Alugue motos Honda com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. A LokMais é o modelo de locação de motos mais completo do Brasil.">
 <meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
 <link rel="icon" href="/assets/favicon-blue.png" type="image/png">
@@ -60,11 +60,13 @@
   .hero .mini div{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--on-dark);}
   .hero .mini svg{width:20px;height:20px;color:var(--orange-bright);flex:0 0 auto;}
   .hero-side{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
-  .play-card{position:relative;background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);border-radius:var(--r-lg);padding:18px 22px;display:flex;align-items:center;gap:14px;color:#fff;width:max-content;max-width:100%;}
-  .play-card .pi{width:46px;height:46px;border-radius:50%;background:var(--orange);display:grid;place-items:center;flex:0 0 auto;box-shadow:var(--sh-orange);}
-  .play-card .pi svg{width:18px;height:18px;color:#fff;margin-left:2px;}
-  .play-card b{font-family:var(--font-head);font-weight:700;display:block;font-size:.95rem;}
-  .play-card span{font-size:.78rem;color:var(--on-dark-muted);}
+  .yt-thumb{position:relative;border-radius:var(--r-lg);overflow:hidden;display:block;width:260px;max-width:100%;box-shadow:0 8px 32px rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.18);text-decoration:none;flex-shrink:0;}
+  .yt-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+  .yt-thumb .yt-overlay{position:absolute;inset:0;background:rgba(0,0,0,.22);display:grid;place-items:center;transition:.2s;}
+  .yt-thumb:hover .yt-overlay{background:rgba(0,0,0,.1);}
+  .yt-thumb .yt-btn{width:50px;height:50px;border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:var(--sh-orange);}
+  .yt-thumb .yt-btn svg{width:20px;height:20px;color:#fff;margin-left:3px;}
+  .yt-thumb .yt-label{position:absolute;bottom:10px;left:12px;right:12px;font-family:var(--font-head);font-size:.75rem;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6);}
   .hero-badge{position:relative;background:var(--orange);color:#fff;border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh-orange);align-self:flex-end;}
   .hero-badge b{font-family:var(--font-display);font-weight:800;font-size:1.7rem;display:block;line-height:1;}
   .hero-badge span{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-family:var(--font-head);font-weight:600;}
@@ -231,10 +233,13 @@
       </div>
     </div>
     <div class="hero-side">
-      <div class="play-card">
-        <div class="pi"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        <div><b>Vídeo institucional</b><span>Conheça a LokMais</span></div>
-      </div>
+      <a class="yt-thumb" href="https://www.youtube.com/watch?v=IZzNOIcdNOA" target="_blank" rel="noopener" aria-label="Assistir vídeo institucional LokMais no YouTube">
+        <img src="https://img.youtube.com/vi/IZzNOIcdNOA/hqdefault.jpg" alt="Vídeo institucional LokMais" loading="lazy">
+        <div class="yt-overlay">
+          <div class="yt-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <span class="yt-label">Conheça a LokMais</span>
+      </a>
       <div class="hero-badge"><b>R$ 265</b><span>por semana · a partir de</span></div>
     </div>
   </div>
@@ -265,17 +270,6 @@
       <p class="lead">Valores semanais. Caução única de R$ 800 em todos os planos. Manutenção inclusa.</p>
     </div>
     <div class="plan-grid">
-      <div class="plan">
-        <div class="pname">Mensal</div>
-        <div class="pdesc">Para quem precisa começar rápido e quer flexibilidade no atendimento.</div>
-        <div class="apartir">Consulte</div>
-        <div class="price">LokMais</div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Honda Fan 160</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
-        </ul>
-        <a class="btn btn-navy" href="#contato">Quero este plano</a>
-      </div>
       <div class="plan">
         <div class="pname">Trimestral</div>
         <div class="pdesc">Para rodar com previsibilidade e baixo custo semanal.</div>
@@ -351,7 +345,7 @@
       <span class="kicker eyebrow">Por que LokMais</span>
       <h2 style="margin-top:14px;">Mais que uma moto, <span class="o">liberdade com suporte</span></h2>
     </div>
-    <div class="feat-grid">
+    <div class="feat-grid" style="grid-template-columns:repeat(5,1fr);">
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 1.5 1.5 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.4-1.4 2.2-2z"/></svg></div><h3>Manutenção inclusa</h3><p>Oficina própria LokMais para manter sua moto sempre rodando, sem custo extra.</p></div>
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><h3>Segurança e rastreio</h3><p>Frota monitorada com tecnologia, garantindo tranquilidade no dia a dia.</p></div>
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>Atendimento humano</h3><p>Time dedicado para te ajudar do primeiro contato ao último dia do contrato.</p></div>
@@ -410,9 +404,9 @@
     <div class="faq">
       <div class="qa"><button>Quanto é a caução?<span class="pl">+</span></button><div class="ans"><p>A caução é única, de R$ 800, válida para todos os planos. Ela é devolvida no fim do contrato conforme as condições de uso.</p></div></div>
       <div class="qa"><button>A manutenção está inclusa?<span class="pl">+</span></button><div class="ans"><p>Sim. Contamos com oficina própria LokMais para manter sua moto sempre em dia, sem custo adicional de manutenção preventiva.</p></div></div>
-      <div class="qa"><button>Preciso ter nome limpo?<span class="pl">+</span></button><div class="ans"><p>Não fazemos consulta a SPC/Serasa. A documentação é simples — basta CNH válida e poucos documentos.</p></div></div>
+      <div class="qa"><button>Preciso ter nome limpo?<span class="pl">+</span></button><div class="ans"><p>Não fazemos consulta a SPC/Serasa. A documentação é simples: basta CNH válida e poucos documentos.</p></div></div>
       <div class="qa"><button>No fim do plano a moto fica minha?<span class="pl">+</span></button><div class="ans"><p>Nos planos de 30 e 36 meses você caminha rumo à sua moto. Fale com a gente para entender as condições do seu plano.</p></div></div>
-      <div class="qa"><button>Posso usar para trabalhar em aplicativos?<span class="pl">+</span></button><div class="ans"><p>Com certeza. Nossas motos são perfeitas para entregadores e motoristas de aplicativo — econômicas, confiáveis e com manutenção inclusa.</p></div></div>
+      <div class="qa"><button>Posso usar para trabalhar em aplicativos?<span class="pl">+</span></button><div class="ans"><p>Com certeza. Nossas motos são perfeitas para entregadores e motoristas de aplicativo: econômicas, confiáveis e com manutenção inclusa.</p></div></div>
     </div>
   </div>
 </section>
