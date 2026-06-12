@@ -33,8 +33,11 @@
   .mcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);display:flex;flex-direction:column;transition:.2s var(--ease);}
   .mcard:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
   .mcard image-slot{width:100%;height:220px;display:block;background:var(--cloud);}
-  .mcard .moto-photo{width:100%;height:220px;display:block;object-fit:cover;background:var(--cloud);}
+  .mcard .moto-photo{width:100%;height:220px;display:block;object-fit:cover;background:var(--cloud);transition:.2s;}
   .mcard .mb{padding:22px;display:flex;flex-direction:column;flex:1;}
+  .mthumb{display:flex;gap:6px;padding:8px 10px;background:var(--cloud);overflow-x:auto;}
+  .mthumb img{width:60px;height:46px;object-fit:cover;border-radius:6px;cursor:pointer;opacity:.55;border:2px solid transparent;transition:.15s;flex:0 0 auto;}
+  .mthumb img.on,.mthumb img:hover{opacity:1;border-color:var(--orange);}
   .mcard .tagrow{display:flex;gap:6px;flex-wrap:wrap;}
   .mcard h3{font-size:1.25rem;color:var(--navy-700);margin-top:12px;}
   .mcard .sub{font-size:.86rem;color:var(--muted);margin-top:2px;}
@@ -112,7 +115,11 @@
     <div class="cat-grid" id="grid">
       <!-- 1 -->
       <div class="mcard" data-cat="start semi">
-        <img class="moto-photo" src="assets/motos/start-2025-mov-1.jpg" alt="Honda Start 160 seminova em movimento">
+        <img class="moto-photo" src="assets/motos/start-160-2025-lateral.webp" alt="Honda Start 160 seminova">
+        <div class="mthumb">
+          <img src="assets/motos/start-160-2025-lateral.webp" class="on" alt="">
+          <img src="assets/motos/start-160-2025-frontal.webp" alt="">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">Seminova</span><span class="tag navy">Trimestral · 30m · 36m</span></div>
           <h3>Honda Start 160 Semi Nova</h3>
@@ -123,18 +130,27 @@
 
       <!-- 2 -->
       <div class="mcard" data-cat="start">
-        <img class="moto-photo" src="assets/motos/start-2025-estatica-1.jpg" alt="Honda Start 160 2024">
+        <img class="moto-photo" src="assets/motos/titan-160-2024-azul.jpeg" alt="Honda CG 160 Titan 2024 Azul">
+        <div class="mthumb">
+          <img src="assets/motos/titan-160-2024-azul.jpeg" class="on" alt="Azul Perolizado">
+          <img src="assets/motos/titan-160-2024-cinza.jpeg" alt="Cinza Metálico">
+          <img src="assets/motos/titan-160-2024-vermelho.jpeg" alt="Vermelho Perolizado">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">2024</span><span class="tag navy">Trimestral</span></div>
-          <h3>Honda Start 160 · 2024</h3>
+          <h3>Honda CG 160 Titan · 2024</h3>
           <div class="sub">Confiável, econômica e pronta para o dia a dia.</div>
-          <a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20Start%20160%202024%20da%20LokMais.">Quero essa moto</a>
+          <a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20CG%20160%20Titan%202024%20da%20LokMais.">Quero essa moto</a>
         </div>
       </div>
 
       <!-- 3 -->
       <div class="mcard" data-cat="start">
-        <img class="moto-photo" src="assets/motos/start-2025-estatica-2.jpg" alt="Honda Start 160 2025">
+        <img class="moto-photo" src="assets/motos/start-160-2025-lateral.webp" alt="Honda Start 160 2025">
+        <div class="mthumb">
+          <img src="assets/motos/start-160-2025-lateral.webp" class="on" alt="">
+          <img src="assets/motos/start-160-2025-frontal.webp" alt="">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">2025</span><span class="tag navy">Trimestral</span></div>
           <h3>Honda Start 160 · 2025</h3>
@@ -145,7 +161,12 @@
 
       <!-- 4 -->
       <div class="mcard" data-cat="start 0km">
-        <img class="moto-photo" src="assets/motos/start-2026-estatica-1.jpg" alt="Honda Start 160 0 km">
+        <img class="moto-photo" src="assets/motos/start-160-2026-lateral.webp" alt="Honda Start 160 0 km 2026">
+        <div class="mthumb">
+          <img src="assets/motos/start-160-2026-lateral.webp" class="on" alt="">
+          <img src="assets/motos/start-160-2026-lateral-2.webp" alt="">
+          <img src="assets/motos/start-160-2026-vermelho.webp" alt="">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">0 km</span><span class="tag navy">30m · 36m</span></div>
           <h3>Honda Start 160 · 0 km</h3>
@@ -156,7 +177,11 @@
 
       <!-- 5 -->
       <div class="mcard" data-cat="fan">
-        <img class="moto-photo" src="assets/motos/fan-2025-estatica-1.jpg" alt="Honda Fan 160 2025">
+        <img class="moto-photo" src="assets/motos/fan-160-2025-lateral.webp" alt="Honda Fan 160 2025">
+        <div class="mthumb">
+          <img src="assets/motos/fan-160-2025-lateral.webp" class="on" alt="">
+          <img src="assets/motos/fan-160-2025-frontal.webp" alt="">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">2025</span><span class="tag navy">Trimestral</span></div>
           <h3>Honda Fan 160 · 2025</h3>
@@ -167,7 +192,12 @@
 
       <!-- 6 -->
       <div class="mcard" data-cat="fan 0km">
-        <img class="moto-photo" src="assets/motos/fan-2026-estatica-2.jpg" alt="Honda Fan 2026 0 km">
+        <img class="moto-photo" src="assets/motos/fan-160-2026-lateral.webp" alt="Honda Fan 160 2026 0 km">
+        <div class="mthumb">
+          <img src="assets/motos/fan-160-2026-lateral.webp" class="on" alt="">
+          <img src="assets/motos/fan-160-2026-lateral-2.webp" alt="">
+          <img src="assets/motos/fan-160-2026-vermelho.webp" alt="">
+        </div>
         <div class="mb">
           <div class="tagrow"><span class="tag">2026</span><span class="tag navy">30m · 36m</span></div>
           <h3>Honda Fan · 2026 · 0 km</h3>
@@ -226,6 +256,16 @@
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
 <script>
+document.querySelectorAll('.mcard').forEach(card=>{
+  const main=card.querySelector('.moto-photo');
+  const thumbs=card.querySelectorAll('.mthumb img');
+  thumbs.forEach(t=>t.onclick=()=>{
+    main.src=t.src;
+    thumbs.forEach(o=>o.classList.remove('on'));
+    t.classList.add('on');
+  });
+});
+
 document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.fbtn').forEach(o=>o.classList.toggle('on',o===b));
   const f=b.dataset.f;
