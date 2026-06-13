@@ -92,10 +92,6 @@
 
     const html = items.map((item) => {
       const featured = item.destaque === "Sim" || item.is_featured;
-      const rows = lines(item.tabela_precos).map((line) => {
-        const [label, value] = line.split("|").map((part) => part.trim());
-        return `<div class="row"><span>${esc(label || line)}</span>${value ? `<b>${esc(value)}</b>` : ""}</div>`;
-      }).join("");
       const features = lines(item.features).map((feature) => `<li>${esc(feature)}</li>`).join("");
       return `
         <div class="${document.querySelector(".planos-detail") ? "pd" : "plan"} ${featured ? (document.querySelector(".planos-detail") ? "featured" : "feat-plan") : ""}">
@@ -104,7 +100,6 @@
           <div class="${document.querySelector(".planos-detail") ? "psub" : "pdesc"}">${esc(item.subtitulo || item.duracao || "")}</div>
           <div class="apartir">A partir de</div>
           <div class="price">R$ ${esc(item.preco_semanal || "")}<small>/sem</small></div>
-          ${rows ? `<div class="priceall">${rows}</div>` : ""}
           ${features ? `<ul>${features}</ul>` : ""}
           <a class="btn ${featured ? "btn-primary" : "btn-navy"}" href="/contato">Quero este plano</a>
         </div>`;
