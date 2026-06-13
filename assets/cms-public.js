@@ -111,6 +111,7 @@
   function renderUnidades(items) {
     const target = document.getElementById("units");
     if (!items.length || !target) return;
+    if (document.getElementById("map")) return;
     target.innerHTML = items.map((item, index) => {
       const city = item.cidade || item.title || "Unidade LokMais";
       const whatsapp = item.whatsapp || "5531972285918";

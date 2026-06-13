@@ -2,8 +2,6 @@
   var ham=document.getElementById('ham');
   var mnav=document.getElementById('mnav');
   var close=document.getElementById('mnav-close');
-  var bar=document.getElementById('mcta');
-
   function setOpen(open){
     if(!mnav) return;
     mnav.classList.toggle('open',open);
@@ -17,18 +15,5 @@
   }
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') setOpen(false); });
 
-  // Sticky bottom CTA: show after 220px scroll
-  if(bar){
-    var ticking=false;
-    function onScroll(){
-      if(ticking) return;
-      ticking=true;
-      requestAnimationFrame(function(){
-        bar.classList.toggle('show', window.scrollY > 220);
-        ticking=false;
-      });
-    }
-    window.addEventListener('scroll',onScroll,{passive:true});
-    onScroll();
-  }
+  // The mobile CTA bar is controlled by CSS and remains visible on mobile.
 })();

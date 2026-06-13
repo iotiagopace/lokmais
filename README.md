@@ -1,41 +1,56 @@
 # LokMais
 
-Site institucional + landing pages da **LokMais** — locação de motos Honda com planos semanais.
-*Sua liberdade merece mais.*
+Site institucional e landing pages da **LokMais**, locacao de motos Honda com planos semanais.
 
-> Stack: HTML puro + CSS (com tokens compartilhados em `lokmais.css`) + JavaScript vanilla.
-> O site publico continua estatico, mas o painel admin e a API CMS rodam em Vercel Functions com Turso/libSQL.
+URL de producao: <https://lokmais.vercel.app/>
+
+> Stack: HTML estatico + CSS compartilhado em `lokmais.css` + JavaScript vanilla.
+> O site publico continua simples e estatico; o painel admin e a API CMS rodam em Vercel Functions com Turso/libSQL.
 
 ---
 
 ## Estrutura
 
 ```
-├── index.html                  ← Home (hero com vídeo YouTube de fundo)
-├── planos.html                 ← Planos e Preços
+├── index.html                  ← Home
+├── planos.html                 ← Planos
 ├── como-funciona.html          ← Passo a passo do aluguel
-├── motos.html                  ← Catálogo da frota Honda
+├── motos.html                  ← Catalogo da frota Honda
 ├── sobre.html                  ← Sobre a LokMais
-├── unidades.html               ← Mapa interativo de unidades
-├── faq.html                    ← Dúvidas frequentes (categorizadas)
-├── contato.html                ← Formulário + canais de atendimento
-├── arquivados/simulador.html   ← Simulador de aluguel arquivado temporariamente
-├── seja-franqueado.html        ← LP de alta conversão para franqueados
+├── unidades.html               ← Mapa interativo Leaflet/OpenStreetMap
+├── faq.html                    ← Duvidas frequentes
+├── contato.html                ← Formulario e canais de atendimento
+├── seja-franqueado.html        ← Landing page para franqueados
+├── arquivados/simulador.html   ← Simulador arquivado temporariamente
 ├── admin.html                  ← Painel CMS Turso
-├── cms-config.js               ← Configuração das seções editáveis do CMS
+├── cms-config.js               ← Configuracao das secoes editaveis do CMS
 ├── schema.sql                  ← Schema Turso/libSQL do CMS
 ├── api/cms/                    ← API Vercel conectada ao Turso
-├── 00-sistema-de-design.html   ← Documentação visual do sistema
-├── DESIGN.md                   ← Sistema de design (Markdown)
-├── lokmais.css                 ← Tokens (cor, tipografia, espaço, raio, sombra)
+├── 00-sistema-de-design.html   ← Documentacao visual do sistema
+├── DESIGN.md                   ← Sistema de design em Markdown
+├── lokmais.css                 ← Tokens e componentes globais
 └── assets/
-    ├── logo-lockup-white.png   ← Logo principal (header/footer)
-    ├── logo-full.png           ← Logo completo
-    ├── icon-orange.png         ← Ícone (laranja, fundo escuro)
-    ├── icon-navy.png           ← Ícone (navy, fundo claro)
-    ├── image-slot.js           ← Drag-and-drop para preencher imagens
-    └── cms-public.js           ← Hidratação publica via /api/cms/public
+    ├── logo-lockup-white.png   ← Logo principal do header/footer
+    ├── favicon-blue.png        ← Icone de aba e apple-touch-icon
+    ├── og-cover.jpg            ← Imagem OG/Twitter
+    ├── hero-moto.jpg           ← Foto do hero da home
+    ├── nav.js                  ← Menu mobile e controle do drawer
+    ├── cms-public.js           ← Hidratacao publica via /api/cms/public
+    ├── image-slot.js           ← Ferramenta para slots editaveis de imagem
+    └── motos/                  ← Fotos reais dos modelos Honda
 ```
+
+---
+
+## Estado atual
+
+- Rotas limpas ativas via `vercel.json`, com redirects para slugs antigos como `/index.html`, `/sejafranqueado` e `/simulador`.
+- Home com video institucional no hero (`IZzNOIcdNOA`), foto real lateral e CTAs para aluguel/franquia.
+- Catalogo de motos com fotos locais em `assets/motos/` e miniaturas por modelo.
+- Pagina de unidades com Leaflet + OpenStreetMap, sem dependencia de chave Google Maps.
+- Pagina de franqueados com formulario no primeiro bloco, videos de prova social e dados comerciais ajustados.
+- Simulador removido da navegacao publica e preservado em `arquivados/simulador.html`.
+- Mobile com drawer fullscreen e barra fixa de CTAs.
 
 ---
 
@@ -58,50 +73,41 @@ Rotas principais:
 - `POST /api/cms/leads`
 - `POST /api/cms/auth/login`
 
-As paginas publicas preservam o HTML atual. Quando o Turso tiver itens publicados, `assets/cms-public.js` substitui os blocos de motos, planos, unidades, FAQ, depoimentos e imagens editaveis. Se o banco estiver vazio, o conteudo estatico atual permanece visivel.
+As paginas publicas preservam o HTML atual. Quando o Turso tiver itens publicados, `assets/cms-public.js` pode substituir blocos de motos, planos, FAQ, depoimentos e imagens editaveis. A pagina `unidades.html` mantem o mapa Leaflet estatico atual para preservar os pins e interacoes configuradas.
 
 ---
 
-## Antes de publicar — substituir placeholders
+## Pontos pendentes conhecidos
 
-Estes pontos têm valores genéricos no código. **Trocar antes de subir para produção:**
-
-| O quê | Onde | Valor atual |
-|---|---|---|
-| WhatsApp oficial | páginas principais | `5531972285918` aplicado como padrão |
-| Floats e botões WhatsApp | páginas principais | `https://wa.me/5531972285918` |
-| ID do vídeo YouTube (hero) | `index.html` | `const YT_ID = "5qap5aO4i9A"` |
-| Endereços/telefones das unidades | `unidades.html` | `0000-0000`, ruas com `0000` |
-| Posição dos pinos no mapa | `unidades.html` | aproximação NE — refinar lat/lng |
-| Nota e avaliações do Google | `index.html` | "4,9 placeholder" |
-| Depoimentos em vídeo | `index.html` | image-slots vazios |
-| E-mails | `contato.html`, footers | `contato@lokmais.com`, `expansao@lokmais.com` |
-| Fotos reais de equipe/depoimentos | páginas secundárias | `<image-slot>` drag-and-drop |
+- Outlet LokMais: proxima fase comercial.
+- Simulador de financiamento/aluguel: arquivado para possivel retomada futura.
+- Preco oficial da Fan 160: aguarda tabela oficial.
+- Fotos finais enviadas pelo cliente: substituir quando aprovadas.
+- Atualizacao direta das imagens no banco Turso: hoje existe fallback local em `assets/cms-public.js`.
 
 ---
 
 ## Sistema de design
 
-- **Tipografia:** Poppins (geométrica, bold) — display, títulos e corpo.
-- **Cores:** Marinho `#191970` + Laranja `#F47A18`, neutros frios.
-- **Componentes:** botões pílula, cards de plano, cards de moto, banners diagonais, FAQ accordion.
-- **Documentação:** `00-sistema-de-design.html` e `DESIGN.md`.
+- Tipografia: Poppins.
+- Cores: marinho `#191970` + laranja `#F47A18`.
+- Componentes: botoes pilula, cards de plano, cards de moto, banners diagonais, FAQ accordion, mobile drawer e CTA bar.
+- Documentacao: `00-sistema-de-design.html` e `DESIGN.md`.
 
 ---
 
 ## Como rodar localmente
 
-Para testar apenas o HTML estatico, basta abrir `index.html` em qualquer servidor local:
+Para testar o HTML estatico:
 
 ```bash
-# com Python
 python3 -m http.server 8000
+```
 
-# ou com Node
-npx serve
+Depois acesse:
 
-# ou com PHP
-php -S localhost:8000
+```text
+http://localhost:8000/
 ```
 
 Para testar as rotas `/api/cms`, use Vercel local:
@@ -112,20 +118,19 @@ npx vercel dev --listen 127.0.0.1:3000
 npm run check
 ```
 
-No ambiente local (`localhost` ou `127.0.0.1`), o `/admin.html` abre em modo demonstração com qualquer e-mail/senha se a API de autenticação ainda não tiver `ADMIN_EMAIL` e `ADMIN_PASSWORD`. Em produção, o login sempre exige as variáveis reais.
+No ambiente local (`localhost` ou `127.0.0.1`), o `/admin.html` pode abrir em modo de desenvolvimento conforme as variaveis configuradas. Em producao, o login deve exigir `ADMIN_EMAIL`, `ADMIN_PASSWORD` e `ADMIN_SESSION_SECRET`.
 
 ---
 
 ## Deploy
 
-Já compatível com qualquer static host. Para o Google Cloud Run (atual):
+O deploy principal e feito pela integracao GitHub + Vercel. Ao subir para `main`, a Vercel publica em:
 
-```bash
-# subir como container estático (nginx servindo a raiz)
-gcloud run deploy lok-mais --source .
+```text
+https://lokmais.vercel.app/
 ```
 
-Para GitHub Pages, basta habilitar nas configurações do repo.
+Tambem existe `.vercelignore` para evitar envio de arquivos locais, caches e pastas sem relacao com a build.
 
 ---
 
