@@ -54,6 +54,41 @@
     return null;
   }
 
+  function approvedMotoPrice(item) {
+    const hay = [item.modelo, item.title, item.tag, item.category].join(" ").toLowerCase();
+    if (hay.includes("start") && /2023|2024/.test(hay)) return "255,00";
+    if (hay.includes("start") && hay.includes("2025") && !/semi[\s-]?nova|seminova/.test(hay)) return "305,00";
+    if (hay.includes("start") && /(2026|0\s?km)/.test(hay)) return "419,90";
+    if (hay.includes("fan") && hay.includes("2025")) return "315,00";
+    if (hay.includes("fan") && hay.includes("2026")) return "";
+    return item.preco_semanal || "";
+  }
+
+  function approvedMotoPlans(item) {
+    const hay = [item.modelo, item.title, item.tag, item.category].join(" ").toLowerCase();
+    if (/semi[\s-]?nova|seminova/.test(hay)) return "Minha Moto · 30m · 36m";
+    if (hay.includes("start") && /2023|2024/.test(hay)) return "Mensal · Trimestral · Semestral · Minha Moto 30m";
+    if (hay.includes("start") && hay.includes("2025")) return "Mensal · Trimestral · Semestral";
+    if (hay.includes("start") && /(2026|0\s?km)/.test(hay)) return "Minha Moto · 30m · 36m";
+    if (hay.includes("fan") && hay.includes("2025")) return "Mensal · Trimestral · Semestral";
+    if (hay.includes("fan") && hay.includes("2026")) return "Consulte disponibilidade";
+    return item.planos || "";
+  }
+
+  function approvedFaqAnswer(item) {
+    const question = String(item.pergunta || item.title || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+    if (question.includes("como funciona a caucao") || question.includes("quanto e a caucao")) {
+      return "A caução é de R$ 750 para a Start 2024 e R$ 800 para a Start 2025 e o Plano Minha Moto, conforme as condições do contrato.";
+    }
+    if (question.includes("posso escolher a moto")) {
+      return "Sim, conforme a disponibilidade da unidade. Fale com o atendimento para conferir quais motos estão disponíveis em cada plano.";
+    }
+    return item.resposta || "";
+  }
+
   function renderMotos(items) {
     const targets = [
       document.querySelector(".moto-grid"),
@@ -66,15 +101,17 @@
       const img = localMotoImg(item) || imageOf(item);
       const specs = String(item.specs || "").split("·").map((s) => s.trim()).filter(Boolean);
       const filters = item.filtro || [item.category, item.tag, title].join(" ").toLowerCase();
+      const price = approvedMotoPrice(item);
+      const plans = approvedMotoPlans(item);
       return `
         <div class="${document.querySelector(".cat-grid") ? "mcard" : "moto"}" data-cat="${esc(filters)}">
           ${img ? `<img class="moto-photo" src="${esc(img)}" alt="${esc(title)}">` : ""}
           <div class="mb">
-            <div class="tagrow"><span class="tag">${esc(item.tag || item.category || "")}</span>${item.planos ? `<span class="tag navy">${esc(item.planos)}</span>` : ""}</div>
+            <div class="tagrow"><span class="tag">${esc(item.tag || item.category || "")}</span>${plans ? `<span class="tag navy">${esc(plans)}</span>` : ""}</div>
             <h3>${esc(title)}</h3>
             ${item.disponivel ? `<div class="sub">${esc(item.disponivel)}</div>` : ""}
             <div class="specs">${specs.map((spec) => `<span>${esc(spec)}</span>`).join("")}</div>
-            ${item.preco_semanal ? `<div class="priceblk"><div><span class="lab">A partir de</span><b>R$ ${esc(item.preco_semanal)}<small>/sem</small></b></div></div>` : ""}
+            ${price ? `<div class="priceblk"><div><span class="lab">A partir de</span><b>R$ ${esc(price)}<small>/sem</small></b></div></div>` : ""}
             <a class="btn btn-primary" href="/contato">Quero esta moto</a>
           </div>
         </div>`;
@@ -89,6 +126,11 @@
       document.querySelector(".planos-detail")
     ].filter(Boolean);
     if (!items.length || !targets.length) return;
+
+    // Planos comerciais aprovados podem ser fixados no HTML até a próxima
+    // publicação do CMS, evitando que registros antigos revertam a tabela.
+    const dynamicTargets = targets.filter((target) => target.dataset.staticContent !== "true");
+    if (!dynamicTargets.length) return;
 
     const html = items.map((item) => {
       const featured = item.destaque === "Sim" || item.is_featured;
@@ -105,7 +147,7 @@
         </div>`;
     }).join("");
 
-    targets.forEach((target) => { target.innerHTML = html; });
+    dynamicTargets.forEach((target) => { target.innerHTML = html; });
   }
 
   function renderUnidades(items) {
@@ -139,6 +181,11 @@
   }
 
   function renderFaq(items) {
+    const franchisePage = location.pathname.includes("seja-franqueado");
+    items = items.filter((item) => {
+      const category = String(item.categoria || item.category || "").toLowerCase();
+      return franchisePage ? category === "franquia" : category !== "franquia";
+    });
     const homeTarget = document.querySelector(".faq");
     const pageTarget = document.querySelector(".faq-grid > div:last-child");
     if (!items.length || (!homeTarget && !pageTarget)) return;
@@ -146,7 +193,7 @@
     const qa = items.map((item) => `
       <div class="qa">
         <button>${esc(item.pergunta || item.title)}<span class="pl">+</span></button>
-        <div class="ans"><p>${esc(item.resposta || "")}</p></div>
+        <div class="ans"><p>${esc(approvedFaqAnswer(item))}</p></div>
       </div>`).join("");
 
     if (homeTarget) homeTarget.innerHTML = qa;
@@ -156,7 +203,7 @@
         <div class="faq-cat ${index === 0 ? "on" : ""}" data-c="${esc(group.toLowerCase())}">
           <h2>${esc(group)}</h2>
           ${items.filter((item) => (item.categoria || item.category || "Geral") === group).map((item) => `
-            <div class="qa"><button>${esc(item.pergunta || item.title)}<span class="pl">+</span></button><div class="ans"><p>${esc(item.resposta || "")}</p></div></div>
+            <div class="qa"><button>${esc(item.pergunta || item.title)}<span class="pl">+</span></button><div class="ans"><p>${esc(approvedFaqAnswer(item))}</p></div></div>
           `).join("")}
         </div>`).join("");
     }

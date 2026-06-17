@@ -6,18 +6,18 @@
 <link rel="icon" href="/assets/favicon-blue.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/favicon-blue.png">
 <title>LokMais — Planos e Preços | Aluguel de Motos Honda</title>
-<meta name="description" content="Compare planos semanais de aluguel de motos Honda com manutenção inclusa e caução única de R$ 800 reembolsável. Encontre o plano ideal para você.">
+<meta name="description" content="Compare os planos Mensal, Trimestral, Semestral e Minha Moto da LokMais, com manutenção preventiva, documentação e proteção veicular.">
 <link rel="canonical" href="https://lokmais.vercel.app/planos">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="LokMais">
 <meta property="og:title" content="LokMais — Planos e Preços | Aluguel de Motos Honda">
-<meta property="og:description" content="Compare planos semanais de aluguel de motos Honda com manutenção inclusa e caução única de R$ 800 reembolsável. Encontre o plano ideal para você.">
+<meta property="og:description" content="Compare os planos Mensal, Trimestral, Semestral e Minha Moto da LokMais.">
 <meta property="og:url" content="https://lokmais.vercel.app/planos">
 <meta property="og:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LokMais — Planos e Preços | Aluguel de Motos Honda">
-<meta name="twitter:description" content="Compare planos semanais de aluguel de motos Honda com manutenção inclusa e caução única de R$ 800 reembolsável. Encontre o plano ideal para você.">
+<meta name="twitter:description" content="Compare os planos Mensal, Trimestral, Semestral e Minha Moto da LokMais.">
 <meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
 <link rel="stylesheet" href="lokmais.css">
 <style>
@@ -29,7 +29,7 @@
   .tabs button{background:none;border:0;padding:11px 22px;font-family:var(--font-head);font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:.04em;color:var(--muted);border-radius:var(--r-pill);cursor:pointer;transition:.18s var(--ease);}
   .tabs button.on{background:#fff;color:var(--navy-700);box-shadow:var(--sh-sm);}
 
-  .planos-detail{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;max-width:960px;margin-left:auto;margin-right:auto;}
+  .planos-detail{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:42px;max-width:1040px;margin-left:auto;margin-right:auto;}
   .pd{position:relative;background:#fff;border:2px solid var(--line);border-radius:var(--r-xl);padding:34px 26px;transition:.2s var(--ease);display:flex;flex-direction:column;}
   .pd:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:transparent;}
   .pd.featured{background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-color:transparent;box-shadow:var(--sh-lg);}
@@ -46,8 +46,8 @@
   .pd.featured .price small{color:var(--on-dark-muted);}
   .pd .priceall{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);}
   .pd.featured .priceall{border-color:rgba(255,255,255,.2);}
-  .pd .priceall .row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;font-size:.92rem;}
-  .pd .priceall .row b{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--ink);}
+  .pd .priceall .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:6px 0;font-size:.92rem;}
+  .pd .priceall .row b{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--ink);white-space:nowrap;}
   .pd.featured .priceall .row b{color:#fff;}
   .pd .priceall .row span{color:var(--muted);font-weight:600;}
   .pd.featured .priceall .row span{color:var(--on-dark-muted);}
@@ -61,7 +61,7 @@
   .caucao{margin-top:54px;display:grid;grid-template-columns:1fr 1.4fr;gap:30px;align-items:center;background:linear-gradient(120deg,var(--orange),var(--orange-deep));color:#fff;border-radius:var(--r-xl);padding:42px;position:relative;overflow:hidden;}
   .caucao::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 2px,transparent 2.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000);}
   .caucao>*{position:relative;z-index:2;}
-  .caucao .big{font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,7vw,5rem);line-height:1;}
+  .caucao .big{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,5vw,4rem);line-height:1;}
   .caucao h3{font-size:1.5rem;}
 
   .matrix{margin-top:64px;background:var(--cloud);border-radius:var(--r-xl);padding:34px;overflow-x:auto;}
@@ -85,9 +85,10 @@
       "position": 1,
       "item": {
         "@type": "Offer",
-        "name": "Plano Flex",
-        "description": "Plano semanal sem fidelidade, ideal para quem quer testar a locação.",
+        "name": "Plano Mensal",
+        "description": "Aluguel temporário com período mínimo de 30 dias.",
         "seller": {"@type":"Organization","name":"LokMais"},
+        "price": "280.00",
         "priceCurrency": "BRL",
         "availability": "https://schema.org/InStock"
       }
@@ -98,8 +99,9 @@
       "item": {
         "@type": "Offer",
         "name": "Plano Trimestral",
-        "description": "Plano trimestral com manutenção inclusa e caução única de R$ 800 reembolsável.",
+        "description": "Aluguel temporário com período mínimo de 90 dias.",
         "seller": {"@type":"Organization","name":"LokMais"},
+        "price": "265.00",
         "priceCurrency": "BRL",
         "availability": "https://schema.org/InStock"
       }
@@ -109,9 +111,23 @@
       "position": 3,
       "item": {
         "@type": "Offer",
-        "name": "Plano Longo Prazo",
-        "description": "Planos de 30 e 36 meses com possibilidade de ficar com a moto ao final.",
+        "name": "Plano Semestral",
+        "description": "Aluguel temporário com período mínimo de 180 dias.",
         "seller": {"@type":"Organization","name":"LokMais"},
+        "price": "255.00",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Offer",
+        "name": "Plano Minha Moto",
+        "description": "Plano fidelidade de 30 ou 36 meses com manutenção preventiva, IPVA, documentação e proteção veicular.",
+        "seller": {"@type":"Organization","name":"LokMais"},
+        "price": "379.90",
         "priceCurrency": "BRL",
         "availability": "https://schema.org/InStock"
       }
@@ -156,74 +172,109 @@
   <div class="diag"></div>
   <div class="wrap">
     <div class="crumbs"><a href="/">Início</a> / <span>Planos e Preços</span></div>
+    <span class="kicker on-dark" style="margin-top:24px;">Promoção LokMais</span>
     <h1>Escolha o plano da sua <span class="o">liberdade</span></h1>
-    <p class="lead">Planos com valores semanais, manutenção inclusa e a opção de levar a moto pra casa no fim. Caução única de R$ 800 — reembolsável.</p>
+    <p class="lead">Escolha entre aluguel temporário ou Plano Minha Moto. Todos contam com manutenção preventiva e suporte LokMais.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="planos-detail">
-      <!-- TRIMESTRAL -->
+    <div class="planos-detail" data-static-content="true">
+      <!-- MENSAL -->
       <div class="pd">
-        <div class="pname">Trimestral</div>
-        <div class="psub">3 meses de aluguel · ideal para começar.</div>
+        <div class="pname">Mensal</div>
+        <div class="psub">Aluguel temporário · mínimo de 30 dias.</div>
         <div class="apartir">A partir de</div>
-        <div class="price">R$ 265<small>/sem</small></div>
+        <div class="price">R$ 280<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 · 2023/2024</span><b>R$ 280</b></div>
+          <div class="row"><span>Start 2025 · roda de liga e freio a disco</span><b>R$ 330</b></div>
+          <div class="row"><span>Fan 2025</span><b>R$ 350</b></div>
+        </div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Fan 160</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução conforme o modelo</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta a SPC/Serasa</li>
         </ul>
         <a class="btn btn-navy" href="/contato">Quero este plano</a>
       </div>
 
-      <!-- 30 MESES -->
-      <div class="pd featured">
-        <div class="ribbon">Mais escolhido</div>
-        <div class="pname">30 meses</div>
-        <div class="psub">A moto roda com você no caminho de ser sua.</div>
-        <div class="apartir">A partir de</div>
-        <div class="price">R$ 419,90<small>/sem</small></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Fan 160</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Opção de chamar a moto de sua</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
-        </ul>
-        <a class="btn btn-primary" href="/contato">Quero este plano</a>
-      </div>
-
-      <!-- 36 MESES -->
+      <!-- TRIMESTRAL -->
       <div class="pd">
-        <div class="pname">36 meses</div>
-        <div class="psub">Menor parcela semanal · prazo estendido.</div>
+        <div class="pname">Trimestral</div>
+        <div class="psub">Aluguel temporário · mínimo de 90 dias.</div>
         <div class="apartir">A partir de</div>
-        <div class="price">R$ 399,90<small>/sem</small></div>
+        <div class="price">R$ 265<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 · 2023/2024</span><b>R$ 265</b></div>
+          <div class="row"><span>Start 2025 · roda de liga e freio a disco</span><b>R$ 315</b></div>
+          <div class="row"><span>Fan 2025</span><b>R$ 330</b></div>
+        </div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Fan 160</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Menor parcela do mercado</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução R$ 800 reembolsável</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução conforme o modelo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta a SPC/Serasa</li>
         </ul>
         <a class="btn btn-navy" href="/contato">Quero este plano</a>
+      </div>
+
+      <!-- SEMESTRAL -->
+      <div class="pd">
+        <div class="pname">Semestral</div>
+        <div class="psub">Aluguel temporário · mínimo de 180 dias.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 255<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>Start 160 · 2023/2024</span><b>R$ 255</b></div>
+          <div class="row"><span>Start 2025 · roda de liga e freio a disco</span><b>R$ 305</b></div>
+          <div class="row"><span>Fan 2025</span><b>R$ 315</b></div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução conforme o modelo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta a SPC/Serasa</li>
+        </ul>
+        <a class="btn btn-navy" href="/contato">Quero este plano</a>
+      </div>
+
+      <!-- PLANO MINHA MOTO -->
+      <div class="pd featured">
+        <div class="ribbon">Plano fidelidade</div>
+        <div class="pname">Minha Moto</div>
+        <div class="psub">Escolha 30 ou 36 meses e rode no caminho de chamar a moto de sua.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 379,90<small>/sem</small></div>
+        <div class="priceall">
+          <div class="row"><span>30m · Start 2024</span><b>R$ 379,90</b></div>
+          <div class="row"><span>30m · Start 2025 seminova</span><b>R$ 419,90</b></div>
+          <div class="row"><span>30m · Start 0 km 2026</span><b>R$ 449,90</b></div>
+          <div class="row"><span>36m · Start 2025 seminova</span><b>R$ 399,90</b></div>
+          <div class="row"><span>36m · Start 0 km 2026</span><b>R$ 419,90</b></div>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção preventiva e 2 trocas de óleo ao mês</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> IPVA e documentação inclusos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Proteção veicular inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Caução de R$ 800</li>
+        </ul>
+        <a class="btn btn-primary" href="/contato">Quero este plano</a>
       </div>
     </div>
 
     <!-- CAUÇÃO -->
     <div class="caucao">
       <div>
-        <div class="big">R$ 800</div>
-        <div style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:.8rem;margin-top:6px;opacity:.92;">Caução única · reembolsável</div>
+        <div class="big">A partir de R$ 750</div>
+        <div style="font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:.8rem;margin-top:6px;opacity:.92;">Caução conforme o modelo</div>
       </div>
       <div>
-        <h3>Caução única em todos os planos</h3>
-        <p style="margin-top:8px;max-width:520px;opacity:.95;">Você paga uma única vez, no início do contrato, e o valor é devolvido ao final conforme as condições de uso e devolução da moto. Sem mensalidades escondidas e sem surpresas.</p>
+        <h3>Caução transparente, sem surpresa</h3>
+        <p style="margin-top:8px;max-width:520px;opacity:.95;">R$ 750 para Start 2024 e R$ 800 para Start 2025 e Plano Minha Moto. O valor é pago no início e segue as condições de devolução previstas em contrato.</p>
       </div>
     </div>
 
-    <p style="color:var(--muted-2);font-size:.78rem;margin-top:34px;font-style:italic;">* Valores de referência da tabela LokMais (maio/2026). Podem variar conforme modelo, disponibilidade e unidade. Consulte o atendimento comercial para confirmar a condição atual.</p>
+    <p style="color:var(--muted-2);font-size:.78rem;margin-top:34px;font-style:italic;">* Valores semanais informados pela diretoria em junho/2026. Sujeitos à disponibilidade do modelo e da unidade.</p>
   </div>
 </section>
 

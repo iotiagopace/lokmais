@@ -44,7 +44,7 @@ window.CMS_CONFIG = {
       group: "conteudo",
       icon: "file",
       table: "planos",
-      categories: ["Trimestral", "30 meses", "36 meses"],
+      categories: ["Mensal", "Trimestral", "Semestral", "Plano Minha Moto"],
       fields: [
         { id: "nome", label: "Nome do plano", type: "text", card: true, placeholder: "Ex: Trimestral" },
         { id: "subtitulo", label: "Subtitulo", type: "text", card: true, placeholder: "Ex: 3 meses de aluguel" },

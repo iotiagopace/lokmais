@@ -42,7 +42,8 @@
   .hero-overlay{position:absolute;inset:0;z-index:1;background:
      linear-gradient(110deg,rgba(11,11,46,.92) 0%,rgba(11,11,46,.78) 38%,rgba(17,17,70,.55) 65%,rgba(11,11,46,.4) 100%),
      radial-gradient(120% 120% at 90% 10%,rgba(244,122,24,.32),transparent 55%);}
-  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:580px;padding-top:80px;padding-bottom:80px;}
+  .hero-in{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:580px;padding-top:80px;padding-bottom:80px;}
+  .hero-logo{width:min(260px,62vw);height:auto;margin-bottom:28px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.36));}
   .hero h1{font-size:clamp(2.7rem,5.8vw,5rem);line-height:.96;text-shadow:0 6px 30px rgba(0,0,0,.4);}
   .hero h1 .o{color:var(--orange);}
   .hero-rotator{position:relative;display:inline-grid;min-width:min(100%,520px);vertical-align:bottom;overflow:hidden;padding-right:.04em;}
@@ -54,16 +55,17 @@
     8%,28%{opacity:1;transform:translateY(0);}
     36%,100%{opacity:0;transform:translateY(-80%);}
   }
-  .hero .lead{max-width:500px;margin-top:18px;font-size:1.2rem;text-shadow:0 2px 14px rgba(0,0,0,.3);}
+  .hero .lead{max-width:650px;margin-top:22px;font-size:1.2rem;text-shadow:0 2px 14px rgba(0,0,0,.3);}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
   .hero .mini{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);}
   .hero .mini div{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--on-dark);}
   .hero .mini svg{width:20px;height:20px;color:var(--orange-bright);flex:0 0 auto;}
-  .hero-side{position:relative;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
-  .hero-photo-main{width:100%;max-width:480px;height:380px;object-fit:cover;object-position:center;border-radius:var(--r-xl);box-shadow:0 12px 48px rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.14);}
-  .hero-badge{position:relative;background:var(--orange);color:#fff;border-radius:var(--r-md);padding:14px 20px;box-shadow:var(--sh-orange);align-self:flex-end;}
-  .hero-badge b{font-family:var(--font-display);font-weight:800;font-size:1.7rem;display:block;line-height:1;}
-  .hero-badge span{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-family:var(--font-head);font-weight:600;}
+  .home-orange{background:linear-gradient(135deg,var(--orange),var(--orange-deep));color:#fff;}
+  .home-orange .kicker,.home-orange h2,.home-orange .o{color:#fff!important;}
+  .home-orange .sec-head .lead{color:rgba(255,255,255,.88);}
+  .home-orange .eyebrow::before{background:#fff;}
+  .home-orange .step{background:rgba(255,255,255,.96);}
+  .home-warm{background:linear-gradient(180deg,#fff7ef,#ffead8);}
 
   /* STEPS */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;}
@@ -73,7 +75,7 @@
   .step p{color:var(--muted);font-size:.92rem;margin-top:8px;}
 
   /* PLANOS */
-  .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;max-width:900px;margin-left:auto;margin-right:auto;}
+  .plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;max-width:1180px;margin-left:auto;margin-right:auto;}
   .plan{position:relative;background:#fff;border:2px solid var(--line);border-radius:var(--r-xl);padding:32px 24px;transition:.2s var(--ease);display:flex;flex-direction:column;}
   .plan:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:transparent;}
   .plan.feat-plan{background:linear-gradient(170deg,var(--navy-700),var(--navy-900));color:#fff;border-color:transparent;box-shadow:var(--sh-lg);}
@@ -95,8 +97,17 @@
   .plan .btn{width:100%;justify-content:center;margin-top:24px;}
 
   /* CATALOGO */
-  .moto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;}
+  .fleet-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;}
+  .fleet-actions{display:flex;align-items:center;gap:10px;flex:0 0 auto;}
+  .fleet-all{color:#fff;font-family:var(--font-head);font-weight:700;font-size:.84rem;text-transform:uppercase;letter-spacing:.04em;margin-right:8px;text-decoration:underline;text-underline-offset:4px;}
+  .fleet-arrow{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;transition:.2s var(--ease);backdrop-filter:blur(8px);}
+  .fleet-arrow:hover{background:#fff;color:var(--orange-deep);transform:translateY(-2px);}
+  .fleet-arrow:disabled{opacity:.35;cursor:default;transform:none;}
+  .fleet-arrow svg{width:21px;height:21px;}
+  .moto-grid{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 54px)/4);gap:18px;margin-top:38px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:inline mandatory;scroll-behavior:smooth;padding:2px 2px 18px;scrollbar-width:none;}
+  .moto-grid::-webkit-scrollbar{display:none;}
   .moto{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:.2s var(--ease);}
+  .moto-grid .moto{scroll-snap-align:start;}
   .moto:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
   .moto image-slot{width:100%;height:170px;display:block;}
   .moto-photo{width:100%;height:170px;display:block;object-fit:cover;background:var(--cloud);}
@@ -146,17 +157,28 @@
   .foot-col a{display:block;margin-bottom:10px;font-size:.95rem;}
 
   @media(max-width:920px){
-    .hero-in,.fran{grid-template-columns:1fr;}
-    .hero-side{order:-1;align-items:flex-start;}
-    .steps,.feat-grid,.moto-grid{grid-template-columns:1fr 1fr;}
+    .fran{grid-template-columns:1fr;}
+    .steps,.feat-grid{grid-template-columns:1fr 1fr;}
+    .moto-grid{grid-auto-columns:calc((100% - 18px)/2);}
     .plan-grid{grid-template-columns:1fr;}
-    .hero-photo-main{max-height:260px;}
   }
   @media(max-width:560px){
-    .steps,.feat-grid,.moto-grid{grid-template-columns:1fr;}
+    .steps,.feat-grid{grid-template-columns:1fr;}
+    .fleet-head-row{align-items:flex-start;}
+    .fleet-actions{align-self:flex-end;}
+    .fleet-all{display:none;}
+    .fleet-arrow{width:42px;height:42px;}
+    .moto-grid{grid-template-columns:none!important;grid-auto-columns:86%;margin-top:28px;}
     .hero h1{font-size:clamp(2.1rem,10vw,2.8rem)!important;}
     .hero-rotator{min-width:0!important;width:100%;}
-    .hero .lead{font-size:1rem!important;}
+    .hero{min-height:calc(100svh - 64px);}
+    .hero-in{min-height:calc(100svh - 64px);padding-top:54px;padding-bottom:76px;}
+    .hero-logo{width:min(220px,58vw);margin-bottom:22px;}
+    .hero-copy-extra .lead{font-size:1rem;margin-top:14px;}
+    .hero-copy-extra .cta-row{gap:10px;margin-top:18px;}
+    .hero-copy-extra .btn{font-size:.88rem;padding:11px 16px;}
+    .hero .mini{gap:12px;margin-top:22px;flex-direction:column;}
+    .hero .mini div{font-size:.84rem;}
   }
 </style>
 <script type="application/ld+json">
@@ -230,124 +252,152 @@
   <div class="hero-overlay"></div>
   <div class="wrap hero-in">
     <div>
-      <span class="kicker on-dark"></span>
+      <img class="hero-logo" src="assets/logo-lockup-white.png" alt="LokMais">
       <h1 style="margin-top:16px;">Sua liberdade <span class="o hero-rotator" aria-label="merece mais"><span>merece mais</span><span>sem burocracia</span><span>em movimento</span></span></h1>
-      <p class="lead on-dark">Alugue uma moto Honda com planos semanais sem burocracia, manutenção inclusa e a opção de chamar a moto de sua.</p>
-      <div class="cta-row">
-        <a class="btn btn-lg btn-wa" href="#planos">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
-          Alugar pelo WhatsApp
-        </a>
-        <a class="btn btn-lg btn-outline" href="/seja-franqueado">Seja franqueado</a>
+      <div class="hero-copy-extra">
+        <p class="lead on-dark">Alugue uma moto Honda com planos semanais sem burocracia, manutenção inclusa e a opção de chamar a moto de sua.</p>
+        <div class="cta-row">
+          <a class="btn btn-lg btn-wa" href="#planos">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
+            Alugar pelo WhatsApp
+          </a>
+          <a class="btn btn-lg btn-outline" href="/seja-franqueado">Seja franqueado</a>
+        </div>
+        <div class="mini">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> +2.000 motos rodando</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta ao SPC/Serasa</div>
+        </div>
       </div>
-      <div class="mini">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> +2.000 motos rodando</div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Sem consulta ao SPC/Serasa</div>
-      </div>
-    </div>
-    <div class="hero-side">
-      <img class="hero-photo-main" src="assets/hero-moto.jpg" alt="Entregador em Honda pelas ruas do Brasil" loading="lazy">
-      <div class="hero-badge"><b>R$ 265</b><span>por semana · a partir de</span></div>
     </div>
   </div>
 </section>
 
 <!-- COMO FUNCIONA -->
-<section class="section" id="como">
+<section class="section home-orange" id="como">
   <div class="wrap">
     <div class="sec-head">
       <span class="kicker eyebrow">Como funciona</span>
       <h2 style="margin-top:14px;">Sua moto em <span class="o">4 passos simples</span></h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">01</div><h3>Escolha o plano</h3><p>Mensal, trimestral, 30 ou 36 meses. Você decide o prazo que cabe no seu bolso.</p></div>
+      <div class="step"><div class="num">01</div><h3>Escolha o plano</h3><p>Mensal, Trimestral ou Plano Fidelidade, com opções de 30 ou 36 meses.</p></div>
       <div class="step"><div class="num">02</div><h3>Documentação simples</h3><p>CNH e poucos documentos. Sem consulta a SPC/Serasa e sem burocracia.</p></div>
-      <div class="step"><div class="num">03</div><h3>Retire sua moto</h3><p>Pague a caução única e retire sua Honda revisada e pronta para rodar.</p></div>
+      <div class="step"><div class="num">03</div><h3>Retire sua moto</h3><p>Pague a caução conforme o modelo e retire sua Honda revisada e pronta para rodar.</p></div>
       <div class="step"><div class="num">04</div><h3>Caia na estrada</h3><p>Manutenção inclusa e suporte LokMais. É só rodar e aproveitar a liberdade.</p></div>
     </div>
   </div>
 </section>
 
 <!-- PLANOS -->
-<section class="section cloud" id="planos">
+<section class="section home-warm" id="planos">
   <div class="wrap">
     <div class="sec-head center">
-      <span class="kicker eyebrow">Planos e preços</span>
+      <span class="kicker eyebrow">Promoção LokMais</span>
       <h2 style="margin-top:14px;">Escolha o plano da sua <span class="o">liberdade</span></h2>
-      <p class="lead">Valores semanais. Caução única de R$ 800 em todos os planos. Manutenção inclusa.</p>
+      <p class="lead">Aluguel temporário ou Plano Minha Moto. Valores semanais com manutenção preventiva inclusa.</p>
     </div>
-    <div class="plan-grid">
+    <div class="plan-grid" data-static-content="true">
+      <div class="plan">
+        <div class="pname">Mensal</div>
+        <div class="pdesc">Mínimo de 30 dias para quem precisa de flexibilidade.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 280<small>/sem</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Start 160 ou Fan 160</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+        </ul>
+        <a class="btn btn-navy" href="#contato">Quero este plano</a>
+      </div>
       <div class="plan">
         <div class="pname">Trimestral</div>
-        <div class="pdesc">Para rodar com previsibilidade e baixo custo semanal.</div>
+        <div class="pdesc">Mínimo de 90 dias e valor semanal mais econômico.</div>
         <div class="apartir">A partir de</div>
         <div class="price">R$ 265<small>/sem</small></div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Honda Fan 160</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Start 160 ou Fan 160</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+        </ul>
+        <a class="btn btn-navy" href="#contato">Quero este plano</a>
+      </div>
+      <div class="plan">
+        <div class="pname">Semestral</div>
+        <div class="pdesc">Mínimo de 180 dias com a menor diária do aluguel temporário.</div>
+        <div class="apartir">A partir de</div>
+        <div class="price">R$ 255<small>/sem</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Start 160 ou Fan 160</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
         </ul>
         <a class="btn btn-navy" href="#contato">Quero este plano</a>
       </div>
       <div class="plan feat-plan">
-        <div class="ribbon">Mais escolhido</div>
-        <div class="pname">30 meses</div>
-        <div class="pdesc">Para quem quer contrato longo e possibilidade de chamar a moto de sua.</div>
+        <div class="ribbon">Plano fidelidade</div>
+        <div class="pname">Minha Moto</div>
+        <div class="pdesc">30 ou 36 meses para rodar no caminho de chamar a moto de sua.</div>
         <div class="apartir">A partir de</div>
-        <div class="price">R$ 419<small>,90/sem</small></div>
+        <div class="price">R$ 379<small>,90/sem</small></div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Honda Fan 160</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> IPVA e documentação inclusos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Proteção veicular e manutenção</li>
         </ul>
         <a class="btn btn-primary" href="#contato">Quero este plano</a>
       </div>
-      <div class="plan">
-        <div class="pname">36 meses</div>
-        <div class="pdesc">Prazo estendido para reduzir o valor semanal e manter sua rotina rodando.</div>
-        <div class="apartir">A partir de</div>
-        <div class="price">R$ 399<small>,90/sem</small></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Honda Start 160 ou Honda Fan 160</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</li>
-        </ul>
-        <a class="btn btn-navy" href="#contato">Quero este plano</a>
-      </div>
     </div>
-    <p class="center" style="color:var(--muted-2);font-size:.82rem;margin-top:26px;font-style:italic;">* Valores de referência (tabela maio/2026). Podem variar conforme modelo e disponibilidade da unidade.</p>
+    <p class="center" style="color:var(--muted-2);font-size:.82rem;margin-top:26px;font-style:italic;">* Valores variam conforme plano, modelo e disponibilidade da unidade.</p>
   </div>
 </section>
 
 <!-- MOTOS -->
-<section class="section" id="motos">
+<section class="section home-orange" id="motos">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="kicker eyebrow">Nossas motos</span>
-      <h2 style="margin-top:14px;">Frota <span class="o">Honda</span>, revisada e pronta</h2>
-      <p class="lead">Modelos disponíveis, revisados e prontos para quem depende da moto todos os dias.</p>
+    <div class="fleet-head-row">
+      <div class="sec-head">
+        <span class="kicker eyebrow">Nossas motos</span>
+        <h2 style="margin-top:14px;">Frota Honda, revisada e pronta</h2>
+        <p class="lead">Deslize para conhecer os modelos disponíveis, revisados e prontos para rodar.</p>
+      </div>
+      <div class="fleet-actions">
+        <a class="fleet-all" href="/motos">Ver frota completa</a>
+        <button class="fleet-arrow" id="fleet-prev" type="button" aria-label="Motos anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="fleet-arrow" id="fleet-next" type="button" aria-label="Próximas motos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
-    <div class="moto-grid">
+    <div class="moto-grid" aria-label="Modelos disponíveis">
       <div class="moto">
-        <img class="moto-photo" src="assets/motos/titan-160-2024-azul.jpeg" alt="Honda CG 160 Titan 2024">
-        <div class="mb"><span class="tag">Disponível</span><h3>Honda Start 160</h3><div class="specs"><span>Revisada</span><span>Econômica</span></div><a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20Start%20160%20da%20LokMais.">Quero essa moto</a></div>
+        <img class="moto-photo" src="assets/motos/start-160-2025-lateral.webp" alt="Honda Start 160 seminova">
+        <div class="mb"><span class="tag">Seminova</span><h3>Honda Start 160</h3><div class="specs"><span>Revisada</span><span>Minha Moto</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
+      </div>
+      <div class="moto">
+        <img class="moto-photo" src="assets/motos/titan-160-2024-azul.jpeg" alt="Honda Start 160 2024">
+        <div class="mb"><span class="tag">2024</span><h3>Honda Start 160</h3><div class="specs"><span>Disponível</span><span>Econômica</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
       </div>
       <div class="moto">
         <img class="moto-photo" src="assets/motos/start-160-2025-lateral.webp" alt="Honda Start 160 2025">
-        <div class="mb"><span class="tag">Disponível</span><h3>Honda Start 160</h3><div class="specs"><span>Manutenção inclusa</span><span>Pronta para rodar</span></div><a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20Start%20160%20da%20LokMais.">Quero essa moto</a></div>
+        <div class="mb"><span class="tag">2025</span><h3>Honda Start 160</h3><div class="specs"><span>Roda de liga</span><span>Freio a disco</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
       </div>
       <div class="moto">
-        <img class="moto-photo" src="assets/motos/fan-160-2026-lateral.webp" alt="Honda Fan 160 2026">
-        <div class="mb"><span class="tag navy">Disponível</span><h3>Honda Fan 160</h3><div class="specs"><span>Alta procura</span><span>Honda</span></div><a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Honda%20Fan%20160%20da%20LokMais.">Quero essa moto</a></div>
+        <img class="moto-photo" src="assets/motos/start-160-2026-lateral.webp" alt="Honda Start 160 0 km 2026">
+        <div class="mb"><span class="tag">0 km · 2026</span><h3>Honda Start 160</h3><div class="specs"><span>Minha Moto</span><span>0 km</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
       </div>
       <div class="moto">
-        <img class="moto-photo" src="assets/motos/start-160-2025-frontal.webp" alt="Honda Start 160 seminova">
-        <div class="mb"><span class="tag">Seminova</span><h3>Outros modelos disponíveis</h3><div class="specs"><span>Procedência</span><span>Suporte LokMais</span></div><a class="btn btn-primary" href="https://wa.me/5531972285918?text=Ol%C3%A1!%20Quero%20saber%20quais%20motos%20est%C3%A3o%20dispon%C3%ADveis%20na%20LokMais.">Quero essa moto</a></div>
+        <img class="moto-photo" src="assets/motos/fan-160-2025-lateral.webp" alt="Honda Fan 160 2025">
+        <div class="mb"><span class="tag">2025</span><h3>Honda Fan 160</h3><div class="specs"><span>Alta procura</span><span>Pronta para rodar</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
+      </div>
+      <div class="moto">
+        <img class="moto-photo" src="assets/motos/fan-160-2026-lateral.webp" alt="Honda Fan 160 2026 0 km">
+        <div class="mb"><span class="tag navy">0 km · 2026</span><h3>Honda Fan 160</h3><div class="specs"><span>Consulte</span><span>Disponibilidade</span></div><a class="btn btn-primary" href="/contato">Quero essa moto</a></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- DIFERENCIAIS -->
-<section class="section cloud">
+<section class="section home-warm">
   <div class="wrap">
     <div class="sec-head">
       <span class="kicker eyebrow">Por que LokMais</span>
@@ -358,7 +408,7 @@
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg></div><h3>Segurança e rastreio</h3><p>Frota monitorada com tecnologia, garantindo tranquilidade no dia a dia.</p></div>
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><h3>Atendimento humano</h3><p>Time dedicado para te ajudar do primeiro contato ao último dia do contrato.</p></div>
       <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg></div><h3>Seu corre não para</h3><p>Agilidade em atendimento, manutenção e suporte para manter sua rotina em movimento.</p></div>
-      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div><h3>Benefícios exclusivos</h3><p>Campanhas promocionais, tanque cheio e incentivos especiais para apoiar seu dia a dia.</p></div>
+      <div class="feat"><div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div><h3>Proteção + documentação</h3><p>IPVA, documentação e proteção veicular inclusos para você rodar com tranquilidade.</p></div>
     </div>
   </div>
 </section>
@@ -403,14 +453,14 @@
 </section>
 
 <!-- FAQ -->
-<section class="section cloud" id="faq">
+<section class="section home-warm" id="faq">
   <div class="wrap">
     <div class="sec-head center">
       <span class="kicker eyebrow">Dúvidas frequentes</span>
       <h2 style="margin-top:14px;">Perguntas sobre o <span class="o">aluguel</span></h2>
     </div>
     <div class="faq">
-      <div class="qa"><button>Quanto é a caução?<span class="pl">+</span></button><div class="ans"><p>A caução é única, de R$ 800, válida para todos os planos. Ela é devolvida no fim do contrato conforme as condições de uso.</p></div></div>
+      <div class="qa"><button>Quanto é a caução?<span class="pl">+</span></button><div class="ans"><p>A caução é de R$ 750 para a Start 2024 e R$ 800 para a Start 2025 e o Plano Minha Moto, conforme as condições do contrato.</p></div></div>
       <div class="qa"><button>A manutenção está inclusa?<span class="pl">+</span></button><div class="ans"><p>Sim. Contamos com oficina própria LokMais para manter sua moto sempre em dia, sem custo adicional de manutenção preventiva.</p></div></div>
       <div class="qa"><button>Preciso ter nome limpo?<span class="pl">+</span></button><div class="ans"><p>Não fazemos consulta a SPC/Serasa. A documentação é simples: basta CNH válida e poucos documentos.</p></div></div>
       <div class="qa"><button>No fim do plano a moto fica minha?<span class="pl">+</span></button><div class="ans"><p>Nos planos de 30 e 36 meses você caminha rumo à sua moto. Fale com a gente para entender as condições do seu plano.</p></div></div>
@@ -460,6 +510,28 @@ const YT_ID = "IZzNOIcdNOA";
 const yt = document.getElementById('hero-yt');
 if (yt) {
   yt.src = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1`;
+}
+
+const fleet = document.querySelector('.moto-grid');
+const fleetPrev = document.getElementById('fleet-prev');
+const fleetNext = document.getElementById('fleet-next');
+if (fleet && fleetPrev && fleetNext) {
+  const updateFleetControls = () => {
+    const max = fleet.scrollWidth - fleet.clientWidth;
+    fleetPrev.disabled = fleet.scrollLeft <= 4;
+    fleetNext.disabled = fleet.scrollLeft >= max - 4;
+  };
+  const moveFleet = direction => {
+    const card = fleet.querySelector('.moto');
+    const step = card ? card.getBoundingClientRect().width + 18 : fleet.clientWidth * .8;
+    fleet.scrollBy({ left: direction * step, behavior: 'smooth' });
+  };
+  fleetPrev.addEventListener('click', () => moveFleet(-1));
+  fleetNext.addEventListener('click', () => moveFleet(1));
+  fleet.addEventListener('scroll', updateFleetControls, { passive: true });
+  window.addEventListener('resize', updateFleetControls);
+  new MutationObserver(updateFleetControls).observe(fleet, { childList: true });
+  updateFleetControls();
 }
 
 document.querySelectorAll('.qa button').forEach(b=>{

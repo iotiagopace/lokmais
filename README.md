@@ -81,8 +81,6 @@ As paginas publicas preservam o HTML atual. Quando o Turso tiver itens publicado
 
 - Outlet LokMais: proxima fase comercial.
 - Simulador de financiamento/aluguel: arquivado para possivel retomada futura.
-- Preco oficial da Fan 160: aguarda tabela oficial.
-- Fotos finais enviadas pelo cliente: substituir quando aprovadas.
 - Atualizacao direta das imagens no banco Turso: hoje existe fallback local em `assets/cms-public.js`.
 
 ---
