@@ -1,10 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/:slug((?!planos|como-funciona|contato|faq|motos|seja-franqueado|sobre|unidades|admin|00-sistema-de-design|assets|api|unidade)([a-z0-9][a-z0-9-]*))",
-      "destination": "/unidade.html"
-    }
+    { "source": "/contagem",              "destination": "/unidade.html" }
   ],
   "redirects": [
     {
