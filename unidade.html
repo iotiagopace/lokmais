@@ -33,6 +33,16 @@
   .hero-logo{width:min(260px,62vw);height:auto;margin-bottom:28px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.36));}
   .hero h1{font-size:clamp(2.7rem,5.8vw,5rem);line-height:.96;text-shadow:0 6px 30px rgba(0,0,0,.4);}
   .hero h1 .o{color:var(--orange);}
+  .hero-rotator{position:relative;display:inline-grid;min-width:min(100%,520px);vertical-align:bottom;overflow:hidden;padding-right:.04em;}
+  .hero-rotator span{grid-area:1/1;opacity:0;transform:translateY(80%);animation:heroWords 9s infinite;}
+  .hero-rotator span:nth-child(2){animation-delay:3s;}
+  .hero-rotator span:nth-child(3){animation-delay:6s;}
+  @keyframes heroWords{
+    0%{opacity:0;transform:translateY(80%);}
+    8%,28%{opacity:1;transform:translateY(0);}
+    36%,100%{opacity:0;transform:translateY(-80%);}
+  }
+  .hero-unit-label{font-family:var(--font-head);font-weight:700;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-bright);margin-bottom:10px;display:block;}
   .hero .lead{max-width:650px;margin-top:22px;font-size:1.2rem;text-shadow:0 2px 14px rgba(0,0,0,.3);}
   .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
   .hero .mini{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);}
@@ -202,7 +212,8 @@
   <div class="wrap hero-in">
     <div>
       <img class="hero-logo" src="/assets/logo-lockup-white.png" alt="LokMais">
-      <h1 style="margin-top:16px;" id="hero-title">LOKMAIS</h1>
+      <span class="hero-unit-label" id="hero-title"></span>
+      <h1 style="margin-top:8px;">Sua liberdade <span class="o hero-rotator" aria-label="merece mais"><span>merece mais</span><span>sem burocracia</span><span>em movimento</span></span></h1>
       <div class="hero-copy-extra">
         <p class="lead on-dark">Alugue uma moto Honda com planos semanais sem burocracia, manutenção inclusa e a opção de chamar a moto de sua.</p>
         <div class="cta-row">
@@ -210,7 +221,6 @@
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:1.2em;height:1.2em;"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
             Alugar pelo WhatsApp
           </a>
-          <a class="btn btn-lg btn-outline" href="/seja-franqueado">Seja franqueado</a>
         </div>
         <div class="mini">
           <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Manutenção inclusa</div>
@@ -469,9 +479,9 @@
   var metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute('content', 'Alugue motos Honda em ' + unit.nome + ' com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. LokMais ' + unit.nome + ' - ' + unit.uf + '.');
 
-  // hero title
+  // label acima do h1
   var heroTitle = document.getElementById('hero-title');
-  if (heroTitle) heroTitle.textContent = cidadeUF;
+  if (heroTitle) heroTitle.textContent = 'LOKMAIS ' + unit.nome.toUpperCase() + ' · ' + unit.uf;
 
   // todos os links WhatsApp
   document.querySelectorAll('.js-wa-cta').forEach(function(el){ el.href = wa; });
