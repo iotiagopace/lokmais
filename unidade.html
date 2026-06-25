@@ -564,17 +564,13 @@
     });
     var motoGrid = document.querySelector('.moto-grid');
     if (motoGrid) {
-      motoGrid.style.display = 'flex';
+      motoGrid.style.display = 'grid';
+      motoGrid.style.gridTemplateColumns = 'repeat(2, minmax(0, 320px))';
+      motoGrid.style.gridAutoFlow = 'row';
       motoGrid.style.justifyContent = 'center';
-      motoGrid.style.flexWrap = 'wrap';
-      motoGrid.style.overflowX = 'visible';
+      motoGrid.style.overflowX = 'unset';
+      motoGrid.style.scrollSnapType = 'none';
     }
-    document.querySelectorAll('.moto-grid .moto').forEach(function(card){
-      if (card.style.display !== 'none') {
-        card.style.width = 'clamp(260px, 30%, 340px)';
-        card.style.flex = '0 0 auto';
-      }
-    });
   }
 
   // vídeo hero
