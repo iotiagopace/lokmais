@@ -3,11 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- título e meta dinâmicos — preenchidos pelo JS abaixo -->
 <title>LokMais | Locação de Motos</title>
-<meta name="description" content="Alugue motos Honda com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. A LokMais é o modelo de locação de motos mais completo do Brasil.">
+<meta name="description" content="">
+<link rel="canonical" href="">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="LokMais">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<meta property="og:url" content="">
+<meta property="og:image" content="https://www.lokmais.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <link rel="icon" href="/assets/favicon-blue.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/favicon-blue.png">
+<!-- config de unidades carregado cedo para SEO no <head> -->
+<script src="/units-config.js"></script>
+<script>
+(function(){
+  var slug = window.location.pathname.replace(/^\/|\/$/g,'');
+  var unit = (window.LOKMAIS_UNITS||[]).find(function(u){return u.slug===slug;});
+  if(!unit) return;
+  var cidade = unit.nome;
+  var uf = unit.uf;
+  var url = 'https://www.lokmais.com/'+slug;
+  var title = 'Aluguel de Moto em '+cidade+' '+uf+' | LokMais · Manutenção Inclusa';
+  var desc = 'Alugue motos Honda em '+cidade+' com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. LokMais '+cidade+' - '+uf+'. Fale no WhatsApp!';
+  document.title = title;
+  document.querySelector('meta[name="description"]').content = desc;
+  document.querySelector('link[rel="canonical"]').href = url;
+  document.querySelector('meta[property="og:title"]').content = title;
+  document.querySelector('meta[property="og:description"]').content = desc;
+  document.querySelector('meta[property="og:url"]').content = url;
+  document.querySelector('meta[name="twitter:title"]').content = title;
+  document.querySelector('meta[name="twitter:description"]').content = desc;
+  // JSON-LD LocalBusiness
+  var ld = {
+    '@context':'https://schema.org',
+    '@type':'LocalBusiness',
+    'name':'LokMais '+cidade,
+    'url': url,
+    'image':'https://www.lokmais.com/assets/og-cover.jpg',
+    'description': desc,
+    'telephone': '+'+unit.whatsapp,
+    'address':{
+      '@type':'PostalAddress',
+      'streetAddress': unit.endereco,
+      'addressLocality': cidade,
+      'addressRegion': uf,
+      'addressCountry':'BR'
+    },
+    'openingHours': unit.horario,
+    'geo':{
+      '@type':'GeoCoordinates',
+      'latitude': unit.lat,
+      'longitude': unit.lng
+    },
+    'sameAs':['https://wa.me/'+unit.whatsapp]
+  };
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.text = JSON.stringify(ld);
+  document.head.appendChild(s);
+})();
+</script>
 <link rel="stylesheet" href="/lokmais.css">
 <style>
   body{background:#fff;}
@@ -457,27 +520,14 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
 </a>
 
-<!-- carrega config de unidades antes de tudo -->
-<script src="/units-config.js"></script>
 <script>
 (function () {
-  // lê o slug da URL: /contagem → "contagem"
   var slug = window.location.pathname.replace(/^\/|\/$/g, '');
   var unit = (window.LOKMAIS_UNITS || []).find(function(u){ return u.slug === slug; });
 
-  if (!unit) {
-    // slug não encontrado → redireciona para lista de unidades
-    window.location.replace('/unidades');
-    return;
-  }
+  if (!unit) { window.location.replace('/unidades'); return; }
 
   var wa = 'https://wa.me/' + unit.whatsapp;
-  var cidadeUF = 'LOKMAIS ' + unit.nome.toUpperCase() + ' - ' + unit.uf;
-
-  // título e meta
-  document.title = 'LokMais ' + unit.nome + ' | Locação de Motos · ' + unit.uf;
-  var metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.setAttribute('content', 'Alugue motos Honda em ' + unit.nome + ' com planos semanais, manutenção inclusa e sem consulta ao SPC/Serasa. LokMais ' + unit.nome + ' - ' + unit.uf + '.');
 
   // label acima do h1
   var heroTitle = document.getElementById('hero-title');
