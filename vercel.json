@@ -1,7 +1,8 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/manaus", "destination": "/unidade" }
+    { "source": "/contagem", "destination": "/unidade" },
+    { "source": "/manaus",   "destination": "/unidade" }
   ],
   "redirects": [
     {
