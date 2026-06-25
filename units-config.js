@@ -18,14 +18,14 @@
  */
 window.LOKMAIS_UNITS = [
   {
-    slug:     'contagem',
-    nome:     'Contagem',
-    uf:       'MG',
-    whatsapp: '5531972285918',
-    endereco: 'Av. Juscelino Kubitscheck, 855 · Contagem / MG · CEP 32223-400',
+    slug:     'manaus',
+    nome:     'Manaus',
+    uf:       'AM',
+    whatsapp: '5592988031388',
+    endereco: 'Rua Rio das Bicas, 175 · Manaus / AM · CEP 69057-200',
     horario:  'Seg a Sáb · 08h às 18h',
-    lat:      -19.9321,
-    lng:      -44.0534,
+    lat:      -3.1190,
+    lng:      -60.0217,
     gtm:      '',
     pixel:    '',
   },
