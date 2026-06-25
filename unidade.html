@@ -556,11 +556,24 @@
     if (grid) { grid.style.gridTemplateColumns = '1fr'; grid.style.maxWidth = '480px'; grid.style.marginLeft = 'auto'; grid.style.marginRight = 'auto'; }
   }
 
-  // frota: se '2026', oculta motos sem tag "2026"
+  // frota: se '2026', oculta motos sem tag "2026" e centraliza as visíveis
   if (unit.frota === '2026') {
     document.querySelectorAll('.moto-grid .moto').forEach(function(card){
       var tag = card.querySelector('.tag');
       if (!tag || tag.textContent.indexOf('2026') === -1) card.style.display = 'none';
+    });
+    var motoGrid = document.querySelector('.moto-grid');
+    if (motoGrid) {
+      motoGrid.style.display = 'flex';
+      motoGrid.style.justifyContent = 'center';
+      motoGrid.style.flexWrap = 'wrap';
+      motoGrid.style.overflowX = 'visible';
+    }
+    document.querySelectorAll('.moto-grid .moto').forEach(function(card){
+      if (card.style.display !== 'none') {
+        card.style.width = 'clamp(260px, 30%, 340px)';
+        card.style.flex = '0 0 auto';
+      }
     });
   }
 
