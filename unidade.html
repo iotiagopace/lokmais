@@ -571,6 +571,12 @@
       motoGrid.style.overflowX = 'unset';
       motoGrid.style.scrollSnapType = 'none';
     }
+    document.querySelectorAll('.moto-grid .moto').forEach(function(card){
+      if (card.style.display !== 'none') {
+        var img = card.querySelector('.moto-photo');
+        if (img) { img.style.objectFit = 'contain'; img.style.height = '200px'; img.style.padding = '12px 16px 0'; img.style.background = '#fff'; }
+      }
+    });
   }
 
   // vídeo hero
