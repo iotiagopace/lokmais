@@ -549,6 +549,21 @@
   // todos os links WhatsApp
   document.querySelectorAll('.js-wa-cta').forEach(function(el){ el.href = wa; });
 
+  // planos: se 'minha-moto', oculta os 3 planos simples e centraliza o destaque
+  if (unit.planos === 'minha-moto') {
+    document.querySelectorAll('.plan:not(.feat-plan)').forEach(function(el){ el.style.display = 'none'; });
+    var grid = document.querySelector('.plan-grid');
+    if (grid) { grid.style.gridTemplateColumns = '1fr'; grid.style.maxWidth = '480px'; grid.style.marginLeft = 'auto'; grid.style.marginRight = 'auto'; }
+  }
+
+  // frota: se '2026', oculta motos sem tag "2026"
+  if (unit.frota === '2026') {
+    document.querySelectorAll('.moto-grid .moto').forEach(function(card){
+      var tag = card.querySelector('.tag');
+      if (!tag || tag.textContent.indexOf('2026') === -1) card.style.display = 'none';
+    });
+  }
+
   // vídeo hero
   var YT_ID = 'IZzNOIcdNOA';
   var yt = document.getElementById('hero-yt');

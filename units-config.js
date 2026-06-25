@@ -40,5 +40,7 @@ window.LOKMAIS_UNITS = [
     lng:      -60.0217,
     gtm:      '',
     pixel:    '',
+    planos:   'minha-moto', // 'todos' | 'minha-moto'
+    frota:    '2026',       // 'todas' | '2026'
   },
 ];
