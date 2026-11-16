@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lokmais.vercel.app/sitemap.xml
+Sitemap: https://www.lokmais.com/sitemap.xml

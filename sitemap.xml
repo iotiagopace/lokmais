@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lokmais.vercel.app/</loc>
+    <loc>https://www.lokmais.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/planos</loc>
+    <loc>https://www.lokmais.com/planos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/motos</loc>
+    <loc>https://www.lokmais.com/motos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/como-funciona</loc>
+    <loc>https://www.lokmais.com/como-funciona</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/faq</loc>
+    <loc>https://www.lokmais.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/unidades</loc>
+    <loc>https://www.lokmais.com/unidades</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/sobre</loc>
+    <loc>https://www.lokmais.com/sobre</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/contato</loc>
+    <loc>https://www.lokmais.com/contato</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://lokmais.vercel.app/seja-franqueado</loc>
+    <loc>https://www.lokmais.com/seja-franqueado</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.lokmais.com/contagem</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.lokmais.com/manaus</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.lokmais.com/sao-paulo</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
