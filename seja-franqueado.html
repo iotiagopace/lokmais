@@ -7,18 +7,18 @@
 <link rel="apple-touch-icon" href="/assets/favicon-blue.png">
 <title>LokMais | Seja um Franqueado | Abra sua unidade de motos</title>
 <meta name="description" content="Invista em uma franquia LokMais de locação de motos Honda. Modelo validado, alta demanda e suporte completo. Saiba como abrir sua unidade.">
-<link rel="canonical" href="https://lokmais.vercel.app/seja-franqueado">
+<link rel="canonical" href="https://www.lokmais.com/seja-franqueado">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="LokMais">
 <meta property="og:title" content="LokMais | Seja um Franqueado | Abra sua unidade de motos">
 <meta property="og:description" content="Invista em uma franquia LokMais de locação de motos Honda. Modelo validado, alta demanda e suporte completo. Saiba como abrir sua unidade.">
-<meta property="og:url" content="https://lokmais.vercel.app/seja-franqueado">
-<meta property="og:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta property="og:url" content="https://www.lokmais.com/seja-franqueado">
+<meta property="og:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LokMais | Seja um Franqueado | Abra sua unidade de motos">
 <meta name="twitter:description" content="Invista em uma franquia LokMais de locação de motos Honda. Modelo validado, alta demanda e suporte completo. Saiba como abrir sua unidade.">
-<meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta name="twitter:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <link rel="stylesheet" href="lokmais.css">
 <style>
   body{background:#fff;}
@@ -238,10 +238,10 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://lokmais.vercel.app/#organization",
+  "@id": "https://www.lokmais.com/#organization",
   "name": "LokMais",
-  "url": "https://lokmais.vercel.app/",
-  "logo": "https://lokmais.vercel.app/assets/logo-lockup-white.png",
+  "url": "https://www.lokmais.com/",
+  "logo": "https://www.lokmais.com/assets/logo-lockup-white.png",
   "description": "Franquia de locação de motos Honda com modelo validado, suporte completo e alta demanda em todo o Brasil.",
   "contactPoint": {
     "@type": "ContactPoint",
@@ -602,7 +602,7 @@
       <span class="kicker eyebrow" style="justify-content:center;">Dúvidas frequentes</span>
       <h2 style="margin-top:14px;">Perguntas sobre a <span class="o">franquia</span></h2>
     </div>
-    <div class="faq">
+    <div class="faq" data-static-content="true">
       <div class="qa"><button>Preciso ter experiência com motos ou locação?<span class="pl">+</span></button><div class="ans"><p>Não. O modelo foi desenhado para ser operado com suporte completo da LokMais, da implantação à gestão do dia a dia.</p></div></div>
       <div class="qa"><button>Qual o valor do investimento?<span class="pl">+</span></button><div class="ans"><p>O investimento é montado sob medida conforme o tamanho da unidade e o seu perfil. Fale com um especialista para receber uma simulação completa.</p></div></div>
       <div class="qa"><button>Em quanto tempo recupero o investimento?<span class="pl">+</span></button><div class="ans"><p>O prazo médio de retorno é de 18 a 24 meses, variando conforme praça, modelo e performance da unidade.</p></div></div>
@@ -689,10 +689,9 @@ document.querySelectorAll('.qa button').forEach(b=>{
 });
 
 // ── Formulário de lead ──────────────────────────────────────────────
-async function enviarLead(e) {
+function enviarLead(e) {
   e.preventDefault();
   const f    = e.target;
-  const btn  = f.querySelector('button[type=submit]');
   const lead = {
     nome:    f.nome.value.trim(),
     fone:    f.fone.value.trim(),
@@ -705,16 +704,14 @@ async function enviarLead(e) {
     status:  'new',
   };
 
-  const btnText = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-  await window.CmsTurso?.submitLead(f, { subject: 'Lead de franquia' });
-  btn.disabled = false;
-  btn.textContent = btnText;
+  // Lead vai em segundo plano (keepalive) e o WhatsApp abre dentro do clique,
+  // para o navegador (principalmente Safari iOS) não bloquear a nova aba.
+  window.CmsTurso?.submitLead(f, { subject: 'Lead de franquia' });
 
   // Redireciona para WhatsApp com os dados
   const msg = `Olá! Quero ser franqueado LokMais.%0A%0ANome: ${encodeURIComponent(lead.nome)}%0AWhatsApp: ${encodeURIComponent(lead.fone)}%0AE-mail: ${encodeURIComponent(lead.email)}%0ACidade: ${encodeURIComponent(lead.cidade)}%0ACapital: ${encodeURIComponent(lead.capital)}`;
-  window.open(`https://wa.me/5547988289908?text=${msg}`, '_blank');
+  const url = `https://wa.me/5547988289908?text=${msg}`;
+  if (!window.open(url, '_blank')) window.location.href = url;
   return false;
 }
 

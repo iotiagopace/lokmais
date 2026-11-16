@@ -7,25 +7,25 @@
 <link rel="apple-touch-icon" href="/assets/favicon-blue.png">
 <title>LokMais — Sobre a Empresa | Locação de Motos Honda no Brasil</title>
 <meta name="description" content="Conheça a LokMais, referência em locação de motos Honda no Brasil. Transparência, suporte completo e mobilidade real para quem precisa trabalhar.">
-<link rel="canonical" href="https://lokmais.vercel.app/sobre">
+<link rel="canonical" href="https://www.lokmais.com/sobre">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="LokMais">
 <meta property="og:title" content="LokMais — Sobre a Empresa | Locação de Motos Honda no Brasil">
 <meta property="og:description" content="Conheça a LokMais, referência em locação de motos Honda no Brasil. Transparência, suporte completo e mobilidade real para quem precisa trabalhar.">
-<meta property="og:url" content="https://lokmais.vercel.app/sobre">
-<meta property="og:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta property="og:url" content="https://www.lokmais.com/sobre">
+<meta property="og:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LokMais — Sobre a Empresa | Locação de Motos Honda no Brasil">
 <meta name="twitter:description" content="Conheça a LokMais, referência em locação de motos Honda no Brasil. Transparência, suporte completo e mobilidade real para quem precisa trabalhar.">
-<meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta name="twitter:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <link rel="stylesheet" href="lokmais.css">
 <style>
   body{background:#fff;}
   .nav .brand b{font-style:normal;}
 
   .manifesto{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;}
-  .manifesto image-slot{width:100%;height:480px;display:block;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%);}
+  .manifesto .manifesto-photo{width:100%;height:480px;display:block;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-lg);clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%);}
   .manifesto h2{color:var(--navy-700);font-size:clamp(2rem,4vw,3rem);}
   .manifesto p{color:var(--muted);font-size:1.05rem;margin-top:14px;}
   .manifesto p.intro{font-size:1.2rem;color:var(--ink);font-weight:500;}
@@ -57,12 +57,12 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://lokmais.vercel.app/#organization",
+  "@id": "https://www.lokmais.com/#organization",
   "name": "LokMais",
-  "url": "https://lokmais.vercel.app/",
-  "logo": "https://lokmais.vercel.app/assets/logo-lockup-white.png",
+  "url": "https://www.lokmais.com/",
+  "logo": "https://www.lokmais.com/assets/logo-lockup-white.png",
   "description": "Referência em locação de motos Honda no Brasil. Planos semanais, manutenção inclusa e suporte completo para quem precisa trabalhar com mobilidade.",
-  "foundingDate": "2024",
+  "foundingDate": "2021",
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer support",
@@ -133,7 +133,7 @@
 <section class="section">
   <div class="wrap">
     <div class="manifesto">
-      <image-slot id="sobre-hero" data-cms-img="sobre_hero" placeholder="Foto: equipe / unidade / motoboy" shape="rect"></image-slot>
+      <img id="sobre-hero" class="manifesto-photo" data-cms-img="sobre_hero" src="assets/hero-moto.jpg" alt="Moto Honda da frota LokMais" loading="lazy">
       <div>
         <span class="kicker eyebrow">Quem somos</span>
         <h2 style="margin-top:14px;">A liberdade <span class="em-orange">não pode esperar</span></h2>
@@ -219,7 +219,6 @@
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.1.1.7-.1 1.3Z"/></svg>
 </a>
 
-<script src="assets/image-slot.js"></script>
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
 

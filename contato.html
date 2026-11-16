@@ -7,18 +7,18 @@
 <link rel="apple-touch-icon" href="/assets/favicon-blue.png">
 <title>LokMais — Contato | Fale com a gente</title>
 <meta name="description" content="Entre em contato com a LokMais por WhatsApp, e-mail ou nas nossas unidades. Tire suas dúvidas sobre aluguel de motos Honda e franquias.">
-<link rel="canonical" href="https://lokmais.vercel.app/contato">
+<link rel="canonical" href="https://www.lokmais.com/contato">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="LokMais">
 <meta property="og:title" content="LokMais — Contato | Fale com a gente">
 <meta property="og:description" content="Entre em contato com a LokMais por WhatsApp, e-mail ou nas nossas unidades. Tire suas dúvidas sobre aluguel de motos Honda e franquias.">
-<meta property="og:url" content="https://lokmais.vercel.app/contato">
-<meta property="og:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta property="og:url" content="https://www.lokmais.com/contato">
+<meta property="og:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LokMais — Contato | Fale com a gente">
 <meta name="twitter:description" content="Entre em contato com a LokMais por WhatsApp, e-mail ou nas nossas unidades. Tire suas dúvidas sobre aluguel de motos Honda e franquias.">
-<meta name="twitter:image" content="https://lokmais.vercel.app/assets/og-cover.jpg">
+<meta name="twitter:image" content="https://www.lokmais.com/assets/og-cover.jpg">
 <link rel="stylesheet" href="lokmais.css">
 <style>
   body{background:#fff;}
@@ -63,12 +63,12 @@
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "name": "Contato LokMais",
-  "url": "https://lokmais.vercel.app/contato",
+  "url": "https://www.lokmais.com/contato",
   "description": "Entre em contato com a LokMais por WhatsApp, e-mail ou nas nossas unidades.",
   "publisher": {
     "@type": "Organization",
     "name": "LokMais",
-    "@id": "https://lokmais.vercel.app/#organization"
+    "@id": "https://www.lokmais.com/#organization"
   }
 }
 </script>
@@ -144,7 +144,7 @@
           <div class="reason">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h6l3-6h3M9 11l3 6"/></svg></div>
             <b>Quero alugar uma moto</b>
-            <span>Escolha o plano, simule o valor e a gente entra em contato pra fechar.</span>
+            <span>Escolha o plano, mande seus dados e a gente entra em contato pra fechar.</span>
           </div>
           <div class="reason">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 1.5 1.5 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.4-1.4 2.2-2z"/></svg></div>
@@ -225,26 +225,21 @@
 <script src="cms-config.js"></script>
 <script src="assets/cms-public.js"></script>
 <script>
-const WA = '5531972285918'; // <- substituir pelo WhatsApp oficial
-async function enviarLead(e){
+const WA = '5531972285918';          // atendimento / aluguel
+const WA_FRANQUIA = '5547988289908'; // mesmo número da página seja-franqueado
+function enviarLead(e){
   e.preventDefault();
   const f=e.target;
-  const btn = f.querySelector('button[type=submit]');
-  const btnText = btn?.textContent;
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
-  }
-  await window.CmsTurso?.submitLead(f, {
+  // Lead vai em segundo plano (keepalive) e o WhatsApp abre ainda dentro do clique,
+  // para o navegador (principalmente Safari iOS) não bloquear a nova aba.
+  window.CmsTurso?.submitLead(f, {
     subject: f.motivo.value,
     message: f.msg.value || `Plano: ${f.plano.value || 'Nao informado'}`
   });
-  if (btn) {
-    btn.disabled = false;
-    btn.textContent = btnText;
-  }
+  const destino = /franquead/i.test(f.motivo.value) ? WA_FRANQUIA : WA;
   const m=`Olá! Quero falar com a LokMais.%0A%0ANome: ${encodeURIComponent(f.nome.value)}%0AWhatsApp: ${encodeURIComponent(f.fone.value)}%0ACidade: ${encodeURIComponent(f.cidade.value)}%0AMotivo: ${encodeURIComponent(f.motivo.value)}%0APlano: ${encodeURIComponent(f.plano.value||'—')}%0AMensagem: ${encodeURIComponent(f.msg.value||'—')}`;
-  window.open(`https://wa.me/${WA}?text=${m}`,'_blank');
+  const url = `https://wa.me/${destino}?text=${m}`;
+  if (!window.open(url,'_blank')) window.location.href = url;
   return false;
 }
 </script>

@@ -22,7 +22,7 @@ window.LOKMAIS_UNITS = [
     nome:     'Contagem',
     uf:       'MG',
     whatsapp: '5531972285918',
-    endereco: 'Av. Juscelino Kubitscheck, 855 · Contagem / MG · CEP 32223-400',
+    endereco: 'Av. Juscelino Kubitschek, 855 · Contagem / MG · CEP 32223-400',
     horario:  'Seg a Sáb · 08h às 18h',
     lat:      -19.9321,
     lng:      -44.0534,
@@ -42,5 +42,19 @@ window.LOKMAIS_UNITS = [
     pixel:    '',
     planos:   'minha-moto', // 'todos' | 'minha-moto'
     frota:    '2026',       // 'todas' | '2026'
+  },
+  {
+    slug:     'sao-paulo',
+    nome:     'São Paulo',
+    uf:       'SP',
+    whatsapp: '5511936228651',
+    endereco: 'Av. Rudge, 936 · Bom Retiro · São Paulo / SP · CEP 01134-000',
+    horario:  'Seg a Sáb · 08h às 18h',
+    lat:      -23.5201,
+    lng:      -46.6521,
+    gtm:      '',
+    pixel:    '',
+    planos:   'minha-moto', // SP opera só o Plano Minha Moto
+    frota:    '2026',       // mesma regra de Manaus: só motos 0 km do Minha Moto
   },
 ];

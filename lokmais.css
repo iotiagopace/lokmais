@@ -293,11 +293,11 @@ body.mnav-lock{overflow:hidden;}
   }
   .matrix table,.compare table{min-width:560px;}
 
-  .mapbox{height:360px!important;position:static!important;}
-  .mapbox .label{left:14px!important;top:14px!important;font-size:.64rem!important;}
+  .mapbox{height:360px!important;position:relative!important;}
+  .mapbox .label{left:auto!important;right:14px!important;top:14px!important;font-size:.64rem!important;}
   .mapbox .map-note{left:14px!important;right:14px!important;bottom:14px!important;font-size:.76rem!important;}
 
-  .wa-float{right:14px;bottom:14px;width:54px;height:54px;}
+  .wa-float{right:14px;bottom:calc(80px + env(safe-area-inset-bottom));width:54px;height:54px;}
   .wa-float svg{width:28px;height:28px;}
 }
 

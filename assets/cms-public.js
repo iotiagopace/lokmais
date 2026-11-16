@@ -93,7 +93,7 @@
     const targets = [
       document.querySelector(".moto-grid"),
       document.querySelector(".cat-grid")
-    ].filter(Boolean);
+    ].filter((target) => target && target.dataset.staticContent !== "true");
     if (!items.length || !targets.length) return;
 
     const html = items.map((item) => {
@@ -186,8 +186,10 @@
       const category = String(item.categoria || item.category || "").toLowerCase();
       return franchisePage ? category === "franquia" : category !== "franquia";
     });
-    const homeTarget = document.querySelector(".faq");
-    const pageTarget = document.querySelector(".faq-grid > div:last-child");
+    // Conteúdo aprovado e acentuado fica fixo no HTML quando marcado com data-static-content.
+    const isDynamic = (el) => el && el.dataset.staticContent !== "true";
+    const homeTarget = [document.querySelector(".faq")].find(isDynamic);
+    const pageTarget = [document.querySelector(".faq-grid > div:last-child")].find(isDynamic);
     if (!items.length || (!homeTarget && !pageTarget)) return;
 
     const qa = items.map((item) => `
@@ -258,7 +260,8 @@
       await fetch(`${api}/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        keepalive: true // o envio continua mesmo se a pessoa sair para o WhatsApp
       });
     } catch (error) {
       console.warn("CMS lead failed:", error);
