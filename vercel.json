@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "routes": [
-    { "src": "^/$", "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }], "dest": "/lp-minas/index.html" }
+    { "src": "^/$", "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }], "dest": "/lp-minas/index.html", "override": true, "headers": { "X-Robots-Tag": "noindex, nofollow, noarchive" } }
   ],
   "rewrites": [
     { "source": "/contagem", "destination": "/unidade" },
