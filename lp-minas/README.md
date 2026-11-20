@@ -29,3 +29,7 @@ JavaScript e montagem verificados; 14 preços conferidos na interface e escolha 
 ## Ajustes V6
 
 Minha Moto é a seleção inicial. Cidades continuam alternando em todos os banners mesmo com foco ou mouse nos controles. Formulário único acompanha a página: coluna fixa no computador e painel com WhatsApp/expansão no celular; preserva dados e sincroniza o plano escolhido. Continua demonstrativo, sem envio ou armazenamento. A revisão e os artefatos internos permanecem na central Metry, fora do repositório público.
+
+## Ajustes V7
+
+A coluna lateral fixa da V6 foi substituída por um formulário menor que acompanha a página: no computador, cartão compacto no canto inferior direito (WhatsApp + Continuar, que expande os demais campos); no celular, barra inferior com o preço e "Quero alugar". Fica fora de cena durante a abertura e, no computador, enquanto o comparador de planos está no centro da tela. Continua demonstrativo, sem envio ou armazenamento.

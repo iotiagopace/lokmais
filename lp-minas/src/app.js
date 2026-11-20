@@ -77,7 +77,7 @@ const phone=$('#lead-phone');
 phone.addEventListener('input',()=>{phone.setCustomValidity('');phone.removeAttribute('aria-invalid');$('#phone-error').hidden=true;});
 $('#lead-form').addEventListener('submit',e=>{
  e.preventDefault();
- if(inquiryNarrow.matches&&!inquiryPanel.classList.contains('is-expanded')){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});return;}
+ if(!inquiryPanel.classList.contains('is-expanded')){openInquiry();return;}
  if(!$('#lead-form').reportValidity())return;
  let digits=phone.value.replace(/\D/g,'');if(digits.length>11&&digits.startsWith('55'))digits=digits.slice(2);
  if(!/^[1-9]{2}[2-9][0-9]{7,8}$/.test(digits)||/^(\d)\1+$/.test(digits)){$('#phone-error').hidden=false;phone.setAttribute('aria-invalid','true');phone.setCustomValidity('Informe um WhatsApp com DDD válido.');phone.reportValidity();phone.focus();return;}
@@ -141,20 +141,30 @@ document.addEventListener('visibilitychange',syncCarousel);reduced.addEventListe
 if('IntersectionObserver' in window){new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;syncCarousel();},{threshold:.05}).observe(gallery);const reveals=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-revealed');reveals.unobserve(e.target);}});},{threshold:.12});$$('[data-reveal]').forEach(el=>reveals.observe(el));}
 showSlide(0);
 syncCarousel();
-// Um único formulário acompanha a página: coluna no desktop, painel compacto no celular.
-const inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle');
+// V7: um único formulário compacto acompanha a página (cartão no desktop, barra no celular) e expande sob demanda.
+// Fica recolhido para fora da tela enquanto a abertura (que já tem CTA) ocupa a maior parte da tela.
+const inquiryRail=$('#inquiry-rail'),inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle'),heroSection=$('.hero');
 const inquiryNarrow=matchMedia('(max-width: 1099px)');
+let heroVisible=true,comparatorVisible=false;
 function syncInquiry(){
- const expanded=!inquiryNarrow.matches||inquiryPanel.classList.contains('is-expanded');
+ const expanded=inquiryPanel.classList.contains('is-expanded');
  inquiryToggle.setAttribute('aria-expanded',expanded);
  inquiryToggle.setAttribute('aria-label',expanded?'Recolher formulário':'Expandir formulário');
- $('#lead-submit').textContent=expanded?'Consultar esse plano':'Continuar';
+ $('#lead-submit').textContent=expanded?'Consultar esse plano':(inquiryNarrow.matches?'Quero alugar':'Continuar');
+ const away=(heroVisible||(comparatorVisible&&!inquiryNarrow.matches))&&!expanded&&!inquiryRail.contains(document.activeElement);
+ inquiryRail.classList.toggle('is-away',away);
+ inquiryRail.inert=away;
 }
 function setInquiryExpanded(expanded){inquiryPanel.classList.toggle('is-expanded',expanded);syncInquiry();}
 function openInquiry(){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});}
 inquiryToggle.addEventListener('click',()=>setInquiryExpanded(!inquiryPanel.classList.contains('is-expanded')));
-inquiryPanel.addEventListener('keydown',event=>{if(event.key==='Escape'&&inquiryNarrow.matches){setInquiryExpanded(false);inquiryToggle.focus({preventScroll:true});}});
+inquiryPanel.addEventListener('keydown',event=>{if(event.key==='Escape'&&inquiryPanel.classList.contains('is-expanded')){setInquiryExpanded(false);inquiryToggle.focus({preventScroll:true});}});
 $$('a[href="#contato"]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openInquiry();}));
-inquiryNarrow.addEventListener('change',()=>{if(inquiryPanel.contains(document.activeElement))inquiryPanel.classList.add('is-expanded');syncInquiry();});
+inquiryNarrow.addEventListener('change',syncInquiry);
+inquiryRail.addEventListener('focusout',()=>setTimeout(syncInquiry,0));
+if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{heroVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'0px 0px -45% 0px'}).observe(heroSection);
+ // No desktop, o comparador já tem CTA próprio; o cartão sai de cena para não cobrir preços.
+ const comparator=$('#plan-panel');if(comparator)new IntersectionObserver(([entry])=>{comparatorVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'-30% 0px -30% 0px'}).observe(comparator);
+}else{heroVisible=false;}
 syncInquiry();
 })();

@@ -1,6 +1,6 @@
 ---
 name: "LokMais Belo Horizonte e região — LP V6"
-description: "Campanha fotográfica, catálogo em areia/carvão e formulário único persistente."
+description: "Campanha fotográfica, catálogo em areia/carvão e formulário único compacto que acompanha a página."
 colors:
   blue: "#142d87"
   blue-deep: "#102366"
@@ -42,12 +42,12 @@ components:
   term-control-selected: {backgroundColor: "{colors.selected}", textColor: "{colors.ink}"}
   quote: {backgroundColor: "{colors.charcoal}", textColor: "{colors.white}", padding: "24px 26px"}
   input: {backgroundColor: "{colors.white}", textColor: "{colors.ink}", rounded: "{rounded.square}", padding: "10px 12px"}
-  inquiry-rail: {backgroundColor: "{colors.sand}", width: "380px", padding: "16px"}
+  inquiry-rail: {width: "320px", position: "fixed bottom-right 20px (desktop) / bottom bar (<1100px)"}
   inquiry-panel: {backgroundColor: "{colors.paper}", textColor: "{colors.ink}"}
   process: {backgroundColor: "{colors.sand}", textColor: "{colors.ink}"}
 ---
 
-# Design System: LokMais — LP V6
+# Design System: LokMais — LP V7
 
 ## Overview
 
@@ -84,9 +84,9 @@ Contêiner máximo de 1328 px com bordas internas de 32/28/24/20/18 px nos inter
 
 Faixa laranja sobreposta ao fim da abertura, sem sombra; três benefícios viram coluna até 600 px. Processo: quatro colunas, duas até 800 px, padding vertical 64/60/52 px em desktop/tablet/celular. Sequência: contato → dados/CNH/comprovante → análise e aprovação → retirada após contratação.
 
-Catálogo: cartões de modelo ocupam a largura do painel. Em desktop entre 1100 e 1659 px, estágio e cotação empilham para acomodar o formulário; a partir de 1660 px retomam 43/57. Entre 801 e 1099 px mantém 43/57; até 800 px vira uma coluna. Até 600 px, painel com 20 × 14 px e fotos menores nos controles. Prazos mantêm duas colunas (condição e semanal), com diária equivalente abaixo.
+Catálogo: cartões de modelo ocupam a largura do painel. Acima de 800 px, estágio e cotação em 43/57 (V7 removeu o empilhamento criado para a coluna lateral); até 800 px vira uma coluna. Até 600 px, painel com 20 × 14 px e fotos menores nos controles. Prazos mantêm duas colunas (condição e semanal), com diária equivalente abaixo.
 
-Há um único formulário real: trilho fixo de 380 px à direita em telas a partir de 1100 px, com 380 px reservados no body e cabeçalho; não recentralizar sobre a área ocupada. Painel tem altura máxima `100dvh - 32px` e rolagem interna. Abaixo de 1100 px, ocupa a base da tela: WhatsApp real e Continuar ficam acessíveis no estado compacto, detalhes expandem no mesmo formulário. Altura máxima `100dvh - 24px` com rolagem; body reserva 214 px ao fim. A seção de contato contém resumo e ação para abrir o formulário. O antigo dock móvel de CTA foi removido.
+Há um único formulário real, compacto, que acompanha a página (V7, a pedido do usuário: a coluna lateral fixa da V6 foi rejeitada). Desktop a partir de 1100 px: cartão de 320 px fixo a 20 px do canto inferior direito, cabeçalho carvão "Fale com a LokMais", oferta atual e WhatsApp + Continuar; Continuar ou o toggle expandem os demais campos no mesmo cartão (altura máxima `100dvh - 48px`, rolagem interna). Abaixo de 1100 px: barra inferior carvão de ~68 px com diária/semanal e "Quero alugar", que expande o formulário completo; body reserva 84 px. Sem reserva lateral no body ou cabeçalho. O cartão/barra fica fora de cena (e `inert`) enquanto a abertura ocupa a tela e, só no desktop, enquanto o comparador está no centro da tela (ele tem CTA próprio e o cartão cobriria os preços); reaparece ao expandir, ao receber foco ou por qualquer CTA de contato. A seção de contato contém resumo e ação para abrir o formulário.
 
 ## Elevation & Depth
 
@@ -104,7 +104,7 @@ Cantos retos em painéis, campos, fotos e botões. Bordas funcionais: campos de 
 
 **Feedback.** Crossfade de foto em 1s, reenquadramento 1→1.035 em 9s, entrada de mensagem em .4s, foto do modelo em 350 ms/12 px. Passos entram em .65s com atrasos 0/100/200/300 ms e desenho SVG de .75s; benefícios em .6s com 0/90/180 ms. Movimento reduzido remove animações/autoplay mantendo conteúdo e cotação visíveis.
 
-**Ações e contato.** Botões laranja com tinta ou claros com azul, peso 600 e padding padrão 15 × 28 px. Foco laranja de 3 px, afastamento 5 px. No trilho, campos têm altura mínima de 46 px e padding 10 × 12 px; rótulos persistentes, validação textual local e erro explícito. Resultado inline tem `role=status`. Todos os links para contato e CTA de escolha abrem o mesmo formulário e focam o nome, sem rolar a página; os dados preenchidos são preservados. No estado compacto, Continuar expande antes de validar/enviar a demonstração. Toggle de 44 × 44 px atualiza `aria-expanded`; Escape recolhe no modo estreito e devolve o foco ao toggle. Ao expandir, cabeçalho do painel é sticky; abaixo de 1100 px há rolagem interna. FAQ permanece `details/summary` nativo. Não há dock com recolhimento por títulos/foco: o formulário persistente substitui esse comportamento V5.
+**Ações e contato.** Botões laranja com tinta ou claros com azul, peso 600 e padding padrão 15 × 28 px. Foco laranja de 3 px, afastamento 5 px. No cartão, campos têm altura mínima de 44 px e padding 9 × 12 px; rótulos persistentes, validação textual local e erro explícito. Resultado inline tem `role=status`. Todos os links para contato e CTA de escolha abrem o mesmo formulário e focam o nome, sem rolar a página; os dados preenchidos são preservados. No estado compacto, Continuar expande antes de validar/enviar a demonstração. Toggle de 44 × 44 px atualiza `aria-expanded`; Escape recolhe (todas as larguras) e devolve o foco ao toggle. Ao expandir, cabeçalho do painel é sticky; abaixo de 1100 px há rolagem interna. FAQ permanece `details/summary` nativo. Não há dock com recolhimento por títulos/foco: o formulário persistente substitui esse comportamento V5.
 
 **The Demonstração Clara Rule.** Preservar as 14 opções MG, semana como cobrança, diária como semana/7 arredondada e cauções por modalidade: R$800 no Minha Moto, temporário a confirmar. Óleo: duas trocas mensais no Minha Moto, excluído no temporário. Formulário não envia nem salva, não recebe documentos e não reserva moto; não apresentar contato ou recebimento como efetivos.
 
@@ -112,7 +112,8 @@ Cantos retos em painéis, campos, fotos e botões. Bordas funcionais: campos de 
 
 - **Do** preservar campanha/ativo oficial, seleção por modelo/prazo e condições junto do preço.
 - **Do** manter a cidade independente de hover/foco/navegação dos banners; preservar pausa explícita, visibilidade e movimento reduzido.
-- **Do** manter retirada em Contagem, formulário único, valores sincronizados, reserva de espaço e rolagem interna do painel.
+- **Do** manter retirada em Contagem, formulário único compacto, valores sincronizados e rolagem interna do cartão expandido.
+- **Don't** voltar à coluna lateral fixa de altura total (rejeitada pelo usuário em 20/11/2026).
 - **Don't** introduzir degradês, fontes distorcidas, eyebrows, sombras ou urgência inventada.
 - **Don't** usar imagem de campanha como prova de estoque, cliente ou local real; nem “Minas” como promessa de cobertura estadual.
 - **Don't** afirmar publicação, aprovação comercial, ganhos, conversão ou entrega no CRM a partir desta prévia.

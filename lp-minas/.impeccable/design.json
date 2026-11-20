@@ -428,34 +428,31 @@
       }
     },
     "layout": {
-      "catalogueColumns": "1100–1659px: 1 column; 1660+:43% 57%; 801–1099:43% 57%; <=800:1 column",
+      "catalogueColumns": "801+:43% 57%; <=800:1 column",
       "process": "sand; 4 columns →2 at 800px; padding 64/60/52px",
       "pickup": "Contagem only",
       "inquiry": {
         "singleForm": true,
+        "version": "V7 compact floating form (V6 full-height side rail rejected by user)",
         "desktop": {
           "media": "min-width:1100px",
-          "position": "fixed right top bottom",
-          "width": "380px",
-          "bodyAndHeaderRightReservation": "380px",
-          "railPadding": "16px",
-          "panelMaxHeight": "calc(100dvh - 32px)",
-          "overflowY": "auto"
+          "position": "fixed bottom-right 20px",
+          "width": "320px",
+          "compact": "charcoal header + current offer + WhatsApp + Continuar",
+          "expanded": "same card, all fields, max-height calc(100dvh - 48px), overflow auto",
+          "bodyReservation": "none"
         },
         "narrow": {
           "media": "max-width:1099px",
           "position": "fixed bottom full width",
-          "compact": "real WhatsApp input + Continue; other fields remain in same form, hidden until expanded",
-          "bodyPaddingBottom": "214px",
-          "panelMaxHeight": "calc(100dvh - 24px)",
-          "overflowY": "auto",
-          "toggleTouchTarget": "44px x 44px",
-          "expandedHeader": "sticky top"
+          "compact": "~68px charcoal bar: daily/weekly offer + 'Quero alugar'",
+          "expanded": "full form, max-height calc(100dvh - 24px)",
+          "bodyPaddingBottom": "84px"
         },
+        "visibility": "off-screen and inert while hero fills the view; desktop also while comparator (#plan-panel) is in the middle band; always shown when expanded/focused",
         "open": "all contact anchors and choose-plan expand and focus name without page scroll",
-        "collapse": "toggle or Escape in narrow mode; Escape returns focus to toggle",
+        "collapse": "toggle or Escape at all widths",
         "preserveFields": true,
-        "oldMobileDockRemoved": true,
         "demoOnly": true
       }
     },
@@ -540,7 +537,7 @@
       "name": "Formulário persistente",
       "kind": "custom",
       "refersTo": "inquiry-panel",
-      "description": "Espécime expandido do único formulário. Runtime fixa em trilho direito de 380px no desktop e base da tela abaixo de1100px. Toggle/Escape/Continuar controlados em src/app.js; dados são preservados, sem envio.",
+      "description": "Espécime expandido do único formulário. Runtime V7: cartão compacto de 320px no canto inferior direito no desktop e barra inferior abaixo de 1100px, expandindo no mesmo formulário. Toggle/Escape/Continuar controlados em src/app.js; dados são preservados, sem envio.",
       "html": "<aside class=\"ds-inquiry\"><div class=\"ds-panel is-expanded\"><header><h2>Fale com a LokMais</h2><button type=\"button\" class=\"ds-toggle\" aria-expanded=\"true\" aria-label=\"Recolher formulário\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 9 7 7 7-7\"/></svg></button></header><div class=\"ds-offer\"><strong>R$55,70/dia*</strong><span>R$389,90 por semana</span></div><form><label class=\"ds-detail\">Seu nome<input autocomplete=\"name\" placeholder=\"Como podemos chamar você?\"></label><label class=\"ds-phone\">WhatsApp com DDD<input type=\"tel\" autocomplete=\"tel\" placeholder=\"(31) 99999-9999\"></label><button type=\"button\" class=\"ds-submit\">Consultar esse plano</button><p>Prévia: nenhum dado é enviado ou salvo.</p></form></div></aside>",
       "css": ".ds-inquiry{background:var(--sand,#f1e5d5);padding:16px;font-family:var(--font,\"General Sans\",Arial,sans-serif);color:var(--ink,#111b2b)}.ds-panel{background:var(--paper,#f8f4ed);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}.ds-panel header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 12px}.ds-panel h2{font-size:1.375rem;font-weight:700;line-height:1.2;letter-spacing:-.025em;margin:0}.ds-toggle{display:none}.ds-offer{display:flex;flex-wrap:wrap;gap:5px 12px;align-items:baseline;padding:0 20px 16px;font-size:.875rem}.ds-offer strong{font-size:1rem}.ds-panel form{padding:0 20px 20px}.ds-panel label{display:block;font-size:.875rem;margin-top:14px;font-weight:500}.ds-panel input{display:block;box-sizing:border-box;width:100%;margin-top:6px;min-height:46px;padding:10px 12px;border:1px solid #aebbcf;border-radius:0;background:#fff;color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;line-height:1.5}.ds-submit{margin-top:18px;min-height:50px;padding:12px 16px;border:0;border-radius:0;background:var(--orange,#f47a18);color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;cursor:pointer}.ds-submit:hover{background:#ff963e}.ds-submit:active{transform:translateY(1px)}.ds-panel p{font-size:.875rem;margin:10px 0 0;line-height:1.5}.ds-panel input:focus-visible,.ds-submit:focus-visible,.ds-toggle:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(max-width:1099px){.ds-inquiry{padding:0;background:transparent}.ds-panel{max-height:calc(100dvh - 24px)}.ds-panel header{padding:10px 20px 7px;min-height:45px}.ds-panel h2{font-size:1rem}.ds-toggle{display:grid;place-items:center;min-width:44px;min-height:44px;padding:6px;border:0;background:var(--sand,#f1e5d5);color:var(--ink,#111b2b)}.ds-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform:rotate(180deg)}.ds-panel.is-expanded header{position:sticky;top:0;z-index:1;background:var(--paper,#f8f4ed)}}"
     }
