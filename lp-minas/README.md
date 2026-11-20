@@ -25,3 +25,7 @@ As 14 opções de Minas ficam em `src/plans.js`. Diária é um equivalente do pr
 V5: processo em areia, escolha visual por modelo e cotação destacada. H1 alterna Belo Horizonte, Contagem e Minas com animação vertical independente dos banners, mantendo pausa e movimento reduzido. Santa Luzia permanece no conteúdo regional fixo.
 
 JavaScript e montagem verificados; 14 preços conferidos na interface e escolha preservada no formulário demonstrativo. Conferir o deployment de Preview após cada atualização. Não testar envio de leads reais nesta etapa.
+
+## Ajustes V6
+
+Minha Moto é a seleção inicial. Cidades continuam alternando em todos os banners mesmo com foco ou mouse nos controles. Formulário único acompanha a página: coluna fixa no computador e painel com WhatsApp/expansão no celular; preserva dados e sincroniza o plano escolhido. Continua demonstrativo, sem envio ou armazenamento. A revisão e os artefatos internos permanecem na central Metry, fora do repositório público.

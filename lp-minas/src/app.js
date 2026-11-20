@@ -8,8 +8,8 @@ const get=id=>plans.find(p=>p.id===id);
 const duration=p=>p.months?`${p.months} meses`:`mínimo de ${p.days} dias`;
 const label=p=>`${p.name} · ${p.model} · ${duration(p)}`;
 const media={start:'{{motoStart}}',semi:'{{motoSemi}}',zero:'{{motoZero}}',fan:'{{motoFan}}'};
-let mode='rental', selectedId='temp-semestral-start24', contactId=null;
-const choices={rental:{model:'start24',id:selectedId},ownership:{model:'semi',id:'mm-semi-36'}};
+let mode='ownership', selectedId='mm-semi-36', contactId='mm-semi-36';
+const choices={rental:{model:'start24',id:'temp-semestral-start24'},ownership:{model:'semi',id:'mm-semi-36'}};
 function optionsFor(model) {return plans.filter(p=>p.mode===mode&&(mode==='rental'?p.id.endsWith(model):p.group===model));}
 function renderOptions(model,preferredId) {
  const options=optionsFor(model);
@@ -39,11 +39,10 @@ function updateCosts() {
  $('#quote-weekly').textContent='Pagamento de '+money(p.weeklyCents)+' por semana';
  $('#quote-term').textContent=p.months?'Minha Moto · '+p.months+' meses':p.name+' · mínimo de '+p.days+' dias';
  $('#choose-plan-label').textContent=p.mode==='ownership'?'Quero meu plano Minha Moto':'Quero essa moto';
- $('#sticky-plan-price').textContent=daily(p)+'/dia*';
- $('#sticky-weekly').textContent=money(p.weeklyCents)+' por semana';
  $('#cost-deposit').textContent=p.depositCents===null?'Confirmar por modelo':money(p.depositCents);
  $('#cost-initial').textContent=p.depositCents===null?'A confirmar':money(p.depositCents+p.weeklyCents);
  $('#cost-note').textContent=p.depositCents===null?'A unidade confirma a caução e o valor para começar antes da contratação.':'Estimativa sem promoção: primeira semana + caução. Confirme a regra e eventuais outras cobranças com a unidade.';
+ setContact(selectedId);
 }
 function setMode(next) {
  mode=next;
@@ -63,18 +62,24 @@ function setContact(id) {
  $('#lead-interest').value=contactId||'undecided';
  $('#selected-plan-text').textContent=contactId?label(get(id)):'Quero ajuda para escolher meu plano';
  $('#selected-plan-price').textContent=contactId?`${money(get(id).weeklyCents)} por semana. Equivalente a ${daily(get(id))}/dia.`:'';
+ const quoted=get(contactId||selectedId);
+ $('#sticky-plan-price').textContent=daily(quoted)+'/dia*';
+ $('#sticky-weekly').textContent=money(quoted.weeklyCents)+' por semana';
  $('#form-result').hidden=true;
 }
-$('#choose-plan').addEventListener('click',()=>{setContact(selectedId);$('#contato').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});
+$('#choose-plan').addEventListener('click',()=>{setContact(selectedId);openInquiry();});
 const groups={ownership:document.createElement('optgroup'),rental:document.createElement('optgroup')};groups.ownership.label='Plano Minha Moto';groups.rental.label='Aluguel temporário';
 plans.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=label(p);groups[p.mode].append(o);});
 $('#lead-interest').append(groups.ownership,groups.rental);
 $('#lead-interest').addEventListener('change',e=>setContact(e.target.value));
-setMode('rental');
+setMode('ownership');
 const phone=$('#lead-phone');
 phone.addEventListener('input',()=>{phone.setCustomValidity('');phone.removeAttribute('aria-invalid');$('#phone-error').hidden=true;});
 $('#lead-form').addEventListener('submit',e=>{
- e.preventDefault();let digits=phone.value.replace(/\D/g,'');if(digits.length>11&&digits.startsWith('55'))digits=digits.slice(2);
+ e.preventDefault();
+ if(inquiryNarrow.matches&&!inquiryPanel.classList.contains('is-expanded')){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});return;}
+ if(!$('#lead-form').reportValidity())return;
+ let digits=phone.value.replace(/\D/g,'');if(digits.length>11&&digits.startsWith('55'))digits=digits.slice(2);
  if(!/^[1-9]{2}[2-9][0-9]{7,8}$/.test(digits)||/^(\d)\1+$/.test(digits)){$('#phone-error').hidden=false;phone.setAttribute('aria-invalid','true');phone.setCustomValidity('Informe um WhatsApp com DDD válido.');phone.reportValidity();phone.focus();return;}
  setContact($('#lead-interest').value);
  $('#form-result-plan').textContent=contactId?`${label(get(contactId))}. ${money(get(contactId).weeklyCents)} por semana.`:'Quero ajuda para escolher meu plano.';
@@ -91,7 +96,7 @@ async function rotateCity(){
  try{cityAnimation=city.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-105%)',opacity:0}],{duration:200,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});await cityAnimation.finished;cityIndex=(cityIndex+1)%cityNames.length;city.textContent='em '+cityNames[cityIndex];cityAnimation.cancel();cityAnimation=city.animate([{transform:'translateY(105%)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:360,easing:'cubic-bezier(.16,1,.3,1)'});await cityAnimation.finished;}catch{}finally{cityAnimation?.cancel();cityAnimation=null;cityChanging=false;}
 }
 const banners=[
- {plan:'temp-semestral-start24',action:'Escolher minha moto'},
+ {plan:'mm-semi-36',action:'Conhecer o Minha Moto'},
  {plan:'mm-zero-33',action:'Conhecer o Minha Moto'},
  {plan:'temp-semestral-fan25',action:'Quero minha moto'}
 ];
@@ -114,7 +119,18 @@ $('#hero-action').addEventListener('click',()=>{
  const p=get($('#hero-action').dataset.heroPlan),model=p.mode==='ownership'?p.group:p.id.split('-').at(-1);
  choices[p.mode]={model,id:p.id};setMode(p.mode);
 });
-function syncCarousel(){clearInterval(timer);clearInterval(cityTimer);timer=null;cityTimer=null;const shouldRun=!userPaused&&!hovered&&!focused&&!document.hidden&&inView&&!reduced.matches;if(shouldRun){timer=setInterval(()=>showSlide(index+1),6500);cityTimer=setInterval(rotateCity,3000);}else if(cityAnimation){cityAnimation.cancel();}$('.hero').classList.toggle('is-still',!shouldRun);const pause=$('#slide-pause');pause.disabled=reduced.matches;pause.setAttribute('aria-pressed',userPaused||reduced.matches);pause.textContent=reduced.matches?'Pausado':userPaused?'Reproduzir':'Pausar';}
+function syncCarousel(){
+ clearInterval(timer);timer=null;
+ const canAnimate=!userPaused&&!document.hidden&&inView&&!reduced.matches;
+ const canSlide=canAnimate&&!hovered&&!focused;
+ if(canSlide)timer=setInterval(()=>showSlide(index+1),6500);
+ // O foco ou o mouse nos banners não interrompem os nomes das cidades.
+ if(canAnimate&&!cityTimer)cityTimer=setInterval(rotateCity,3000);
+ if(!canAnimate){clearInterval(cityTimer);cityTimer=null;cityAnimation?.cancel();}
+ $('.hero').classList.toggle('is-still',!canSlide);
+ const pause=$('#slide-pause');pause.disabled=reduced.matches;pause.setAttribute('aria-pressed',userPaused||reduced.matches);pause.textContent=reduced.matches?'Pausado':userPaused?'Reproduzir':'Pausar';
+ pause.setAttribute('aria-label',reduced.matches?'Animações pausadas':userPaused?'Reproduzir banners e cidades':'Pausar banners e cidades');
+}
 function go(n){showSlide(n);syncCarousel();}
 $('#slide-prev').addEventListener('click',()=>go(index-1));$('#slide-next').addEventListener('click',()=>go(index+1));
 indicators.forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.goSlide))));
@@ -125,24 +141,20 @@ document.addEventListener('visibilitychange',syncCarousel);reduced.addEventListe
 if('IntersectionObserver' in window){new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;syncCarousel();},{threshold:.05}).observe(gallery);const reveals=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-revealed');reveals.unobserve(e.target);}});},{threshold:.12});$$('[data-reveal]').forEach(el=>reveals.observe(el));}
 showSlide(0);
 syncCarousel();
-// O contato acompanha a leitura no celular e se recolhe ao chegar ao formulário.
-const dock=$('#mobile-contact'),dockLink=$('#mobile-contact-link');
-let heroActionVisible=true,formVisible=false,editingForm=false;
-const protectedTitles=$$('main h2').filter(e=>!e.matches('[data-message]'));
-function syncDock(){
- const dockHeight=dock.offsetHeight||100;
- const titleInDock=protectedTitles.some(title=>{const r=title.getBoundingClientRect();return r.height>0&&r.bottom>innerHeight-dockHeight-12&&r.top<innerHeight;});
- const visible=!heroActionVisible&&!formVisible&&!editingForm&&!titleInDock;
- dock.classList.toggle('is-visible',visible);dock.setAttribute('aria-hidden',!visible);dock.inert=!visible;dockLink.tabIndex=visible?0:-1;
+// Um único formulário acompanha a página: coluna no desktop, painel compacto no celular.
+const inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle');
+const inquiryNarrow=matchMedia('(max-width: 1099px)');
+function syncInquiry(){
+ const expanded=!inquiryNarrow.matches||inquiryPanel.classList.contains('is-expanded');
+ inquiryToggle.setAttribute('aria-expanded',expanded);
+ inquiryToggle.setAttribute('aria-label',expanded?'Recolher formulário':'Expandir formulário');
+ $('#lead-submit').textContent=expanded?'Consultar esse plano':'Continuar';
 }
-if('IntersectionObserver' in window){
- new IntersectionObserver(entries=>{heroActionVisible=entries[0].isIntersecting;syncDock();},{threshold:0}).observe($('#hero-action'));
- new IntersectionObserver(entries=>{formVisible=entries[0].isIntersecting;syncDock();},{threshold:0,rootMargin:'0px 0px 100px 0px'}).observe($('#lead-form'));
-}
-let dockFrame=false;
-window.addEventListener('scroll',()=>{if(!dockFrame){dockFrame=true;requestAnimationFrame(()=>{dockFrame=false;syncDock();});}},{passive:true});
-window.addEventListener('resize',syncDock);
-$('#lead-form').addEventListener('focusin',()=>{editingForm=true;syncDock();});
-$('#lead-form').addEventListener('focusout',e=>{if(!$('#lead-form').contains(e.relatedTarget)){editingForm=false;syncDock();}});
-dockLink.addEventListener('click',()=>{setContact(selectedId);});
+function setInquiryExpanded(expanded){inquiryPanel.classList.toggle('is-expanded',expanded);syncInquiry();}
+function openInquiry(){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});}
+inquiryToggle.addEventListener('click',()=>setInquiryExpanded(!inquiryPanel.classList.contains('is-expanded')));
+inquiryPanel.addEventListener('keydown',event=>{if(event.key==='Escape'&&inquiryNarrow.matches){setInquiryExpanded(false);inquiryToggle.focus({preventScroll:true});}});
+$$('a[href="#contato"]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openInquiry();}));
+inquiryNarrow.addEventListener('change',()=>{if(inquiryPanel.contains(document.activeElement))inquiryPanel.classList.add('is-expanded');syncInquiry();});
+syncInquiry();
 })();
