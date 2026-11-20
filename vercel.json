@@ -1,7 +1,9 @@
 {
   "cleanUrls": true,
+  "routes": [
+    { "src": "^/$", "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }], "dest": "/lp-minas/index.html" }
+  ],
   "rewrites": [
-    { "source": "/", "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }], "destination": "/lp-minas/index.html" },
     { "source": "/contagem", "destination": "/unidade" },
     { "source": "/manaus",   "destination": "/unidade" },
     { "source": "/sao-paulo", "destination": "/unidade" },
