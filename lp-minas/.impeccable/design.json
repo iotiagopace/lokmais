@@ -449,7 +449,7 @@
           "expanded": "full form, max-height calc(100dvh - 24px)",
           "bodyPaddingBottom": "84px"
         },
-        "visibility": "off-screen and inert while hero fills the view; desktop also while comparator (#plan-panel) is in the middle band; always shown when expanded/focused",
+        "visibility": "V7.1: off-screen and inert only at page top (scrollY < 80px); shown from the first scroll; desktop collapses to header-only mini bar (~50px, click opens form) while comparator (#plan-panel) is in the middle band; always full when expanded/focused",
         "open": "all contact anchors and choose-plan expand and focus name without page scroll",
         "collapse": "toggle or Escape at all widths",
         "preserveFields": true,

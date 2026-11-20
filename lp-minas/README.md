@@ -32,4 +32,4 @@ Minha Moto é a seleção inicial. Cidades continuam alternando em todos os bann
 
 ## Ajustes V7
 
-A coluna lateral fixa da V6 foi substituída por um formulário menor que acompanha a página: no computador, cartão compacto no canto inferior direito (WhatsApp + Continuar, que expande os demais campos); no celular, barra inferior com o preço e "Quero alugar". Fica fora de cena durante a abertura e, no computador, enquanto o comparador de planos está no centro da tela. Continua demonstrativo, sem envio ou armazenamento.
+A coluna lateral fixa da V6 foi substituída por um formulário menor que acompanha a página: no computador, cartão compacto no canto inferior direito (WhatsApp + Continuar, que expande os demais campos); no celular, barra inferior com o preço e "Quero alugar". Aparece já no primeiro scroll (só fica escondido no topo da página). No computador, sobre o comparador de planos, encolhe para uma barra com o título, que abre o formulário ao clique. Continua demonstrativo, sem envio ou armazenamento.

@@ -142,19 +142,25 @@ if('IntersectionObserver' in window){new IntersectionObserver(entries=>{inView=e
 showSlide(0);
 syncCarousel();
 // V7: um único formulário compacto acompanha a página (cartão no desktop, barra no celular) e expande sob demanda.
-// Fica recolhido para fora da tela enquanto a abertura (que já tem CTA) ocupa a maior parte da tela.
-const inquiryRail=$('#inquiry-rail'),inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle'),heroSection=$('.hero');
+// V7.1: aparece já no primeiro scroll (só fica fora de cena no topo da página, onde a abertura tem CTA próprio).
+// No desktop, sobre o comparador, encolhe para a barra do título em vez de sumir, para não cobrir os preços.
+const inquiryRail=$('#inquiry-rail'),inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle'),inquiryHeading=$('.inquiry-heading');
 const inquiryNarrow=matchMedia('(max-width: 1099px)');
-let heroVisible=true,comparatorVisible=false;
+const SHOW_AFTER=80;
+let atTop=scrollY<SHOW_AFTER,comparatorVisible=false;
 function syncInquiry(){
- const expanded=inquiryPanel.classList.contains('is-expanded');
+ const expanded=inquiryPanel.classList.contains('is-expanded'),focusedInside=inquiryRail.contains(document.activeElement);
  inquiryToggle.setAttribute('aria-expanded',expanded);
  inquiryToggle.setAttribute('aria-label',expanded?'Recolher formulário':'Expandir formulário');
  $('#lead-submit').textContent=expanded?'Consultar esse plano':(inquiryNarrow.matches?'Quero alugar':'Continuar');
- const away=(heroVisible||(comparatorVisible&&!inquiryNarrow.matches))&&!expanded&&!inquiryRail.contains(document.activeElement);
+ const away=atTop&&!expanded&&!focusedInside;
  inquiryRail.classList.toggle('is-away',away);
  inquiryRail.inert=away;
+ inquiryRail.classList.toggle('is-mini',comparatorVisible&&!inquiryNarrow.matches&&!expanded&&!focusedInside);
 }
+let scrollQueued=false;
+addEventListener('scroll',()=>{if(scrollQueued)return;scrollQueued=true;requestAnimationFrame(()=>{scrollQueued=false;const next=scrollY<SHOW_AFTER;if(next!==atTop){atTop=next;syncInquiry();}});},{passive:true});
+inquiryHeading.addEventListener('click',event=>{if(inquiryRail.classList.contains('is-mini')&&!inquiryToggle.contains(event.target))openInquiry();});
 function setInquiryExpanded(expanded){inquiryPanel.classList.toggle('is-expanded',expanded);syncInquiry();}
 function openInquiry(){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});}
 inquiryToggle.addEventListener('click',()=>setInquiryExpanded(!inquiryPanel.classList.contains('is-expanded')));
@@ -162,9 +168,8 @@ inquiryPanel.addEventListener('keydown',event=>{if(event.key==='Escape'&&inquiry
 $$('a[href="#contato"]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openInquiry();}));
 inquiryNarrow.addEventListener('change',syncInquiry);
 inquiryRail.addEventListener('focusout',()=>setTimeout(syncInquiry,0));
-if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{heroVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'0px 0px -45% 0px'}).observe(heroSection);
- // No desktop, o comparador já tem CTA próprio; o cartão sai de cena para não cobrir preços.
+if('IntersectionObserver' in window){
  const comparator=$('#plan-panel');if(comparator)new IntersectionObserver(([entry])=>{comparatorVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'-30% 0px -30% 0px'}).observe(comparator);
-}else{heroVisible=false;}
+}
 syncInquiry();
 })();

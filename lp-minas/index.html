@@ -60,6 +60,7 @@
 .choice-mark{width:22px;height:22px;border:1px solid #80715e;border-radius:50%;position:relative}.plan-option[aria-pressed=true] .choice-mark{border-color:var(--ink)}.plan-option[aria-pressed=true] .choice-mark::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink)}.quote-price{margin-top:0}
 /* V7: formulário compacto que acompanha a página (cartão flutuante no desktop, barra no celular); sem coluna lateral fixa. */
 .inquiry-rail{position:fixed;z-index:35;right:20px;bottom:20px;width:320px;max-width:calc(100vw - 32px);transition:transform .32s var(--ease),opacity .32s var(--ease),visibility .32s}.inquiry-rail.is-away{transform:translateY(calc(100% + 32px));opacity:0;visibility:hidden}.inquiry-panel{background:var(--paper);border:1px solid #cdbfa9;max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;box-shadow:0 18px 40px -24px rgba(17,27,43,.45)}.inquiry-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 6px 4px 16px;background:var(--charcoal);color:var(--white);position:sticky;top:0;z-index:1}.inquiry-heading h2{font-size:var(--body);line-height:1.3;letter-spacing:-.01em;font-weight:600}#inquiry-toggle{display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;background:transparent;color:var(--white);cursor:pointer}#inquiry-toggle svg{width:20px;height:20px;transform:rotate(180deg);transition:transform .2s}.is-expanded #inquiry-toggle svg{transform:none}#inquiry-toggle:focus-visible{outline:2px solid var(--orange);outline-offset:-2px}.inquiry-offer{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:12px 16px 0;color:var(--ink);font-size:var(--small);font-variant-numeric:tabular-nums}.inquiry-offer strong{font-size:var(--lead);letter-spacing:-.02em}.inquiry-offer span{color:var(--warm-quiet)}.inquiry-panel .lead-form{padding:0 16px 16px;background:transparent}.inquiry-panel .form-heading{display:none}.inquiry-panel .field{margin-top:12px}.inquiry-panel .field label{font-size:var(--small);margin-bottom:5px}.inquiry-panel .field input,.inquiry-panel .select-wrap select{min-height:44px;padding:9px 12px;font-size:1rem}.inquiry-panel .select-wrap select{padding-right:38px}.inquiry-panel .field-note{font-size:var(--small);margin-top:5px}.inquiry-panel .lead-form>.button{margin-top:14px;min-height:46px;padding:10px 16px}.inquiry-panel .preview-note{font-size:var(--small);margin-top:8px;line-height:1.45}.inquiry-panel .form-result{padding:14px;margin-top:14px}.inquiry-panel:not(.is-expanded) .inquiry-detail,.inquiry-panel:not(.is-expanded) .form-result{display:none}.inquiry-panel:not(.is-expanded) .lead-form{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.inquiry-panel:not(.is-expanded) .phone-field{margin:10px 0 0;min-width:0}.inquiry-panel:not(.is-expanded) .lead-form>.button{margin:0;min-height:44px}.inquiry-panel:not(.is-expanded) .preview-note{display:none}.contact-grid{display:block}.contact-copy{max-width:720px;margin-inline:auto}.contact-open{margin:26px auto 0;display:flex;width:max-content;max-width:100%}
+.inquiry-rail.is-mini .inquiry-panel:not(.is-expanded) .inquiry-offer,.inquiry-rail.is-mini .inquiry-panel:not(.is-expanded) .lead-form{display:none}.inquiry-rail.is-mini .inquiry-heading{cursor:pointer}
 @media(max-width:1099px){body{padding-bottom:84px}.inquiry-rail{inset:auto 0 0;width:100%;max-width:none}.inquiry-rail.is-away{transform:translateY(105%)}.inquiry-panel{border-width:1px 0 0;max-height:calc(100dvh - 24px);box-shadow:none}.inquiry-panel:not(.is-expanded){display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--charcoal);color:var(--white);border:0}.inquiry-panel:not(.is-expanded) .inquiry-heading{display:none}.inquiry-panel:not(.is-expanded) .inquiry-offer{padding:0;color:var(--white);flex-direction:column;gap:0}.inquiry-panel:not(.is-expanded) .inquiry-offer strong{font-size:var(--body)}.inquiry-panel:not(.is-expanded) .inquiry-offer span{color:#e5dccf}.inquiry-panel:not(.is-expanded) .lead-form{display:block;padding:0}.inquiry-panel:not(.is-expanded) .phone-field,.inquiry-panel:not(.is-expanded) .preview-note{display:none}.inquiry-panel:not(.is-expanded) .lead-form>.button{min-height:48px;white-space:nowrap}.inquiry-panel.is-expanded .lead-form{padding-bottom:calc(18px + env(safe-area-inset-bottom))}.contact-copy{max-width:680px}.site-footer{padding-bottom:32px}}
 @media print{body{padding-bottom:0}.inquiry-rail{display:none}}
 </style>
@@ -253,19 +254,25 @@ if('IntersectionObserver' in window){new IntersectionObserver(entries=>{inView=e
 showSlide(0);
 syncCarousel();
 // V7: um único formulário compacto acompanha a página (cartão no desktop, barra no celular) e expande sob demanda.
-// Fica recolhido para fora da tela enquanto a abertura (que já tem CTA) ocupa a maior parte da tela.
-const inquiryRail=$('#inquiry-rail'),inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle'),heroSection=$('.hero');
+// V7.1: aparece já no primeiro scroll (só fica fora de cena no topo da página, onde a abertura tem CTA próprio).
+// No desktop, sobre o comparador, encolhe para a barra do título em vez de sumir, para não cobrir os preços.
+const inquiryRail=$('#inquiry-rail'),inquiryPanel=$('#inquiry-panel'),inquiryToggle=$('#inquiry-toggle'),inquiryHeading=$('.inquiry-heading');
 const inquiryNarrow=matchMedia('(max-width: 1099px)');
-let heroVisible=true,comparatorVisible=false;
+const SHOW_AFTER=80;
+let atTop=scrollY<SHOW_AFTER,comparatorVisible=false;
 function syncInquiry(){
- const expanded=inquiryPanel.classList.contains('is-expanded');
+ const expanded=inquiryPanel.classList.contains('is-expanded'),focusedInside=inquiryRail.contains(document.activeElement);
  inquiryToggle.setAttribute('aria-expanded',expanded);
  inquiryToggle.setAttribute('aria-label',expanded?'Recolher formulário':'Expandir formulário');
  $('#lead-submit').textContent=expanded?'Consultar esse plano':(inquiryNarrow.matches?'Quero alugar':'Continuar');
- const away=(heroVisible||(comparatorVisible&&!inquiryNarrow.matches))&&!expanded&&!inquiryRail.contains(document.activeElement);
+ const away=atTop&&!expanded&&!focusedInside;
  inquiryRail.classList.toggle('is-away',away);
  inquiryRail.inert=away;
+ inquiryRail.classList.toggle('is-mini',comparatorVisible&&!inquiryNarrow.matches&&!expanded&&!focusedInside);
 }
+let scrollQueued=false;
+addEventListener('scroll',()=>{if(scrollQueued)return;scrollQueued=true;requestAnimationFrame(()=>{scrollQueued=false;const next=scrollY<SHOW_AFTER;if(next!==atTop){atTop=next;syncInquiry();}});},{passive:true});
+inquiryHeading.addEventListener('click',event=>{if(inquiryRail.classList.contains('is-mini')&&!inquiryToggle.contains(event.target))openInquiry();});
 function setInquiryExpanded(expanded){inquiryPanel.classList.toggle('is-expanded',expanded);syncInquiry();}
 function openInquiry(){setInquiryExpanded(true);$('#lead-name').focus({preventScroll:true});}
 inquiryToggle.addEventListener('click',()=>setInquiryExpanded(!inquiryPanel.classList.contains('is-expanded')));
@@ -273,10 +280,9 @@ inquiryPanel.addEventListener('keydown',event=>{if(event.key==='Escape'&&inquiry
 $$('a[href="#contato"]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();openInquiry();}));
 inquiryNarrow.addEventListener('change',syncInquiry);
 inquiryRail.addEventListener('focusout',()=>setTimeout(syncInquiry,0));
-if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{heroVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'0px 0px -45% 0px'}).observe(heroSection);
- // No desktop, o comparador já tem CTA próprio; o cartão sai de cena para não cobrir preços.
+if('IntersectionObserver' in window){
  const comparator=$('#plan-panel');if(comparator)new IntersectionObserver(([entry])=>{comparatorVisible=entry.isIntersecting;syncInquiry();},{rootMargin:'-30% 0px -30% 0px'}).observe(comparator);
-}else{heroVisible=false;}
+}
 syncInquiry();
 })();
 </script>
