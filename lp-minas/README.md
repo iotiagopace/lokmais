@@ -1,6 +1,6 @@
 # LP Minas — aprovação interna
 
-Prévia V4 da LokMais para Belo Horizonte, Contagem e Santa Luzia. Retirada informada na unidade de Contagem.
+Prévia V5 da LokMais para Belo Horizonte, Contagem e Santa Luzia. Retirada informada na unidade de Contagem.
 
 ## Revisar
 
@@ -22,4 +22,6 @@ As 14 opções de Minas ficam em `src/plans.js`. Diária é um equivalente do pr
 
 ## Validação da entrega
 
-Montagem reproduz o HTML da prévia V4. JavaScript verificado quanto à sintaxe e interações revisadas na demonstração local; confirmar a página no deployment de Preview antes de compartilhar para aprovação. Não testar envio de leads reais nesta etapa.
+V5: processo em areia, escolha visual por modelo e cotação destacada. H1 alterna Belo Horizonte, Contagem e Minas com animação vertical independente dos banners, mantendo pausa e movimento reduzido. Santa Luzia permanece no conteúdo regional fixo.
+
+JavaScript e montagem verificados; 14 preços conferidos na interface e escolha preservada no formulário demonstrativo. Conferir o deployment de Preview após cada atualização. Não testar envio de leads reais nesta etapa.

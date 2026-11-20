@@ -13,19 +13,32 @@ const choices={rental:{model:'start24',id:selectedId},ownership:{model:'semi',id
 function optionsFor(model) {return plans.filter(p=>p.mode===mode&&(mode==='rental'?p.id.endsWith(model):p.group===model));}
 function renderOptions(model,preferredId) {
  const options=optionsFor(model);
+ $('#plan-model').value=model;
  selectedId=options.some(p=>p.id===preferredId)?preferredId:options[0].id;
  choices[mode]={model,id:selectedId};
- $('#plan-options').innerHTML=options.map(p=>`<button class="plan-option" type="button" data-plan="${p.id}" aria-pressed="${p.id===selectedId}" aria-label="${p.name}, ${p.model}, ${duration(p)}, ${money(p.weeklyCents)} por semana, equivalente a ${daily(p)} por dia"><span><span class="term-name">${p.months?p.months+' meses':p.name}</span><span class="term-detail">${p.months?'Plano Minha Moto':'Mínimo '+p.days+' dias'}</span></span><span class="price-cell">${daily(p)}</span><span class="price-cell">${money(p.weeklyCents)}</span></button>`).join('');
+ const lowest=Math.min(...options.map(p=>p.weeklyCents));
+ $('#plan-options').innerHTML=options.map(p=>`<button class="plan-option" type="button" data-plan="${p.id}" aria-pressed="${p.id===selectedId}" aria-label="${p.name}, ${p.model}, ${duration(p)}, ${money(p.weeklyCents)} por semana, equivalente a ${daily(p)} por dia"><span class="term-choice"><span class="choice-mark" aria-hidden="true"></span><span><span class="term-name">${p.months?p.months+' meses':p.name}</span><span class="term-detail">${p.months?'Plano Minha Moto':'Mínimo '+p.days+' dias'}${p.weeklyCents===lowest?' · Menor valor por semana':''}</span></span></span><span class="price-cell">${money(p.weeklyCents)}</span></button>`).join('');
  $$('[data-plan]').forEach(b=>b.addEventListener('click',()=>{selectedId=b.dataset.plan;choices[mode].id=selectedId;$$('[data-plan]').forEach(o=>o.setAttribute('aria-pressed',o===b));updateCosts();}));
  const image=model==='fan25'?media.fan:model==='zero'?media.zero:model==='semi'?media.semi:media.start;
  const photo=$('#plan-photo');photo.src=image;if(photo.animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches)photo.animate([{opacity:.6,transform:'translateX(12px)'},{opacity:1,transform:'translateX(0)'}],{duration:350,easing:'cubic-bezier(.16,1,.3,1)'});photo.alt=model==='fan25'?'Honda Fan 160, imagem ilustrativa':'Honda Start 160, imagem ilustrativa';
  $('#model-note').textContent=mode==='ownership'&&model==='semi'?'Start 2026 seminova, acima de 7 mil km. Foto ilustrativa.':'Foto ilustrativa. Ano, cor e configuração conforme a disponibilidade.';
- $('#model-fact').innerHTML=mode==='rental'?'<span>Aluguel temporário</span><p>Use a moto pelo período contratado, sem aquisição ao final.</p>':'<span>Plano Minha Moto</span><p>Opção de ficar com a moto ao final, conforme as condições do contrato.</p>';
+ $('#model-fact').innerHTML=mode==='rental'?'<strong>Uma moto para o seu momento.</strong><p>Alugue por 30, 90 ou 180 dias, com pagamento semanal.</p>':'<strong>Rode agora. Planeje ficar com ela.</strong><p>No Minha Moto, a aquisição ao final segue as condições do contrato.</p>';
  $('#plan-includes-text').textContent=mode==='rental'?'Manutenção preventiva, IPVA e proteção veicular. Troca de óleo não inclusa.':'Manutenção preventiva, duas trocas de óleo por mês, IPVA e proteção veicular. Caução de R$800.';
+ renderModelChoices(model);
  updateCosts();
+}
+function renderModelChoices(active){
+ const list=mode==='rental'?[['start24','Start 160','2023/2024',media.start],['start25','Start 2025','Liga e disco',media.start],['fan25','Fan 2025','Honda 160',media.fan]]:[['semi','Start seminova','2026 · acima de 7 mil km',media.semi],['zero','Start 0 km','2026',media.zero]];
+ $('#model-options').innerHTML=list.map(([value,name,note,image])=>{const opts=optionsFor(value),least=opts.reduce((a,b)=>a.weeklyCents<b.weeklyCents?a:b);return `<button type="button" class="model-card" data-model="${value}" aria-pressed="${value===active}" aria-label="${name}, ${note}, a partir de ${money(least.weeklyCents)} por semana, ${duration(least)}"><img src="${image}" alt="" width="156" height="88" loading="lazy"><span class="model-card-copy"><strong>${name}</strong><span>${note}</span><small>A partir de</small><b>${money(least.weeklyCents)}<span>/semana</span></b></span></button>`;}).join('');
+ $$('[data-model]').forEach(button=>button.addEventListener('click',()=>{const before=get(selectedId),next=optionsFor(button.dataset.model),preferred=mode==='rental'?next.find(p=>p.group===before.group):next[0];renderOptions(button.dataset.model,preferred?.id);$('[data-model="'+button.dataset.model+'"]').focus({preventScroll:true});}));
 }
 function updateCosts() {
  const p=get(selectedId);
+ $('#selected-model-name').textContent=p.model;
+ $('#quote-daily').textContent=daily(p);
+ $('#quote-weekly').textContent='Pagamento de '+money(p.weeklyCents)+' por semana';
+ $('#quote-term').textContent=p.months?'Minha Moto · '+p.months+' meses':p.name+' · mínimo de '+p.days+' dias';
+ $('#choose-plan-label').textContent=p.mode==='ownership'?'Quero meu plano Minha Moto':'Quero essa moto';
  $('#sticky-plan-price').textContent=daily(p)+'/dia*';
  $('#sticky-weekly').textContent=money(p.weeklyCents)+' por semana';
  $('#cost-deposit').textContent=p.depositCents===null?'Confirmar por modelo':money(p.depositCents);
@@ -71,11 +84,16 @@ $('#reset-demo').addEventListener('click',()=>{$('#form-result').hidden=true;});
 
 const gallery=$('.hero-gallery'), slides=$$('[data-slide]'), indicators=$$('[data-go-slide]');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let index=0,timer=null,userPaused=false,hovered=false,focused=false,inView=true;
+let index=0,timer=null,cityTimer=null,cityIndex=0,cityAnimation=null,cityChanging=false,userPaused=false,hovered=false,focused=false,inView=true;
+const cityNames=['Belo Horizonte','Contagem','Minas'];
+async function rotateCity(){
+ if(cityChanging||reduced.matches)return;cityChanging=true;const city=$('#hero-city');
+ try{cityAnimation=city.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-105%)',opacity:0}],{duration:200,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});await cityAnimation.finished;cityIndex=(cityIndex+1)%cityNames.length;city.textContent='em '+cityNames[cityIndex];cityAnimation.cancel();cityAnimation=city.animate([{transform:'translateY(105%)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:360,easing:'cubic-bezier(.16,1,.3,1)'});await cityAnimation.finished;}catch{}finally{cityAnimation?.cancel();cityAnimation=null;cityChanging=false;}
+}
 const banners=[
- {city:'Belo Horizonte',plan:'temp-semestral-start24',action:'Escolher minha moto'},
- {city:'Contagem',plan:'mm-zero-33',action:'Conhecer o Minha Moto'},
- {city:'Santa Luzia',plan:'temp-semestral-fan25',action:'Quero minha moto'}
+ {plan:'temp-semestral-start24',action:'Escolher minha moto'},
+ {plan:'mm-zero-33',action:'Conhecer o Minha Moto'},
+ {plan:'temp-semestral-fan25',action:'Quero minha moto'}
 ];
 function showSlide(n){
  const previous=index;index=(n+slides.length)%slides.length;
@@ -83,21 +101,20 @@ function showSlide(n){
  indicators.forEach((b,i)=>b.setAttribute('aria-pressed',i===index));
  $$('[data-message]').forEach((message,i)=>{message.hidden=i!==index;});
  const banner=banners[index],plan=get(banner.plan);
- $('#hero-city').textContent='em '+banner.city;
  $('#hero-daily').textContent=daily(plan);
  $('#hero-weekly').textContent=money(plan.weeklyCents)+' por semana';
  $('#hero-terms').textContent=plan.months?`${plan.model}. ${plan.months} meses. Caução de ${money(plan.depositCents)}.`:`${plan.model}. Semestral, mínimo de ${plan.days} dias.`;
  $('#hero-action').dataset.heroPlan=plan.id;
  $('#hero-action-label').textContent=banner.action;
  if(previous!==index&&!reduced.matches&&$('#hero-city').animate){
-  [$('#hero-city'),$('.hero-messages')].forEach(element=>element.animate([{opacity:.45,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'}));
+  [$('.hero-messages')].forEach(element=>element.animate([{opacity:.45,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'}));
  }
 }
 $('#hero-action').addEventListener('click',()=>{
  const p=get($('#hero-action').dataset.heroPlan),model=p.mode==='ownership'?p.group:p.id.split('-').at(-1);
  choices[p.mode]={model,id:p.id};setMode(p.mode);
 });
-function syncCarousel(){clearInterval(timer);timer=null;const shouldRun=!userPaused&&!hovered&&!focused&&!document.hidden&&inView&&!reduced.matches;if(shouldRun)timer=setInterval(()=>showSlide(index+1),6500);$('.hero').classList.toggle('is-still',!shouldRun);const pause=$('#slide-pause');pause.disabled=reduced.matches;pause.setAttribute('aria-pressed',userPaused||reduced.matches);pause.textContent=reduced.matches?'Pausado':userPaused?'Reproduzir':'Pausar';}
+function syncCarousel(){clearInterval(timer);clearInterval(cityTimer);timer=null;cityTimer=null;const shouldRun=!userPaused&&!hovered&&!focused&&!document.hidden&&inView&&!reduced.matches;if(shouldRun){timer=setInterval(()=>showSlide(index+1),6500);cityTimer=setInterval(rotateCity,3000);}else if(cityAnimation){cityAnimation.cancel();}$('.hero').classList.toggle('is-still',!shouldRun);const pause=$('#slide-pause');pause.disabled=reduced.matches;pause.setAttribute('aria-pressed',userPaused||reduced.matches);pause.textContent=reduced.matches?'Pausado':userPaused?'Reproduzir':'Pausar';}
 function go(n){showSlide(n);syncCarousel();}
 $('#slide-prev').addEventListener('click',()=>go(index-1));$('#slide-next').addEventListener('click',()=>go(index+1));
 indicators.forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.goSlide))));
