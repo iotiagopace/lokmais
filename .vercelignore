@@ -6,3 +6,10 @@ node_modules
 *.log
 *.tmp
 tmp
+
+# Fontes da LP: o HTML de aprovação já é autocontido.
+lp-minas/src
+lp-minas/media
+lp-minas/font-cache
+lp-minas/build.py
+lp-minas/README.md

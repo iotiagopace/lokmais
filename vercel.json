@@ -3,7 +3,8 @@
   "rewrites": [
     { "source": "/contagem", "destination": "/unidade" },
     { "source": "/manaus",   "destination": "/unidade" },
-    { "source": "/sao-paulo", "destination": "/unidade" }
+    { "source": "/sao-paulo", "destination": "/unidade" },
+    { "source": "/lp-minas", "destination": "/lp-minas/index.html" }
   ],
   "redirects": [
     {
@@ -45,6 +46,14 @@
       "source": "/sejafranqueado",
       "destination": "/seja-franqueado",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/lp-minas/:path*",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
     }
   ]
 }
