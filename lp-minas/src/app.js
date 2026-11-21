@@ -29,19 +29,19 @@ function renderOptions(model,preferredId) {
 }
 function renderModelChoices(active){
  const list=mode==='rental'?[['start24','Start 160','2023/2024',media.start],['start25','Start 2025','Liga e disco',media.start],['fan25','Fan 2025','Honda 160',media.fan]]:[['semi','Start seminova','2026 · acima de 7 mil km',media.semi],['zero','Start 0 km','2026',media.zero]];
- $('#model-options').innerHTML=list.map(([value,name,note,image])=>{const opts=optionsFor(value),least=opts.reduce((a,b)=>a.weeklyCents<b.weeklyCents?a:b);return `<button type="button" class="model-card" data-model="${value}" aria-pressed="${value===active}" aria-label="${name}, ${note}, a partir de ${money(least.weeklyCents)} por semana, ${duration(least)}"><img src="${image}" alt="" width="156" height="88" loading="lazy"><span class="model-card-copy"><strong>${name}</strong><span>${note}</span><small>A partir de</small><b>${money(least.weeklyCents)}<span>/semana</span></b></span></button>`;}).join('');
+ // V8: cartões de modelo sem preço; o valor aparece só nos prazos (passo 3), para não mostrar vários preços de uma vez.
+ $('#model-options').innerHTML=list.map(([value,name,note,image])=>`<button type="button" class="model-card" data-model="${value}" aria-pressed="${value===active}" aria-label="${name}, ${note}"><img src="${image}" alt="" width="156" height="88" loading="lazy"><span class="model-card-copy"><strong>${name}</strong><span>${note}</span></span></button>`).join('');
  $$('[data-model]').forEach(button=>button.addEventListener('click',()=>{const before=get(selectedId),next=optionsFor(button.dataset.model),preferred=mode==='rental'?next.find(p=>p.group===before.group):next[0];renderOptions(button.dataset.model,preferred?.id);$('[data-model="'+button.dataset.model+'"]').focus({preventScroll:true});}));
 }
 function updateCosts() {
  const p=get(selectedId);
  $('#selected-model-name').textContent=p.model;
- $('#quote-daily').textContent=daily(p);
- $('#quote-weekly').textContent='Pagamento de '+money(p.weeklyCents)+' por semana';
- $('#quote-term').textContent=p.months?'Minha Moto · '+p.months+' meses':p.name+' · mínimo de '+p.days+' dias';
+ $('#quote-weekly').textContent=money(p.weeklyCents);
+ $('#quote-daily').textContent='Equivale a cerca de '+daily(p)+' por dia*';
+ $('#quote-term').textContent=p.months?'Minha Moto · '+p.months+' meses':'Aluguel '+p.name.toLowerCase()+' · mínimo de '+p.days+' dias';
  $('#choose-plan-label').textContent=p.mode==='ownership'?'Quero meu plano Minha Moto':'Quero essa moto';
- $('#cost-deposit').textContent=p.depositCents===null?'Confirmar por modelo':money(p.depositCents);
- $('#cost-initial').textContent=p.depositCents===null?'A confirmar':money(p.depositCents+p.weeklyCents);
- $('#cost-note').textContent=p.depositCents===null?'A unidade confirma a caução e o valor para começar antes da contratação.':'Estimativa sem promoção: primeira semana + caução. Confirme a regra e eventuais outras cobranças com a unidade.';
+ $('#cost-initial').textContent=p.depositCents===null?'1ª semana de '+money(p.weeklyCents)+' + caução confirmada pela unidade':money(p.depositCents+p.weeklyCents)+' (1ª semana + caução de '+money(p.depositCents)+')';
+ $('#cost-note').textContent=p.depositCents===null?'A caução do aluguel temporário é confirmada pela unidade antes da contratação.':'Estimativa sem promoção. Confirme a regra e eventuais outras cobranças com a unidade.';
  setContact(selectedId);
 }
 function setMode(next) {
@@ -53,7 +53,7 @@ function setMode(next) {
 }
 $$('[data-mode]').forEach(b=>{
  b.addEventListener('click',()=>setMode(b.dataset.mode));
- b.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();setMode(e.key==='Home'?'rental':e.key==='End'?'ownership':mode==='rental'?'ownership':'rental');$('#tab-'+mode).focus();}});
+ b.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();setMode(e.key==='Home'?'ownership':e.key==='End'?'rental':mode==='rental'?'ownership':'rental');$('#tab-'+mode).focus();}});
 });
 $$('[data-mode-link]').forEach(a=>a.addEventListener('click',()=>setMode(a.dataset.modeLink)));
 $('#plan-model').addEventListener('change',e=>{const before=get(selectedId);const options=optionsFor(e.target.value);const next=mode==='rental'?options.find(p=>p.group===before.group):options[0];renderOptions(e.target.value,next?.id);});
@@ -63,8 +63,9 @@ function setContact(id) {
  $('#selected-plan-text').textContent=contactId?label(get(id)):'Quero ajuda para escolher meu plano';
  $('#selected-plan-price').textContent=contactId?`${money(get(id).weeklyCents)} por semana. Equivalente a ${daily(get(id))}/dia.`:'';
  const quoted=get(contactId||selectedId);
- $('#sticky-plan-price').textContent=daily(quoted)+'/dia*';
- $('#sticky-weekly').textContent=money(quoted.weeklyCents)+' por semana';
+ // V8: mesmo critério do comparador — semanal em destaque, diária como referência.
+ $('#sticky-plan-price').textContent=money(quoted.weeklyCents)+'/semana';
+ $('#sticky-weekly').textContent='cerca de '+daily(quoted)+' por dia';
  $('#form-result').hidden=true;
 }
 $('#choose-plan').addEventListener('click',()=>{setContact(selectedId);openInquiry();});

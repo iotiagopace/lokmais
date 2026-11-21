@@ -117,3 +117,7 @@ Cantos retos em painéis, campos, fotos e botões. Bordas funcionais: campos de 
 - **Don't** introduzir degradês, fontes distorcidas, eyebrows, sombras ou urgência inventada.
 - **Don't** usar imagem de campanha como prova de estoque, cliente ou local real; nem “Minas” como promessa de cobertura estadual.
 - **Don't** afirmar publicação, aprovação comercial, ganhos, conversão ou entrega no CRM a partir desta prévia.
+
+## V8 — comparador em três passos (21/11/2026)
+
+Pedido do cliente: escolha de modalidade mais visível e menos preços na primeira visão. Passos numerados com marcador laranja de 28 px (`.step-title`): 1 modalidade, 2 modelo, 3 prazo. Modalidade em dois cartões `role=tab` (Minha Moto primeiro, seleção inicial; Aluguel temporário), com marcador de rádio, nome e descrição curta; selecionado em `#f0ddbf` com borda laranja, igual aos prazos; uma coluna até 600 px. Cartões de modelo sem preço. Preço aparece só nos prazos (semanal) e no resumo carvão, que destaca o semanal (`#quote-weekly`) e traz a diária como linha secundária. Caução + 1ª semana em uma linha "Para começar". Contato fixo mostra semanal primeiro. A abertura (hero) mantém a diária em destaque, como pedido anteriormente.

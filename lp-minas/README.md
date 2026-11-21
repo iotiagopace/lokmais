@@ -33,3 +33,7 @@ Minha Moto é a seleção inicial. Cidades continuam alternando em todos os bann
 ## Ajustes V7
 
 A coluna lateral fixa da V6 foi substituída por um formulário menor que acompanha a página: no computador, cartão compacto no canto inferior direito (WhatsApp + Continuar, que expande os demais campos); no celular, barra inferior com o preço e "Quero alugar". Aparece já no primeiro scroll (só fica escondido no topo da página). No computador, sobre o comparador de planos, encolhe para uma barra com o título, que abre o formulário ao clique. Continua demonstrativo, sem envio ou armazenamento.
+
+## Ajustes V8
+
+Feedback do cliente: a escolha entre Aluguel temporário e Minha Moto ficava escondida e a primeira visão do comparador mostrava preços demais. O comparador virou três passos numerados: 1) como você quer sua moto (cartões Minha Moto e Aluguel temporário com a diferença explicada, sem preço), 2) modelo (cartões sem preço), 3) prazo (lista com o preço semanal). O resumo destaca um único valor, o semanal; a diária aparece como "equivale a cerca de". Caução e primeira semana viraram uma linha "Para começar". A barra/cartão de contato também mostra o semanal primeiro.
