@@ -1,9 +1,13 @@
 {
   "cleanUrls": true,
+  "routes": [
+    { "src": "^/$", "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }], "dest": "/lp-minas", "headers": { "X-Robots-Tag": "noindex, nofollow, noarchive" } }
+  ],
   "rewrites": [
     { "source": "/contagem", "destination": "/unidade" },
     { "source": "/manaus",   "destination": "/unidade" },
-    { "source": "/sao-paulo", "destination": "/unidade" }
+    { "source": "/sao-paulo", "destination": "/unidade" },
+    { "source": "/lp-minas", "destination": "/lp-minas/index.html" }
   ],
   "redirects": [
     {
@@ -45,6 +49,21 @@
       "source": "/sejafranqueado",
       "destination": "/seja-franqueado",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/lp-minas/:path*",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "lokmaisminas.vercel.app" }],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
     }
   ]
 }
