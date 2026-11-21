@@ -57,12 +57,29 @@ $$('[data-mode]').forEach(b=>{
 });
 $$('[data-mode-link]').forEach(a=>a.addEventListener('click',()=>setMode(a.dataset.modeLink)));
 $('#plan-model').addEventListener('change',e=>{const before=get(selectedId);const options=optionsFor(e.target.value);const next=mode==='rental'?options.find(p=>p.group===before.group):options[0];renderOptions(e.target.value,next?.id);});
+// V9: uma escolha alimenta abertura, comparador e contato; fotos não alteram o plano.
+function renderHeroOffer(p) {
+ $('#hero-weekly').textContent=money(p.weeklyCents);
+ $('#hero-daily').textContent='Equivale a cerca de '+daily(p)+' por dia*';
+ $('#hero-terms').textContent=label(p)+(p.depositCents===null?'. Caução confirmada pela unidade.':'. Caução de '+money(p.depositCents)+'.');
+ $('#hero-action').dataset.heroPlan=p.id;
+ $('#hero-action-label').textContent=p.mode==='ownership'?'Conhecer o Minha Moto':'Conhecer o aluguel temporário';
+ $('[data-message="0"]').textContent=p.mode==='ownership'?'Trabalhe com a moto. Planeje ficar com ela.':'Uma moto para trabalhar e fazer renda extra.';
+ $('[data-message="1"]').textContent=p.mode==='ownership'?'Minha Moto: um plano para ficar com ela.':'Aluguel temporário para o seu momento.';
+}
+function selectContactPlan(id) {
+ if(id==='undecided'){setContact(id);return;}
+ const p=get(id),model=p.mode==='ownership'?p.group:p.id.split('-').at(-1);
+ choices[p.mode]={model,id:p.id};setMode(p.mode);
+}
 function setContact(id) {
  contactId=id==='undecided'?null:id;
  $('#lead-interest').value=contactId||'undecided';
  $('#selected-plan-text').textContent=contactId?label(get(id)):'Quero ajuda para escolher meu plano';
  $('#selected-plan-price').textContent=contactId?`${money(get(id).weeklyCents)} por semana. Equivalente a ${daily(get(id))}/dia.`:'';
  const quoted=get(contactId||selectedId);
+ $('.inquiry-offer').hidden=!contactId;
+ renderHeroOffer(quoted);
  // V8: mesmo critério do comparador — semanal em destaque, diária como referência.
  $('#sticky-plan-price').textContent=money(quoted.weeklyCents)+'/semana';
  $('#sticky-weekly').textContent='cerca de '+daily(quoted)+' por dia';
@@ -72,7 +89,7 @@ $('#choose-plan').addEventListener('click',()=>{setContact(selectedId);openInqui
 const groups={ownership:document.createElement('optgroup'),rental:document.createElement('optgroup')};groups.ownership.label='Plano Minha Moto';groups.rental.label='Aluguel temporário';
 plans.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=label(p);groups[p.mode].append(o);});
 $('#lead-interest').append(groups.ownership,groups.rental);
-$('#lead-interest').addEventListener('change',e=>setContact(e.target.value));
+$('#lead-interest').addEventListener('change',e=>selectContactPlan(e.target.value));
 setMode('ownership');
 const phone=$('#lead-phone');
 phone.addEventListener('input',()=>{phone.setCustomValidity('');phone.removeAttribute('aria-invalid');$('#phone-error').hidden=true;});
@@ -96,22 +113,11 @@ async function rotateCity(){
  if(cityChanging||reduced.matches)return;cityChanging=true;const city=$('#hero-city');
  try{cityAnimation=city.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-105%)',opacity:0}],{duration:200,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});await cityAnimation.finished;cityIndex=(cityIndex+1)%cityNames.length;city.textContent='em '+cityNames[cityIndex];cityAnimation.cancel();cityAnimation=city.animate([{transform:'translateY(105%)',opacity:0},{transform:'translateY(0)',opacity:1}],{duration:360,easing:'cubic-bezier(.16,1,.3,1)'});await cityAnimation.finished;}catch{}finally{cityAnimation?.cancel();cityAnimation=null;cityChanging=false;}
 }
-const banners=[
- {plan:'mm-semi-36',action:'Conhecer o Minha Moto'},
- {plan:'mm-zero-33',action:'Conhecer o Minha Moto'},
- {plan:'temp-semestral-fan25',action:'Quero minha moto'}
-];
 function showSlide(n){
  const previous=index;index=(n+slides.length)%slides.length;
  slides.forEach((s,i)=>{s.classList.toggle('is-active',i===index);s.setAttribute('aria-hidden',i!==index);});
  indicators.forEach((b,i)=>b.setAttribute('aria-pressed',i===index));
  $$('[data-message]').forEach((message,i)=>{message.hidden=i!==index;});
- const banner=banners[index],plan=get(banner.plan);
- $('#hero-daily').textContent=daily(plan);
- $('#hero-weekly').textContent=money(plan.weeklyCents)+' por semana';
- $('#hero-terms').textContent=plan.months?`${plan.model}. ${plan.months} meses. Caução de ${money(plan.depositCents)}.`:`${plan.model}. Semestral, mínimo de ${plan.days} dias.`;
- $('#hero-action').dataset.heroPlan=plan.id;
- $('#hero-action-label').textContent=banner.action;
  if(previous!==index&&!reduced.matches&&$('#hero-city').animate){
   [$('.hero-messages')].forEach(element=>element.animate([{opacity:.45,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'}));
  }

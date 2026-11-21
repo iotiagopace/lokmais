@@ -37,3 +37,7 @@ A coluna lateral fixa da V6 foi substituída por um formulário menor que acompa
 ## Ajustes V8
 
 Feedback do cliente: a escolha entre Aluguel temporário e Minha Moto ficava escondida e a primeira visão do comparador mostrava preços demais. O comparador virou três passos numerados: 1) como você quer sua moto (cartões Minha Moto e Aluguel temporário com a diferença explicada, sem preço), 2) modelo (cartões sem preço), 3) prazo (lista com o preço semanal). O resumo destaca um único valor, o semanal; a diária aparece como "equivale a cerca de". Caução e primeira semana viraram uma linha "Para começar". A barra/cartão de contato também mostra o semanal primeiro.
+
+## Ajustes V9
+
+O preço semanal é o valor principal também na abertura. Os banners alternam fotos e mensagens; a oferta permanece no plano escolhido. Modelo/prazo e seleção no formulário sincronizam abertura, comparador e contato. Minha Moto explicita aquisição conforme contrato. Os 14 preços de MG e o formulário demonstrativo permanecem preservados.
