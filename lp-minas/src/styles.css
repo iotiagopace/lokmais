@@ -62,3 +62,7 @@
 
 /* V9: cobrança semanal em destaque e equivalente diário secundário. */
 @media(max-width:600px){.hero-weekly-price>span{font-size:var(--body)}}
+
+/* Duas modalidades acessíveis diretamente pela abertura. */
+.hero-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;max-width:660px;margin-top:24px}.hero-actions .hero-action{margin:0;padding-inline:22px;gap:10px}
+@media(max-width:600px){.hero-actions{flex-direction:column;max-width:360px;gap:10px;margin-top:18px}}

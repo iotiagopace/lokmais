@@ -41,3 +41,7 @@ Feedback do cliente: a escolha entre Aluguel temporário e Minha Moto ficava esc
 ## Ajustes V9
 
 O preço semanal é o valor principal também na abertura. Os banners alternam fotos e mensagens; a oferta permanece no plano escolhido. Modelo/prazo e seleção no formulário sincronizam abertura, comparador e contato. Minha Moto explicita aquisição conforme contrato. Os 14 preços de MG e o formulário demonstrativo permanecem preservados.
+
+## Botões da abertura — 23/11/2026
+
+Dois caminhos fixos: Conhecer o Minha Moto e Conhecer o aluguel temporário. Cada um abre a modalidade correspondente no comparador, preserva a última escolha dessa modalidade e mantém preços sincronizados. Botões empilham no celular.

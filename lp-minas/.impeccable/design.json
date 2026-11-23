@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-21T09:49:11.152190+00:00",
-  "title": "Design System: LokMais — LP V9",
+  "generatedAt": "2026-11-23T21:58:18.488289+00:00",
+  "title": "Design System: LokMais — LP V10",
   "extensions": {
     "scope": "Somente lp-minas/ no checkout codex/lp-minas-aprovacao, V9. Sem UI/rebuild/scan nesta documentação. Próxima entrega autorizada ao mesmo Preview; nenhuma produção. Não altera documento raiz ou original.",
     "colorMeta": {
@@ -439,7 +439,12 @@
         "cta": "references current selected plan",
         "message0and1": "adapt to ownership/rental",
         "message2": "Liberdade para seu corre."
-      }
+      },
+      "actions": [
+        "Conhecer o Minha Moto",
+        "Conhecer o aluguel temporário"
+      ],
+      "actionBehavior": "Fixed ownership/rental links use data-mode-link; each activates and remembers its own modality in the comparator."
     },
     "layout": {
       "catalogueColumns": "801+:43% 57%; <=800:1 column",
@@ -527,7 +532,7 @@
       "refersTo": "button-primary",
       "html": "<button class=\"ds-button-primary\">Quero essa moto</button>",
       "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 28px;border:0;border-radius:0;background:var(--orange,#f47a18);color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;line-height:1.5;cursor:pointer;transition:background .18s,transform .18s cubic-bezier(.16,1,.3,1)}.ds-button-primary:hover{background:#ff963e;transform:translateY(-2px)}.ds-button-primary:active{transform:translateY(1px)}.ds-button-primary:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}",
-      "description": "Ação sólida e foco explícito; CTA comercial varia por modalidade."
+      "description": "Ação sólida e foco explícito. Na abertura, dois rótulos fixos por modalidade; no comparador, a ação acompanha a escolha."
     },
     {
       "name": "Botão light",
@@ -535,7 +540,7 @@
       "refersTo": "button-light",
       "html": "<button class=\"ds-button-light\">Quero essa moto</button>",
       "css": ".ds-button-light{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 28px;border:0;border-radius:0;background:var(--white,#fff);color:var(--blue,#142d87);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;line-height:1.5;cursor:pointer;transition:background .18s,transform .18s cubic-bezier(.16,1,.3,1)}.ds-button-light:hover{background:var(--pale,#eef2f8);transform:translateY(-2px)}.ds-button-light:active{transform:translateY(1px)}.ds-button-light:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-light{transition:none}}",
-      "description": "Ação sólida e foco explícito; CTA comercial varia por modalidade."
+      "description": "Ação sólida e foco explícito. Na abertura, dois rótulos fixos por modalidade; no comparador, a ação acompanha a escolha."
     },
     {
       "name": "Campo de contato",
@@ -592,16 +597,25 @@
       "description": "Cartão de modalidade do passo1; propriedade de aquisição qualificada pelo contrato. Abas reais suportam teclado; uma coluna no celular.",
       "html": "<button class=\"ds-mode\" type=\"button\" role=\"tab\" aria-selected=\"true\"><i aria-hidden=\"true\"></i><span><strong>Minha Moto</strong><small>Para ficar com a moto ao final, conforme contrato. De 24 a 36 meses.</small></span></button>",
       "css": ".ds-mode{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;text-align:left;background:var(--control,#e4ded3);color:var(--ink,#111b2b);border:2px solid transparent;font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;cursor:pointer}.ds-mode[aria-selected=true]{background:var(--selected,#f0ddbf);border-color:var(--orange,#f47a18)}.ds-mode:hover{background:var(--sand,#f1e5d5)}.ds-mode i{position:relative;flex:0 0 22px;width:22px;height:22px;margin-top:2px;border:1px solid #80715e;border-radius:50%;background:var(--paper,#f8f4ed)}.ds-mode[aria-selected=true] i{border-color:var(--orange,#f47a18)}.ds-mode[aria-selected=true] i::after{content:\"\";position:absolute;inset:4px;border-radius:50%;background:var(--orange,#f47a18)}.ds-mode strong{display:block;font-size:1.25rem;font-weight:600;line-height:1.25}.ds-mode small{display:block;margin-top:5px;font-size:.875rem;line-height:1.45;color:var(--warm-quiet,#49433c);max-width:40ch}.ds-mode:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(max-width:600px){.ds-mode{padding:16px}.ds-mode strong{font-size:1rem}}"
+    },
+    {
+      "name": "Ações da abertura",
+      "kind": "custom",
+      "refersTo": "hero-actions",
+      "description": "Dois links fixos para #planos: data-mode-link ownership e rental. Lado a lado com wrap; coluna até600px. Cada link seleciona sua modalidade preservando a escolha anterior.",
+      "html": "<div class=\"ds-hero-actions\"><a class=\"ds-primary\" href=\"#planos\" data-mode-link=\"ownership\">Conhecer o Minha Moto</a><a class=\"ds-light\" href=\"#planos\" data-mode-link=\"rental\">Conhecer o aluguel temporário</a></div>",
+      "css": ".ds-hero-actions{display:flex;flex-wrap:wrap;gap:12px;max-width:660px}.ds-hero-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 22px;text-decoration:none;font:600 1rem/1.5 var(--font,\"General Sans\",Arial,sans-serif)}.ds-primary{background:var(--orange,#f47a18);color:var(--ink,#111b2b)}.ds-light{background:#fff;color:var(--blue,#142d87)}@media(max-width:600px){.ds-hero-actions{flex-direction:column;max-width:360px;gap:10px}}"
     }
   ],
   "narrative": {
     "northStar": "Balcão de catálogo da unidade 855",
-    "overview": "Campanha fotográfica de trabalho na abertura, percurso em areia e escolha comercial com fotos de modelos, prazos e cotação semanal destacada. General Sans conserva proporções naturais; a ação laranja conecta as etapas sem urgência ou promessa inventada.\n\nEscopo exclusivo: `lp-minas/` neste checkout de aprovação. Fonte: `src/index.html`, `src/styles.css`, `src/app.js` e `src/plans.js`. Não substitui o DESIGN raiz nem outras páginas. O contrato comercial e a base de cor estão em `/Users/tiagopace/Documents/Metry-IA/tarefas/lokmais/2026-11-20-github-vercel-aprovacao-lp/v5/REVISAO.md`; este documento registra o estado V9: preço semanal principal, escolha única entre abertura/catálogo/contato, comparador em três passos e formulário compacto; a semente original 08248f20, candidato 7, permanece registrada na tarefa original. Sem novo sorteio ou comp aprovado. A documentação não autoriza publicação, merge, CRM nem aprovação comercial.",
+    "overview": "Campanha fotográfica de trabalho na abertura, percurso em areia e escolha comercial com fotos de modelos, prazos e cotação semanal destacada. General Sans conserva proporções naturais; a ação laranja conecta as etapas sem urgência ou promessa inventada.\n\nEscopo exclusivo: `lp-minas/` neste checkout de aprovação. Fonte: `src/index.html`, `src/styles.css`, `src/app.js` e `src/plans.js`. Não substitui o DESIGN raiz nem outras páginas. O contrato comercial e a base de cor estão em `/Users/tiagopace/Documents/Metry-IA/tarefas/lokmais/2026-11-20-github-vercel-aprovacao-lp/v5/REVISAO.md`; este documento registra o estado V10: preço semanal principal, escolha única entre abertura/catálogo/contato, comparador em três passos e formulário compacto; a semente original 08248f20, candidato 7, permanece registrada na tarefa original. Sem novo sorteio ou comp aprovado. A documentação não autoriza publicação, merge, CRM nem aprovação comercial.",
     "keyCharacteristics": [
       "Fotografia integral sob o cabeçalho e rotação de cidade independente da oferta.",
       "Processo em areia, catálogo em papel/cinza quente, cotação em carvão e ação laranja.",
       "Três passos funcionais de modalidade/modelo/prazo, Minha Moto inicial e formulário único compacto.",
-      "Semanal principal em todas as ofertas; diária equivalente secundária e sem troca autônoma do plano pelos banners."
+      "Semanal principal em todas as ofertas; diária equivalente secundária e sem troca autônoma do plano pelos banners.",
+      "Dois CTAs fixos na abertura escolhem Minha Moto ou Aluguel temporário e preservam a última opção de cada modalidade."
     ],
     "rules": [
       {

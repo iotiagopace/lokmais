@@ -62,8 +62,6 @@ function renderHeroOffer(p) {
  $('#hero-weekly').textContent=money(p.weeklyCents);
  $('#hero-daily').textContent='Equivale a cerca de '+daily(p)+' por dia*';
  $('#hero-terms').textContent=label(p)+(p.depositCents===null?'. Caução confirmada pela unidade.':'. Caução de '+money(p.depositCents)+'.');
- $('#hero-action').dataset.heroPlan=p.id;
- $('#hero-action-label').textContent=p.mode==='ownership'?'Conhecer o Minha Moto':'Conhecer o aluguel temporário';
  $('[data-message="0"]').textContent=p.mode==='ownership'?'Trabalhe com a moto. Planeje ficar com ela.':'Uma moto para trabalhar e fazer renda extra.';
  $('[data-message="1"]').textContent=p.mode==='ownership'?'Minha Moto: um plano para ficar com ela.':'Aluguel temporário para o seu momento.';
 }
@@ -122,10 +120,6 @@ function showSlide(n){
   [$('.hero-messages')].forEach(element=>element.animate([{opacity:.45,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'}));
  }
 }
-$('#hero-action').addEventListener('click',()=>{
- const p=get($('#hero-action').dataset.heroPlan),model=p.mode==='ownership'?p.group:p.id.split('-').at(-1);
- choices[p.mode]={model,id:p.id};setMode(p.mode);
-});
 function syncCarousel(){
  clearInterval(timer);timer=null;
  const canAnimate=!userPaused&&!document.hidden&&inView&&!reduced.matches;

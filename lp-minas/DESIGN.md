@@ -1,5 +1,5 @@
 ---
-name: "LokMais Belo Horizonte e região — LP V9"
+name: "LokMais Belo Horizonte e região — LP V10"
 description: "Campanha fotográfica, catálogo em areia/carvão e formulário único compacto que acompanha a página."
 colors:
   blue: "#142d87"
@@ -49,7 +49,7 @@ components:
   process: {backgroundColor: "{colors.sand}", textColor: "{colors.ink}"}
 ---
 
-# Design System: LokMais — LP V9
+# Design System: LokMais — LP V10
 
 ## Overview
 
@@ -57,7 +57,7 @@ components:
 
 Campanha fotográfica de trabalho na abertura, percurso em areia e escolha comercial com fotos de modelos, prazos e cotação semanal destacada. General Sans conserva proporções naturais; a ação laranja conecta as etapas sem urgência ou promessa inventada.
 
-Escopo exclusivo: `lp-minas/` neste checkout de aprovação. Fonte: `src/index.html`, `src/styles.css`, `src/app.js` e `src/plans.js`. Não substitui o DESIGN raiz nem outras páginas. O contrato comercial e a base de cor estão em `/Users/tiagopace/Documents/Metry-IA/tarefas/lokmais/2026-11-20-github-vercel-aprovacao-lp/v5/REVISAO.md`; este documento registra o estado V9: preço semanal principal, escolha única entre abertura/catálogo/contato, comparador em três passos e formulário compacto; a semente original 08248f20, candidato 7, permanece registrada na tarefa original. Sem novo sorteio ou comp aprovado. A documentação não autoriza publicação, merge, CRM nem aprovação comercial.
+Escopo exclusivo: `lp-minas/` neste checkout de aprovação. Fonte: `src/index.html`, `src/styles.css`, `src/app.js` e `src/plans.js`. Não substitui o DESIGN raiz nem outras páginas. O contrato comercial e a base de cor estão em `/Users/tiagopace/Documents/Metry-IA/tarefas/lokmais/2026-11-20-github-vercel-aprovacao-lp/v5/REVISAO.md`; este documento registra o estado V10: preço semanal principal, escolha única entre abertura/catálogo/contato, comparador em três passos e formulário compacto; a semente original 08248f20, candidato 7, permanece registrada na tarefa original. Sem novo sorteio ou comp aprovado. A documentação não autoriza publicação, merge, CRM nem aprovação comercial.
 
 **Key Characteristics:**
 - Fotografia integral sob o cabeçalho e rotação de cidade independente da oferta.
@@ -103,7 +103,7 @@ Cantos retos em painéis, campos, fotos e botões. Bordas funcionais: campos de 
 
 **Catálogo comercial.** Três passos com marcador laranja de 28 px: modalidade → modelo → prazo. Modalidade tem dois cartões `role=tab`, Minha Moto primeiro e inicial, com rádio visual, nome e descrição; selecionado usa fundo `selected` e borda laranja, e empilha até 600 px. Texto de aquisição é qualificado: “Para ficar com a moto ao final, conforme contrato. De 24 a 36 meses.” Temporário não prevê aquisição. Cartões de modelo têm foto/nome, sem preço; são botões `aria-pressed`, com foco devolvido após atualização. Abas aceitam setas/Home/End. Prazos exibem condição e semanal; cotação carvão destaca somente o valor semanal com “por semana” adjacente, sem rótulo “Você paga”. Diária é equivalente secundário; “Para começar” reúne primeira semana e caução.
 
-**Escolha única.** Padrão `ownership`/`mm-semi-36`: R$389,90 por semana, R$55,70/dia equivalente, caução R$800. `updateCosts → setContact → renderHeroOffer` sincroniza catálogo, oferta da abertura, resumo e contato. Alterar plano no formulário chama `selectContactPlan → setMode`, atualizando o catálogo e a abertura. “Quero ajuda para escolher” oculta a oferta do cartão de contato e conserva o plano do catálogo como referência, sem fingir escolha concluída. CTA do hero aponta para a seleção atual; Planos preserva a escolha.
+**Escolha única.** Padrão `ownership`/`mm-semi-36`: R$389,90 por semana, R$55,70/dia equivalente, caução R$800. `updateCosts → setContact → renderHeroOffer` sincroniza catálogo, oferta da abertura, resumo e contato. Alterar plano no formulário chama `selectContactPlan → setMode`, atualizando o catálogo e a abertura. “Quero ajuda para escolher” oculta a oferta do cartão de contato e conserva o plano do catálogo como referência, sem fingir escolha concluída. A abertura mantém dois CTAs fixos: “Conhecer o Minha Moto” (laranja) e “Conhecer o aluguel temporário” (claro). Cada um abre a respectiva modalidade no comparador, preservando a última escolha daquela modalidade; Planos preserva a escolha.
 
 **Oferta e movimento.** Três campanhas ilustrativas por IA: jaqueta, Start vermelha no estúdio, motociclista/Fan azul na rua. Banners mudam fotos e H2 visível a cada 6.5s; não escolhem planos nem alteram preços/CTA. H2 0/1 adaptam o texto à modalidade selecionada, evitando promessa de aquisição no temporário; a terceira mensagem permanece “Liberdade para seu corre”. Termos do hero usam nome/modelo/prazo do plano e caução correspondente; cidade do H1 gira por `cityNames` (Belo Horizonte/Contagem/Minas) a cada 3s, independentemente. A cidade sai para −105% em 200 ms e entra de +105% em 360 ms; a janela evita transbordamento. A pausa explícita, aba oculta, saída do viewport e movimento reduzido interrompem os dois ciclos. Mouse/foco na galeria pausam somente banners; a cidade continua sem reiniciar o temporizador. Navegação manual dos slides também não reinicia o relógio da cidade. Minas no H1 não confirma atendimento estadual; Santa Luzia permanece no conteúdo fixo e retirada somente em Contagem.
 
@@ -122,3 +122,7 @@ Cantos retos em painéis, campos, fotos e botões. Bordas funcionais: campos de 
 - **Don't** introduzir degradês, fontes distorcidas, eyebrows, sombras decorativas ou urgência inventada.
 - **Don't** usar imagem de campanha como prova de estoque, cliente ou local real; nem “Minas” como promessa de cobertura estadual.
 - **Don't** afirmar publicação, aprovação comercial, ganhos, conversão ou entrega no CRM a partir desta prévia.
+
+## Duas modalidades na abertura — 23/11/2026
+
+`.hero-actions` reúne os dois links para `#planos`, com `data-mode-link` específico. Grupo flex com wrap, gap de 12px, largura máxima de660px e margem superior de24px; botões sem margem própria, padding horizontal22px e gap10px. Até600px, coluna com largura máxima360px, gap10px e margem superior18px. Rótulos permanecem fixos ao trocar modalidade, foto ou prazo. A oferta semanal continua seguindo a seleção única; nenhum preço ou condição comercial mudou.
