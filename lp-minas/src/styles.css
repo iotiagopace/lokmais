@@ -66,3 +66,5 @@
 /* Duas modalidades acessíveis diretamente pela abertura. */
 .hero-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;max-width:660px;margin-top:24px}.hero-actions .hero-action{margin:0;padding-inline:22px;gap:10px}
 @media(max-width:600px){.hero-actions{flex-direction:column;max-width:360px;gap:10px;margin-top:18px}}
+/* Crédito da agência no rodapé (link externo, nova aba). */
+.footer-credit{display:inline-block;margin-top:6px;opacity:.85}.footer-credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}.footer-credit a:hover{opacity:1;color:var(--white)}.footer-credit a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
