@@ -101,8 +101,8 @@ function waLink(name,plan){const msg=`Olá! Sou ${name||'interessado'} e quero a
 function showResult(ok,name,plan){
  $('#form-result-title').textContent=ok?'Pedido enviado!':'Não conseguimos enviar agora';
  $('#form-result-plan').textContent=plan?`${label(plan)}. ${money(plan.weeklyCents)} por semana.`:'Quero ajuda para escolher meu plano.';
- $('#form-result-text').textContent=ok?'A equipe da LokMais Contagem vai chamar você no WhatsApp. Atendimento de segunda a sábado, das 08h às 18h.':'Chame a unidade no WhatsApp para não perder seu atendimento.';
- const wa=$('#form-result-wa');wa.href=waLink(name,plan);wa.textContent=ok?'Prefere adiantar? Chame a unidade no WhatsApp':'Chamar a LokMais Contagem no WhatsApp';
+ $('#form-result-text').textContent=ok?'Vamos abrir o WhatsApp da LokMais Contagem com seu plano preenchido. Atendimento de segunda a sábado, das 08h às 18h.':'Chame a unidade no WhatsApp para não perder seu atendimento.';
+ const wa=$('#form-result-wa');wa.href=waLink(name,plan);wa.textContent=ok?'Se o WhatsApp não abrir, toque aqui':'Chamar a LokMais Contagem no WhatsApp';
  $('#form-result').hidden=false;
 }
 function handleLead(){
@@ -120,6 +120,8 @@ function handleLead(){
  try{ok=!!(window.atriva&&typeof window.atriva.submit==='function'&&window.atriva.submit(fields,labels));}catch(err){ok=false;}
  if(ok){leadSent=true;$('#lead-submit').disabled=true;$('#lead-submit').textContent='Pedido enviado';}
  showResult(ok,name,plan);
+ // Na mesma aba para evitar bloqueio de pop-up; o snippet usa sendBeacon.
+ if(ok)location.assign(waLink(name,plan));
 }
 addEventListener('submit',e=>{if(e.target===$('#lead-form')){e.preventDefault();e.stopImmediatePropagation();handleLead();}},true);
 $('#lead-form').addEventListener('input',()=>{if(leadSent){leadSent=false;$('#lead-submit').disabled=false;syncInquiry();}});
