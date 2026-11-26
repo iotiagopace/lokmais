@@ -1,0 +1,649 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T21:58:18.488289+00:00",
+  "title": "Design System: LokMais — LP V10",
+  "extensions": {
+    "scope": "Somente lp-minas/ no checkout codex/lp-minas-aprovacao, V9. Sem UI/rebuild/scan nesta documentação. Próxima entrega autorizada ao mesmo Preview; nenhuma produção. Não altera documento raiz ou original.",
+    "colorMeta": {
+      "blue": {
+        "displayName": "blue",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15% 0.1528 266.03)",
+          "oklch(26% 0.1528 266.03)",
+          "oklch(38% 0.1528 266.03)",
+          "oklch(49% 0.1528 266.03)",
+          "oklch(61% 0.1528 266.03)",
+          "oklch(72% 0.1528 266.03)",
+          "oklch(84% 0.1528 266.03)",
+          "oklch(95% 0.1528 266.03)"
+        ]
+      },
+      "blue-deep": {
+        "displayName": "blue-deep",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15% 0.1201 266.42)",
+          "oklch(26% 0.1201 266.42)",
+          "oklch(38% 0.1201 266.42)",
+          "oklch(49% 0.1201 266.42)",
+          "oklch(61% 0.1201 266.42)",
+          "oklch(72% 0.1201 266.42)",
+          "oklch(84% 0.1201 266.42)",
+          "oklch(95% 0.1201 266.42)"
+        ]
+      },
+      "ink": {
+        "displayName": "ink",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0348 259.52)",
+          "oklch(26% 0.0348 259.52)",
+          "oklch(38% 0.0348 259.52)",
+          "oklch(49% 0.0348 259.52)",
+          "oklch(61% 0.0348 259.52)",
+          "oklch(72% 0.0348 259.52)",
+          "oklch(84% 0.0348 259.52)",
+          "oklch(95% 0.0348 259.52)"
+        ]
+      },
+      "orange": {
+        "displayName": "orange",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.1769 51.34)",
+          "oklch(26% 0.1769 51.34)",
+          "oklch(38% 0.1769 51.34)",
+          "oklch(49% 0.1769 51.34)",
+          "oklch(61% 0.1769 51.34)",
+          "oklch(72% 0.1769 51.34)",
+          "oklch(84% 0.1769 51.34)",
+          "oklch(95% 0.1769 51.34)"
+        ]
+      },
+      "orange-hover": {
+        "displayName": "orange-hover",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.1598 56.62)",
+          "oklch(26% 0.1598 56.62)",
+          "oklch(38% 0.1598 56.62)",
+          "oklch(49% 0.1598 56.62)",
+          "oklch(61% 0.1598 56.62)",
+          "oklch(72% 0.1598 56.62)",
+          "oklch(84% 0.1598 56.62)",
+          "oklch(95% 0.1598 56.62)"
+        ]
+      },
+      "white": {
+        "displayName": "white",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "sand": {
+        "displayName": "sand",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0250 75.27)",
+          "oklch(26% 0.0250 75.27)",
+          "oklch(38% 0.0250 75.27)",
+          "oklch(49% 0.0250 75.27)",
+          "oklch(61% 0.0250 75.27)",
+          "oklch(72% 0.0250 75.27)",
+          "oklch(84% 0.0250 75.27)",
+          "oklch(95% 0.0250 75.27)"
+        ]
+      },
+      "sand-deep": {
+        "displayName": "sand-deep",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0312 76.94)",
+          "oklch(26% 0.0312 76.94)",
+          "oklch(38% 0.0312 76.94)",
+          "oklch(49% 0.0312 76.94)",
+          "oklch(61% 0.0312 76.94)",
+          "oklch(72% 0.0312 76.94)",
+          "oklch(84% 0.0312 76.94)",
+          "oklch(95% 0.0312 76.94)"
+        ]
+      },
+      "paper": {
+        "displayName": "paper",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0102 81.80)",
+          "oklch(26% 0.0102 81.80)",
+          "oklch(38% 0.0102 81.80)",
+          "oklch(49% 0.0102 81.80)",
+          "oklch(61% 0.0102 81.80)",
+          "oklch(72% 0.0102 81.80)",
+          "oklch(84% 0.0102 81.80)",
+          "oklch(95% 0.0102 81.80)"
+        ]
+      },
+      "charcoal": {
+        "displayName": "charcoal",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0254 251.25)",
+          "oklch(26% 0.0254 251.25)",
+          "oklch(38% 0.0254 251.25)",
+          "oklch(49% 0.0254 251.25)",
+          "oklch(61% 0.0254 251.25)",
+          "oklch(72% 0.0254 251.25)",
+          "oklch(84% 0.0254 251.25)",
+          "oklch(95% 0.0254 251.25)"
+        ]
+      },
+      "warm-quiet": {
+        "displayName": "warm-quiet",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0142 71.65)",
+          "oklch(26% 0.0142 71.65)",
+          "oklch(38% 0.0142 71.65)",
+          "oklch(49% 0.0142 71.65)",
+          "oklch(61% 0.0142 71.65)",
+          "oklch(72% 0.0142 71.65)",
+          "oklch(84% 0.0142 71.65)",
+          "oklch(95% 0.0142 71.65)"
+        ]
+      },
+      "warm-ground": {
+        "displayName": "warm-ground",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0087 84.57)",
+          "oklch(26% 0.0087 84.57)",
+          "oklch(38% 0.0087 84.57)",
+          "oklch(49% 0.0087 84.57)",
+          "oklch(61% 0.0087 84.57)",
+          "oklch(72% 0.0087 84.57)",
+          "oklch(84% 0.0087 84.57)",
+          "oklch(95% 0.0087 84.57)"
+        ]
+      },
+      "control": {
+        "displayName": "control",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0162 82.79)",
+          "oklch(26% 0.0162 82.79)",
+          "oklch(38% 0.0162 82.79)",
+          "oklch(49% 0.0162 82.79)",
+          "oklch(61% 0.0162 82.79)",
+          "oklch(72% 0.0162 82.79)",
+          "oklch(84% 0.0162 82.79)",
+          "oklch(95% 0.0162 82.79)"
+        ]
+      },
+      "selected": {
+        "displayName": "selected",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0449 79.29)",
+          "oklch(26% 0.0449 79.29)",
+          "oklch(38% 0.0449 79.29)",
+          "oklch(49% 0.0449 79.29)",
+          "oklch(61% 0.0449 79.29)",
+          "oklch(72% 0.0449 79.29)",
+          "oklch(84% 0.0449 79.29)",
+          "oklch(95% 0.0449 79.29)"
+        ]
+      },
+      "quote-muted": {
+        "displayName": "quote-muted",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0257 78.91)",
+          "oklch(26% 0.0257 78.91)",
+          "oklch(38% 0.0257 78.91)",
+          "oklch(49% 0.0257 78.91)",
+          "oklch(61% 0.0257 78.91)",
+          "oklch(72% 0.0257 78.91)",
+          "oklch(84% 0.0257 78.91)",
+          "oklch(95% 0.0257 78.91)"
+        ]
+      },
+      "field-border": {
+        "displayName": "field-border",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0319 258.94)",
+          "oklch(26% 0.0319 258.94)",
+          "oklch(38% 0.0319 258.94)",
+          "oklch(49% 0.0319 258.94)",
+          "oklch(61% 0.0319 258.94)",
+          "oklch(72% 0.0319 258.94)",
+          "oklch(84% 0.0319 258.94)",
+          "oklch(95% 0.0319 258.94)"
+        ]
+      },
+      "error": {
+        "displayName": "error",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.1622 30.17)",
+          "oklch(26% 0.1622 30.17)",
+          "oklch(38% 0.1622 30.17)",
+          "oklch(49% 0.1622 30.17)",
+          "oklch(61% 0.1622 30.17)",
+          "oklch(72% 0.1622 30.17)",
+          "oklch(84% 0.1622 30.17)",
+          "oklch(95% 0.1622 30.17)"
+        ]
+      },
+      "on-blue-muted": {
+        "displayName": "on-blue-muted",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0324 270.45)",
+          "oklch(26% 0.0324 270.45)",
+          "oklch(38% 0.0324 270.45)",
+          "oklch(49% 0.0324 270.45)",
+          "oklch(61% 0.0324 270.45)",
+          "oklch(72% 0.0324 270.45)",
+          "oklch(84% 0.0324 270.45)",
+          "oklch(95% 0.0324 270.45)"
+        ]
+      },
+      "soft": {
+        "displayName": "soft",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0155 257.20)",
+          "oklch(26% 0.0155 257.20)",
+          "oklch(38% 0.0155 257.20)",
+          "oklch(49% 0.0155 257.20)",
+          "oklch(61% 0.0155 257.20)",
+          "oklch(72% 0.0155 257.20)",
+          "oklch(84% 0.0155 257.20)",
+          "oklch(95% 0.0155 257.20)"
+        ]
+      },
+      "pale": {
+        "displayName": "pale",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0091 258.34)",
+          "oklch(26% 0.0091 258.34)",
+          "oklch(38% 0.0091 258.34)",
+          "oklch(49% 0.0091 258.34)",
+          "oklch(61% 0.0091 258.34)",
+          "oklch(72% 0.0091 258.34)",
+          "oklch(84% 0.0091 258.34)",
+          "oklch(95% 0.0091 258.34)"
+        ]
+      },
+      "route-line": {
+        "displayName": "route-line",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.0371 81.21)",
+          "oklch(26% 0.0371 81.21)",
+          "oklch(38% 0.0371 81.21)",
+          "oklch(49% 0.0371 81.21)",
+          "oklch(61% 0.0371 81.21)",
+          "oklch(72% 0.0371 81.21)",
+          "oklch(84% 0.0371 81.21)",
+          "oklch(95% 0.0371 81.21)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "H1 regional",
+        "purpose": "General Sans 700; cidade em janela vertical independente dos banners e de mouse/foco/navegação manual.",
+        "responsive": {
+          "default": "clamp(3rem,4.45vw,4rem)",
+          "1100": "3.3rem",
+          "800": "2.75rem",
+          "600": "clamp(1.875rem,8.9vw,2.6rem)"
+        }
+      },
+      "hero-message": {
+        "displayName": "H2 da campanha",
+        "responsive": {
+          "default": "1.375rem",
+          "1100": "1.25rem",
+          "800": "1.125rem"
+        }
+      },
+      "quote": {
+        "displayName": "Semanal principal da cotação",
+        "responsive": {
+          "default": "2.75rem",
+          "600": "2.5rem",
+          "375": "2.25rem"
+        },
+        "purpose": "Valor semanal isolado com por semana adjacente; diária equivalente secundária, sem Você paga."
+      }
+    },
+    "shadows": [
+      {
+        "name": "inquiry-overlay",
+        "value": "0 18px 40px -24px rgba(17,27,43,.45)",
+        "purpose": "Sombra difusa somente do cartão de contato desktop; removida abaixo de1100px."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "tablet",
+        "value": "800px"
+      },
+      {
+        "name": "mobile",
+        "value": "600px"
+      },
+      {
+        "name": "narrow-mobile",
+        "value": "375px"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Entradas e respostas."
+      },
+      {
+        "name": "city",
+        "value": "3000ms interval; 200ms out(-105%); 360ms in(+105%)",
+        "purpose": "cityNames Belo Horizonte/Contagem/Minas, independente do hover/foco/manual dos banners; pausa explícita, aba oculta, fora do viewport e reduced-motion interrompem."
+      },
+      {
+        "name": "banner",
+        "value": "6500ms interval; 1s crossfade; 9s scale(1→1.035)",
+        "purpose": "Somente fotografia e visibilidade da mensagem; não altera plano/oferta. Hover/foco pausa banners; cidade independente."
+      },
+      {
+        "name": "model",
+        "value": "350ms translateX(12px→0)",
+        "purpose": "Feedback da foto após escolher modelo; removido em reduced-motion."
+      },
+      {
+        "name": "steps",
+        "value": ".65s entry; .75s draw; delays 0/100/200/300ms",
+        "purpose": "Percurso em quatro passos, clip-path com margem -16px."
+      },
+      {
+        "name": "benefits",
+        "value": ".6s; delays 0/90/180ms",
+        "purpose": "Entrada discreta dos pictogramas."
+      }
+    ],
+    "hero": {
+      "header": "absolute transparent",
+      "photo": "full-width object-fit:cover",
+      "scrim": {
+        "jacket": {
+          "default": "rgba(3,13,36,.13)",
+          "1100": "rgba(3,13,36,.25)",
+          "800": "rgba(3,13,36,.48)",
+          "600": "rgba(3,13,36,.64)"
+        },
+        "studio": {
+          "default": "rgba(3,13,36,.28)",
+          "800": "rgba(3,13,36,.5)",
+          "600": "rgba(3,13,36,.68)"
+        },
+        "rider": {
+          "default": "rgba(3,13,36,.45)",
+          "800": "rgba(3,13,36,.62)",
+          "600": "rgba(3,13,36,.69)"
+        }
+      },
+      "cityNames": [
+        "Belo Horizonte",
+        "Contagem",
+        "Minas"
+      ],
+      "cityIndependentOfBanners": true,
+      "minHeight": {
+        "default": "740px",
+        "1600+": "800px",
+        "1100": "730px",
+        "800": "720px",
+        "600": "748px"
+      },
+      "cityPause": {
+        "hover": false,
+        "galleryFocus": false,
+        "manualSlideResetsTimer": false,
+        "explicitPause": true,
+        "hidden": true,
+        "offscreen": true,
+        "reducedMotion": true
+      },
+      "defaultSelectedPlan": "mm-semi-36",
+      "offerSource": "setContact(contactId or selectedId) -> renderHeroOffer(plan)",
+      "slideChanges": "photo + active H2 visibility only; no automatic plan/price/CTA mutation",
+      "weeklyHierarchy": {
+        "primary": "#hero-weekly: formatted value only + adjacent por semana",
+        "secondary": "#hero-daily: Equivale a cerca de [daily] por dia*",
+        "terms": "label(plan) + deposit or confirmation",
+        "cta": "references current selected plan",
+        "message0and1": "adapt to ownership/rental",
+        "message2": "Liberdade para seu corre."
+      },
+      "actions": [
+        "Conhecer o Minha Moto",
+        "Conhecer o aluguel temporário"
+      ],
+      "actionBehavior": "Fixed ownership/rental links use data-mode-link; each activates and remembers its own modality in the comparator."
+    },
+    "layout": {
+      "catalogueColumns": "801+:43% 57%; <=800:1 column",
+      "process": "sand; 4 columns →2 at 800px; padding 64/60/52px",
+      "pickup": "Contagem only",
+      "inquiry": {
+        "singleForm": true,
+        "version": "V7 compact form retained in V9; no full-height side rail",
+        "desktop": {
+          "media": "min-width:1100px",
+          "position": "fixed bottom-right 20px",
+          "width": "320px",
+          "compact": "charcoal header + current offer + WhatsApp + Continuar",
+          "expanded": "same card, all fields, max-height calc(100dvh - 48px), overflow auto",
+          "bodyReservation": "none"
+        },
+        "narrow": {
+          "media": "max-width:1099px",
+          "position": "fixed bottom full width",
+          "compact": "charcoal bar: weekly primary + daily equivalent secondary + Quero alugar; offered amount hidden when undecided",
+          "expanded": "full form, max-height calc(100dvh - 24px)",
+          "bodyPaddingBottom": "84px"
+        },
+        "visibility": "V7.1: off-screen and inert only at page top (scrollY < 80px); shown from the first scroll; desktop collapses to header-only mini bar (~50px, click opens form) while comparator (#plan-panel) is in the middle band; always full when expanded/focused",
+        "open": "all contact anchors and choose-plan expand and focus name without page scroll",
+        "collapse": "toggle or Escape at all widths",
+        "preserveFields": true,
+        "demoOnly": true
+      }
+    },
+    "evidence": {
+      "first": "/Users/tiagopace/Documents/Metry-IA/work/lokmais-lp-v9-qa/first",
+      "final": "/Users/tiagopace/Documents/Metry-IA/work/lokmais-lp-v9-qa/final",
+      "widths": [
+        1440,
+        768,
+        375
+      ],
+      "status": "Final package/review pending at documentation update; no final pass claimed.",
+      "lint": "0 FAIL / 3 WARN functional field borders",
+      "detector": "DEGRADED; no complete audit asserted",
+      "coverage": "Fixed mobile panel behavior preexists and was requested; scroll-access/body reserve retained, independent reviewer judges coverage.",
+      "newMedia": false,
+      "limits": "No production, commercial approval, conversion, CRM receipt, or final V9 verdict inferred."
+    },
+    "selection": {
+      "initialMode": "ownership",
+      "initialPlan": "mm-semi-36",
+      "weekly": "R$389,90",
+      "dailyEquivalent": "R$55,70",
+      "deposit": "R$800",
+      "contactSynchronizedBy": "updateCosts -> setContact -> renderHeroOffer",
+      "genericPlanNavigation": "preserves current selection",
+      "initialHeroPlan": "mm-semi-36",
+      "formPlanSelection": "selectContactPlan -> setMode -> renderOptions -> updateCosts",
+      "undecided": "contactId null; hide .inquiry-offer; retain selectedId as catalogue/hero reference",
+      "heroPriceIndependentOfSlides": true,
+      "primaryPrice": "weekly",
+      "dailyPrice": "secondary equivalent"
+    },
+    "catalogue": {
+      "steps": [
+        "1 modalidade",
+        "2 modelo",
+        "3 prazo"
+      ],
+      "modeOrder": [
+        "Minha Moto",
+        "Aluguel temporário"
+      ],
+      "modeSelected": "selected warm surface + orange border + radio mark",
+      "modeBreakpoint": "one column <=600px",
+      "modelPrice": false,
+      "termPrice": "weekly",
+      "quotePrice": "weekly main; daily equivalent secondary",
+      "initialCost": "Para começar: first week + deposit",
+      "ownershipCopy": "Para ficar com a moto ao final, conforme contrato. De 24 a 36 meses.",
+      "unchangedPlanCount": 14
+    }
+  },
+  "components": [
+    {
+      "name": "Botão primary",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "html": "<button class=\"ds-button-primary\">Quero essa moto</button>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 28px;border:0;border-radius:0;background:var(--orange,#f47a18);color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;line-height:1.5;cursor:pointer;transition:background .18s,transform .18s cubic-bezier(.16,1,.3,1)}.ds-button-primary:hover{background:#ff963e;transform:translateY(-2px)}.ds-button-primary:active{transform:translateY(1px)}.ds-button-primary:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}",
+      "description": "Ação sólida e foco explícito. Na abertura, dois rótulos fixos por modalidade; no comparador, a ação acompanha a escolha."
+    },
+    {
+      "name": "Botão light",
+      "kind": "button",
+      "refersTo": "button-light",
+      "html": "<button class=\"ds-button-light\">Quero essa moto</button>",
+      "css": ".ds-button-light{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 28px;border:0;border-radius:0;background:var(--white,#fff);color:var(--blue,#142d87);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;line-height:1.5;cursor:pointer;transition:background .18s,transform .18s cubic-bezier(.16,1,.3,1)}.ds-button-light:hover{background:var(--pale,#eef2f8);transform:translateY(-2px)}.ds-button-light:active{transform:translateY(1px)}.ds-button-light:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-button-light{transition:none}}",
+      "description": "Ação sólida e foco explícito. Na abertura, dois rótulos fixos por modalidade; no comparador, a ação acompanha a escolha."
+    },
+    {
+      "name": "Campo de contato",
+      "kind": "input",
+      "refersTo": "input",
+      "html": "<label class=\"ds-field\">Seu nome<input placeholder=\"Como podemos chamar você?\" autocomplete=\"name\"></label>",
+      "css": ".ds-field{display:block;font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:500;color:var(--ink,#111b2b)}.ds-field input{display:block;margin-top:8px;box-sizing:border-box;width:100%;min-height:44px;padding:9px 12px;border:1px solid #aebbcf;border-radius:0;background:#fff;color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;line-height:1.5}.ds-field input::placeholder{color:#4d5c73;opacity:1}.ds-field input:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}",
+      "description": "Campo real no formulário persistente único; branco, rótulo e validação local, demo sem envio."
+    },
+    {
+      "name": "Modelo selecionável",
+      "kind": "custom",
+      "refersTo": "model-card",
+      "html": "<button type=\"button\" class=\"ds-model\" aria-pressed=\"true\"><strong>Start seminova</strong><span>2026 · acima de 7 mil km</span></button>",
+      "css": ".ds-model{background:var(--control,#e4ded3);color:var(--ink,#111b2b);border:2px solid transparent;padding:16px;text-align:left;font-family:var(--font,\"General Sans\",Arial,sans-serif);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.ds-model[aria-pressed=true]{background:var(--paper,#f8f4ed);border-color:var(--orange,#f47a18)}.ds-model:hover{background:var(--sand,#f1e5d5);transform:translateY(-2px)}.ds-model:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}.ds-model>strong{display:block;font-size:1rem;line-height:1.3}.ds-model>span,.ds-model>small{display:block;color:var(--warm-quiet,#49433c);font-size:.875rem;margin-top:3px}.ds-model>small{margin-top:10px}.ds-model>b{display:block;font-size:1rem;font-variant-numeric:tabular-nums;white-space:nowrap}.ds-model>b>span{font-size:.875rem;font-weight:400}@media(prefers-reduced-motion:reduce){.ds-model{transition:none}}",
+      "description": "Trecho textual do controle real com foto do modelo fornecida pelo runtime. Sem preço; valores aparecem nos prazos e na cotação."
+    },
+    {
+      "name": "Prazo selecionável",
+      "kind": "custom",
+      "refersTo": "term-control",
+      "html": "<button type=\"button\" class=\"ds-term\" aria-pressed=\"true\"><span class=\"ds-choice\"><i></i><span><strong>36 meses</strong><small>Plano Minha Moto · Menor valor por semana</small></span></span><b>R$ 389,90</b></button>",
+      "css": ".ds-term{display:grid;grid-template-columns:1.5fr 1fr;align-items:center;gap:14px;min-height:92px;padding:16px;background:var(--control,#e4ded3);color:var(--ink,#111b2b);border:2px solid transparent;text-align:left;font-family:var(--font,\"General Sans\",Arial,sans-serif);cursor:pointer}.ds-term[aria-pressed=true]{background:var(--selected,#f0ddbf);border-color:var(--orange,#f47a18)}.ds-term:hover{background:var(--selected,#f0ddbf)}.ds-term:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}.ds-choice{display:flex;gap:12px;align-items:center}.ds-choice i{display:grid;place-items:center;flex:0 0 24px;width:22px;height:22px;border:1px solid #80715e;border-radius:50%}.ds-term[aria-pressed=true] i{border-color:var(--ink,#111b2b)}.ds-term[aria-pressed=true] i::after{content:\"\";width:10px;height:10px;border-radius:50%;background:var(--ink,#111b2b)}.ds-term strong{font-size:1.25rem;font-weight:600}.ds-term small{display:block;font-size:.875rem;line-height:1.4;color:var(--warm-quiet,#49433c);margin-top:5px}.ds-term>b{font-size:1.25rem;font-weight:600;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}@media(max-width:600px){.ds-term{min-height:84px;padding:14px 10px;gap:8px}.ds-term strong,.ds-term>b{font-size:1rem}.ds-choice{gap:8px}.ds-choice i{flex-basis:20px}}",
+      "description": "Controle semanal com indicador circular e aria-pressed; diária equivalente fica na cotação abaixo."
+    },
+    {
+      "name": "Cotação do plano",
+      "kind": "custom",
+      "refersTo": "quote",
+      "html": "<div class=\"ds-quote\" role=\"status\"><p><strong>R$ 389,90</strong> por semana</p><small>Minha Moto · 36 meses</small><div>Equivale a cerca de R$ 55,70 por dia*</div><small>*Semana dividida por 7, só para comparar. A cobrança é semanal.</small></div>",
+      "css": ".ds-quote{background:var(--charcoal,#18222d);color:var(--white,#fff);padding:24px 26px;font-family:var(--font,\"General Sans\",Arial,sans-serif)}.ds-quote p{margin:0;display:flex;gap:6px;align-items:baseline;font-size:1.25rem;font-variant-numeric:tabular-nums}.ds-quote strong{font-size:2.75rem;letter-spacing:-.025em;line-height:1.12}.ds-quote>div{font-size:1rem;font-weight:500;margin-top:10px}.ds-quote small{display:block;font-size:.875rem;line-height:1.5;color:var(--quote-muted,#eadfce);margin-top:8px}.ds-quote small:last-child{margin-top:12px;max-width:48ch}@media(max-width:600px){.ds-quote{padding:22px 20px}.ds-quote strong{font-size:2.5rem}}",
+      "description": "Semanal principal em carvão; diária secundária, modalidade/prazo e cobrança explícita. Fonte compartilhada com hero/contato."
+    },
+    {
+      "name": "Etapa do processo",
+      "kind": "custom",
+      "refersTo": "process",
+      "html": "<div class=\"ds-step\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M14 3H5v18h14V8Z\"/><path d=\"M14 3v5h5M8 12h8M8 16h5\"/></svg><h3>Envie os documentos</h3><p>Seus dados, CNH e comprovante de residência.</p></div>",
+      "css": ".ds-step{padding:24px;background:var(--sand,#f1e5d5);color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif)}.ds-step svg{width:42px;height:42px;stroke:var(--blue,#142d87);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.ds-step h3{margin:21px 0 0;font-size:1.125rem;font-weight:700;line-height:1.25;letter-spacing:-.02em}.ds-step p{font-size:1rem;line-height:1.5;color:var(--warm-quiet,#49433c);margin:9px 0 0;max-width:25ch}",
+      "description": "Trecho de um dos quatro passos, com tinta escura e pictograma azul sobre areia; não coleta documentos."
+    },
+    {
+      "name": "Formulário persistente",
+      "kind": "custom",
+      "refersTo": "inquiry-panel",
+      "description": "Cartão V7 compacto mantido na V9; desktop 320px no canto inferior direito, barra abaixo de1100px. Semanal principal e diária secundária. Ao escolher undecided, runtime oculta a oferta. Espécime expandido; estados reais em src/app.js.",
+      "html": "<aside class=\"ds-inquiry\"><div class=\"ds-panel is-expanded\"><header><h2>Fale com a LokMais</h2><button type=\"button\" class=\"ds-toggle\" aria-expanded=\"true\" aria-label=\"Recolher formulário\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 9 7 7 7-7\"/></svg></button></header><div class=\"ds-offer\"><strong>R$389,90/semana</strong><span>cerca de R$55,70 por dia</span></div><form><label>Seu nome<input autocomplete=\"name\" placeholder=\"Como podemos chamar você?\"></label><label>WhatsApp com DDD<input type=\"tel\" placeholder=\"(31) 99999-9999\"></label><button type=\"button\" class=\"ds-submit\">Consultar esse plano</button><p>Prévia: nenhum dado é enviado ou salvo.</p></form></div></aside>",
+      "css": ".ds-inquiry{width:320px;max-width:100%;font-family:var(--font,\"General Sans\",Arial,sans-serif);color:var(--ink,#111b2b)}.ds-panel{background:var(--paper,#f8f4ed);border:1px solid #cdbfa9;max-height:calc(100dvh - 48px);overflow-y:auto;box-shadow:0 18px 40px -24px rgba(17,27,43,.45)}.ds-panel header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 6px 4px 16px;background:var(--charcoal,#18222d);color:#fff;position:sticky;top:0;z-index:1}.ds-panel h2{font-size:1rem;line-height:1.3;letter-spacing:-.01em;font-weight:600;margin:0}.ds-toggle{display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;background:transparent;color:#fff;cursor:pointer}.ds-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ds-offer{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:12px 16px 0;font-size:.875rem;font-variant-numeric:tabular-nums}.ds-offer strong{font-size:1.25rem;letter-spacing:-.02em}.ds-offer span{color:var(--warm-quiet,#49433c)}.ds-panel form{padding:0 16px 16px}.ds-panel label{display:block;margin-top:12px;font-size:.875rem;font-weight:500}.ds-panel input{display:block;width:100%;box-sizing:border-box;min-height:44px;margin-top:5px;padding:9px 12px;border:1px solid #aebbcf;border-radius:0;background:#fff;color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;line-height:1.5}.ds-submit{margin-top:14px;min-height:46px;padding:10px 16px;border:0;border-radius:0;background:var(--orange,#f47a18);color:var(--ink,#111b2b);font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;font-weight:600;cursor:pointer}.ds-submit:hover{background:#ff963e}.ds-submit:active{transform:translateY(1px)}.ds-submit:focus-visible,.ds-panel input:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}.ds-toggle:focus-visible{outline:2px solid var(--orange,#f47a18);outline-offset:-2px}.ds-panel p{font-size:.875rem;margin:8px 0 0;line-height:1.45}@media(max-width:1099px){.ds-inquiry{width:100%}.ds-panel{max-height:calc(100dvh - 24px);box-shadow:none}}"
+    },
+    {
+      "name": "Modalidade selecionável",
+      "kind": "custom",
+      "refersTo": "mode-control-selected",
+      "description": "Cartão de modalidade do passo1; propriedade de aquisição qualificada pelo contrato. Abas reais suportam teclado; uma coluna no celular.",
+      "html": "<button class=\"ds-mode\" type=\"button\" role=\"tab\" aria-selected=\"true\"><i aria-hidden=\"true\"></i><span><strong>Minha Moto</strong><small>Para ficar com a moto ao final, conforme contrato. De 24 a 36 meses.</small></span></button>",
+      "css": ".ds-mode{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;text-align:left;background:var(--control,#e4ded3);color:var(--ink,#111b2b);border:2px solid transparent;font-family:var(--font,\"General Sans\",Arial,sans-serif);font-size:1rem;cursor:pointer}.ds-mode[aria-selected=true]{background:var(--selected,#f0ddbf);border-color:var(--orange,#f47a18)}.ds-mode:hover{background:var(--sand,#f1e5d5)}.ds-mode i{position:relative;flex:0 0 22px;width:22px;height:22px;margin-top:2px;border:1px solid #80715e;border-radius:50%;background:var(--paper,#f8f4ed)}.ds-mode[aria-selected=true] i{border-color:var(--orange,#f47a18)}.ds-mode[aria-selected=true] i::after{content:\"\";position:absolute;inset:4px;border-radius:50%;background:var(--orange,#f47a18)}.ds-mode strong{display:block;font-size:1.25rem;font-weight:600;line-height:1.25}.ds-mode small{display:block;margin-top:5px;font-size:.875rem;line-height:1.45;color:var(--warm-quiet,#49433c);max-width:40ch}.ds-mode:focus-visible{outline:3px solid var(--orange,#f47a18);outline-offset:5px;}@media(max-width:600px){.ds-mode{padding:16px}.ds-mode strong{font-size:1rem}}"
+    },
+    {
+      "name": "Ações da abertura",
+      "kind": "custom",
+      "refersTo": "hero-actions",
+      "description": "Dois links fixos para #planos: data-mode-link ownership e rental. Lado a lado com wrap; coluna até600px. Cada link seleciona sua modalidade preservando a escolha anterior.",
+      "html": "<div class=\"ds-hero-actions\"><a class=\"ds-primary\" href=\"#planos\" data-mode-link=\"ownership\">Conhecer o Minha Moto</a><a class=\"ds-light\" href=\"#planos\" data-mode-link=\"rental\">Conhecer o aluguel temporário</a></div>",
+      "css": ".ds-hero-actions{display:flex;flex-wrap:wrap;gap:12px;max-width:660px}.ds-hero-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 22px;text-decoration:none;font:600 1rem/1.5 var(--font,\"General Sans\",Arial,sans-serif)}.ds-primary{background:var(--orange,#f47a18);color:var(--ink,#111b2b)}.ds-light{background:#fff;color:var(--blue,#142d87)}@media(max-width:600px){.ds-hero-actions{flex-direction:column;max-width:360px;gap:10px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Balcão de catálogo da unidade 855",
+    "overview": "Campanha fotográfica de trabalho na abertura, percurso em areia e escolha comercial com fotos de modelos, prazos e cotação semanal destacada. General Sans conserva proporções naturais; a ação laranja conecta as etapas sem urgência ou promessa inventada.\n\nEscopo exclusivo: `lp-minas/` neste checkout de aprovação. Fonte: `src/index.html`, `src/styles.css`, `src/app.js` e `src/plans.js`. Não substitui o DESIGN raiz nem outras páginas. O contrato comercial e a base de cor estão em `/Users/tiagopace/Documents/Metry-IA/tarefas/lokmais/2026-11-20-github-vercel-aprovacao-lp/v5/REVISAO.md`; este documento registra o estado V10: preço semanal principal, escolha única entre abertura/catálogo/contato, comparador em três passos e formulário compacto; a semente original 08248f20, candidato 7, permanece registrada na tarefa original. Sem novo sorteio ou comp aprovado. A documentação não autoriza publicação, merge, CRM nem aprovação comercial.",
+    "keyCharacteristics": [
+      "Fotografia integral sob o cabeçalho e rotação de cidade independente da oferta.",
+      "Processo em areia, catálogo em papel/cinza quente, cotação em carvão e ação laranja.",
+      "Três passos funcionais de modalidade/modelo/prazo, Minha Moto inicial e formulário único compacto.",
+      "Semanal principal em todas as ofertas; diária equivalente secundária e sem troca autônoma do plano pelos banners.",
+      "Dois CTAs fixos na abertura escolhem Minha Moto ou Aluguel temporário e preservam a última opção de cada modalidade."
+    ],
+    "rules": [
+      {
+        "name": "The Contraste Funcional Rule",
+        "body": "Aplicar a paleta quente construída sem degradês; sobre as fotografias usar scrim neutro uniforme por imagem e tamanho, conforme sidecar. Não trocar a areia por um grande campo azul no processo.",
+        "section": "colors"
+      },
+      {
+        "name": "The Proporção Nativa Rule",
+        "body": "Preservar largura natural, títulos fortes em caixa normal e logo oficial; não inserir rótulos decorativos acima dos títulos.",
+        "section": "typography"
+      },
+      {
+        "name": "The Demonstração Clara Rule",
+        "body": "Preservar as 14 opções MG, semana como cobrança, diária como semana/7 arredondada e cauções por modalidade: R$800 no Minha Moto, temporário a confirmar. Óleo: duas trocas mensais no Minha Moto, excluído no temporário. Formulário não envia nem salva, não recebe documentos e não reserva moto; não apresentar contato ou recebimento como efetivos.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** preservar campanha/ativo oficial, seleção única e condições junto do semanal principal; diária fica secundária.",
+      "**Do** manter a cidade independente de hover/foco/navegação dos banners; preservar pausa explícita, visibilidade e movimento reduzido.",
+      "**Do** manter retirada em Contagem, formulário único compacto, valores sincronizados e rolagem interna do cartão expandido."
+    ],
+    "donts": [
+      "**Don't** voltar à coluna lateral fixa de altura total (rejeitada pelo usuário em 20/11/2026).",
+      "**Don't** introduzir degradês, fontes distorcidas, eyebrows, sombras decorativas ou urgência inventada.",
+      "**Don't** usar imagem de campanha como prova de estoque, cliente ou local real; nem “Minas” como promessa de cobertura estadual.",
+      "**Don't** afirmar publicação, aprovação comercial, ganhos, conversão ou entrega no CRM a partir desta prévia."
+    ]
+  }
+}
