@@ -45,3 +45,7 @@ O preço semanal é o valor principal também na abertura. Os banners alternam f
 ## Botões da abertura — 23/11/2026
 
 Dois caminhos fixos: Conhecer o Minha Moto e Conhecer o aluguel temporário. Cada um abre a modalidade correspondente no comparador, preserva a última escolha dessa modalidade e mantém preços sincronizados. Botões empilham no celular.
+
+## Captação no CRM Atriva
+
+O formulário deixou de ser demonstrativo: carrega o snippet público do Atriva (`api.atriva.com.br/api/public/leads/snippet/atv_a2efdb7edc4e4c8559e15e90.js`, o mesmo das páginas do site) e, depois de validar nome, WhatsApp e cidade, chama `window.atriva.submit` com `nome`, `fone` (mapeados no Atriva) e `cidade`, `plano`, `valor_semanal`, `origem` (vão para as Observações). O envio automático do snippet é interceptado para este formulário, para que "Continuar" ou um telefone inválido não gerem lead parcial. A CSP libera somente `api.atriva.com.br` (script e conexão). Se o envio falhar, a página mostra o WhatsApp da unidade com mensagem pronta.

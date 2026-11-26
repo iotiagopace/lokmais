@@ -91,16 +91,38 @@ $('#lead-interest').addEventListener('change',e=>selectContactPlan(e.target.valu
 setMode('ownership');
 const phone=$('#lead-phone');
 phone.addEventListener('input',()=>{phone.setCustomValidity('');phone.removeAttribute('aria-invalid');$('#phone-error').hidden=true;});
-$('#lead-form').addEventListener('submit',e=>{
- e.preventDefault();
+// Captação real no CRM Atriva (snippet carregado no fim da página).
+// O snippet captura qualquer "submit" da página; aqui ele é interceptado antes (window, fase de captura)
+// para que só um pedido validado e completo seja enviado, e nunca o clique em "Continuar".
+const WA_UNIT='5531972285918';
+let leadSent=false;
+const formatPhone=d=>d.length===11?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;
+function waLink(name,plan){const msg=`Olá! Sou ${name||'interessado'} e quero alugar uma moto na LokMais Contagem.${plan?` Plano: ${label(plan)} (${money(plan.weeklyCents)} por semana).`:''}`;return `https://wa.me/${WA_UNIT}?text=${encodeURIComponent(msg)}`;}
+function showResult(ok,name,plan){
+ $('#form-result-title').textContent=ok?'Pedido enviado!':'Não conseguimos enviar agora';
+ $('#form-result-plan').textContent=plan?`${label(plan)}. ${money(plan.weeklyCents)} por semana.`:'Quero ajuda para escolher meu plano.';
+ $('#form-result-text').textContent=ok?'A equipe da LokMais Contagem vai chamar você no WhatsApp. Atendimento de segunda a sábado, das 08h às 18h.':'Chame a unidade no WhatsApp para não perder seu atendimento.';
+ const wa=$('#form-result-wa');wa.href=waLink(name,plan);wa.textContent=ok?'Prefere adiantar? Chame a unidade no WhatsApp':'Chamar a LokMais Contagem no WhatsApp';
+ $('#form-result').hidden=false;
+}
+function handleLead(){
  if(!inquiryPanel.classList.contains('is-expanded')){openInquiry();return;}
  if(!$('#lead-form').reportValidity())return;
  let digits=phone.value.replace(/\D/g,'');if(digits.length>11&&digits.startsWith('55'))digits=digits.slice(2);
  if(!/^[1-9]{2}[2-9][0-9]{7,8}$/.test(digits)||/^(\d)\1+$/.test(digits)){$('#phone-error').hidden=false;phone.setAttribute('aria-invalid','true');phone.setCustomValidity('Informe um WhatsApp com DDD válido.');phone.reportValidity();phone.focus();return;}
+ if(leadSent)return;
  setContact($('#lead-interest').value);
- $('#form-result-plan').textContent=contactId?`${label(get(contactId))}. ${money(get(contactId).weeklyCents)} por semana.`:'Quero ajuda para escolher meu plano.';
- $('#form-result').hidden=false;
-});
+ const name=$('#lead-name').value.trim(),plan=contactId?get(contactId):null;
+ const fields={nome:name,fone:formatPhone(digits),cidade:$('#lead-city').value,plano:plan?label(plan):'Quer ajuda para escolher',origem:'LP Belo Horizonte e região ('+location.hostname+')'};
+ const labels={nome:'Nome',fone:'WhatsApp',cidade:'Cidade',plano:'Plano de interesse',origem:'Origem'};
+ if(plan){fields.valor_semanal=money(plan.weeklyCents);labels.valor_semanal='Valor semanal';}
+ let ok=false;
+ try{ok=!!(window.atriva&&typeof window.atriva.submit==='function'&&window.atriva.submit(fields,labels));}catch(err){ok=false;}
+ if(ok){leadSent=true;$('#lead-submit').disabled=true;$('#lead-submit').textContent='Pedido enviado';}
+ showResult(ok,name,plan);
+}
+addEventListener('submit',e=>{if(e.target===$('#lead-form')){e.preventDefault();e.stopImmediatePropagation();handleLead();}},true);
+$('#lead-form').addEventListener('input',()=>{if(leadSent){leadSent=false;$('#lead-submit').disabled=false;syncInquiry();}});
 $('#reset-demo').addEventListener('click',()=>{$('#form-result').hidden=true;});
 
 const gallery=$('.hero-gallery'), slides=$$('[data-slide]'), indicators=$$('[data-go-slide]');
@@ -153,7 +175,7 @@ function syncInquiry(){
  const expanded=inquiryPanel.classList.contains('is-expanded'),focusedInside=inquiryRail.contains(document.activeElement);
  inquiryToggle.setAttribute('aria-expanded',expanded);
  inquiryToggle.setAttribute('aria-label',expanded?'Recolher formulário':'Expandir formulário');
- $('#lead-submit').textContent=expanded?'Consultar esse plano':(inquiryNarrow.matches?'Quero alugar':'Continuar');
+ $('#lead-submit').textContent=leadSent?'Pedido enviado':expanded?'Consultar esse plano':(inquiryNarrow.matches?'Quero alugar':'Continuar');
  const away=atTop&&!expanded&&!focusedInside;
  inquiryRail.classList.toggle('is-away',away);
  inquiryRail.inert=away;
