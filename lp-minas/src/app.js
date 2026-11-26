@@ -121,7 +121,16 @@ function handleLead(){
  if(ok){leadSent=true;$('#lead-submit').disabled=true;$('#lead-submit').textContent='Pedido enviado';}
  showResult(ok,name,plan);
  // Na mesma aba para evitar bloqueio de pop-up; o snippet usa sendBeacon.
- if(ok)location.assign(waLink(name,plan));
+ // GA4 (G-CY0NR01GN9): registra generate_lead (sem nome/telefone) antes de abrir o WhatsApp.
+ if(ok)trackLead(plan,$('#lead-city').value,()=>location.assign(waLink(name,plan)));
+}
+function trackLead(plan,city,next){
+ let done=false;const go=()=>{if(!done){done=true;next();}};
+ if(typeof window.gtag!=='function'){go();return;}
+ try{
+  window.gtag('event','generate_lead',{currency:'BRL',value:plan?plan.weeklyCents/100:0,plan_id:plan?plan.id:'ajuda',plan_name:plan?label(plan):'Quer ajuda para escolher',plan_mode:plan?plan.mode:'indefinido',lead_city:city||'',transport_type:'beacon',event_callback:go,event_timeout:1200});
+ }catch(err){}
+ setTimeout(go,1500);
 }
 addEventListener('submit',e=>{if(e.target===$('#lead-form')){e.preventDefault();e.stopImmediatePropagation();handleLead();}},true);
 $('#lead-form').addEventListener('input',()=>{if(leadSent){leadSent=false;$('#lead-submit').disabled=false;syncInquiry();}});

@@ -49,3 +49,7 @@ Dois caminhos fixos: Conhecer o Minha Moto e Conhecer o aluguel temporário. Cad
 ## Captação no CRM Atriva
 
 O formulário deixou de ser demonstrativo: carrega o snippet público do Atriva (`api.atriva.com.br/api/public/leads/snippet/atv_a2efdb7edc4e4c8559e15e90.js`, o mesmo das páginas do site) e, depois de validar nome, WhatsApp e cidade, chama `window.atriva.submit` com `nome`, `fone` (mapeados no Atriva) e `cidade`, `plano`, `valor_semanal`, `origem` (vão para as Observações). O envio automático do snippet é interceptado para este formulário, para que "Continuar" ou um telefone inválido não gerem lead parcial. A CSP libera somente `api.atriva.com.br` (script e conexão). Se o envio falhar, a página mostra o WhatsApp da unidade com mensagem pronta.
+
+## Google Analytics 4 e Google Ads
+
+A LP tem propriedade GA4 própria, separada do site: conta "[b] LOK MAIS MOTOS" › propriedade "LP Minas - belohorizonte.lokmais.com" › fluxo "LP Belo Horizonte" (ID de medição `G-CY0NR01GN9`). Instalada por gtag.js no `<head>` (logo após a CSP), sem GTM, junto com a tag do Google Ads da LokMais (`AW-17617352212`, a mesma do site). Após envio validado ao Atriva, dispara `generate_lead` (currency BRL, value = valor semanal, plan_id, plan_name, plan_mode, lead_city; sem nome/telefone) e só então abre o WhatsApp (callback com limite de 1,5 s). A CSP libera apenas domínios do Google Analytics/Ads (googletagmanager, google-analytics, analytics.google, doubleclick, google.com/.com.br, googleadservices).
